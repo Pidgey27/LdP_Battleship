@@ -4,6 +4,7 @@
 
 #ifndef LDP_BATTLESHIP_COORDINATES_H
 #define LDP_BATTLESHIP_COORDINATES_H
+#include <iostream>
 class Coordinates{
 protected:
     int coord_X;
