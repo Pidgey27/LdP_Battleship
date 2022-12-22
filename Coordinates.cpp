@@ -5,5 +5,5 @@
 #include <iostream>
 
 Coordinates::Coordinates(std::string xy) {
-    char coord_x=xy.substrin()
+    char coord_x=xy.
 }

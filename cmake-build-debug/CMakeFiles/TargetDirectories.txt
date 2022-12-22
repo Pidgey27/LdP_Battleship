@@ -1,0 +1,3 @@
+C:/Users/Aless/Documents/GitHub/LdP_Battleship/cmake-build-debug/CMakeFiles/LdP_Battleship.dir
+C:/Users/Aless/Documents/GitHub/LdP_Battleship/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Aless/Documents/GitHub/LdP_Battleship/cmake-build-debug/CMakeFiles/rebuild_cache.dir
