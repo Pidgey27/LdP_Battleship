@@ -7,14 +7,16 @@
 #include <iostream>
 class Coordinates{
 protected:
-    int coord_X;
     int coord_Y;
+    int coord_X;
 public:
-    Coordinates(int x, int y) : coord_X{x}, coord_Y{y} {};
-    Coordinates(std::string xy);
-    int get_X(){return coord_X;};
-    int get_Y(){return coord_Y;};
-    static void check_Invalid_Char(std::string xy);
-    static std::string check_Lenght(std::string xy);
+    Coordinates(int x, int y) : coord_Y{y}, coord_X{x} {};
+    Coordinates(std::string yx);
+    int get_X(){return coord_Y;};
+    int get_Y(){return coord_X;};
+    static void check_Invalid_Char(std::string yx);
+    static std::string check_Lenght(std::string yx);
+    std::string to_String();
 };
+std::ostream& operator <<(std::ostream& os, Coordinates coordinates);
 #endif //LDP_BATTLESHIP_COORDINATES_H

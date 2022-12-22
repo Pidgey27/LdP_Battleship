@@ -4,32 +4,43 @@
 #include "Coordinates.h"
 #include <iostream>
 #include <algorithm>
+#include <string>
 
-Coordinates::Coordinates(std::string xy) {
-    check_Invalid_Char(xy);
-    xy= check_Lenght(xy);
-    if(xy.size()==2) {
-        coord_X=xy[0]-65;
-        coord_Y=xy[1]-49;
+Coordinates::Coordinates(std::string yx) {
+    check_Invalid_Char(yx);
+    yx= check_Lenght(yx);
+    if(yx.size() == 2) {
+        coord_Y= yx[0] - 65;
+        coord_X= yx[1] - 49;
     }
-    if(xy.size()==3){
-        coord_X=xy[0]-65;
-        coord_Y=xy[2]-39;
+    if(yx.size() == 3){
+        coord_Y= yx[0] - 65;
+        coord_X= yx[2] - 39;
     }
-    if(coord_X>12)
-        coord_X=coord_X-32;
-    //if(coord_X>11||coord_Y>11||coord_X<0||coord_Y<0)
-      //  throw std::runtime_error("Hai inserito delle coordinate invalide!");
+    if(coord_Y > 12)
+        coord_Y= coord_Y - 32;
+    if(coord_Y > 11 || coord_X > 11 || coord_Y < 0 || coord_X < 0)
+        throw std::runtime_error("Hai inserito delle coordinate invalide!");
 }
 
-void Coordinates::check_Invalid_Char(std::string xy) {
+void Coordinates::check_Invalid_Char(std::string yx) {
     std::string invalid="!£$%&/()=?^[]{}*ç@°#§+*-_;,<>òàùèé|";
-    if(!xy.find(invalid)==std::string::npos)
+    if(yx.find_first_of(invalid) != std::string::npos)
         throw std::runtime_error("Hai inserito una stringa non valida!");
 }
-std::string Coordinates::check_Lenght(std::string xy) {
-    xy.erase(remove(xy.begin(), xy.end(), ' '), xy.end());
-    if(xy.size()>3)
+std::string Coordinates::check_Lenght(std::string yx) {
+    yx.erase(remove(yx.begin(), yx.end(), ' '), yx.end());
+    if(yx.size() > 3)
         throw std::runtime_error("Hai inserito una stringa troppo lunga!");
-    return xy;
+    return yx;
+}
+
+std::string Coordinates::to_String() {
+    char a= 'A' + coord_Y;
+    std::string yx="";
+    return yx+a+std::to_string(coord_X+1);
+}
+
+std::ostream& operator <<(std::ostream& os, Coordinates coordinates) {
+    return os<<coordinates.to_String();
 }
