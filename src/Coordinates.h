@@ -14,5 +14,7 @@ public:
     Coordinates(std::string xy);
     int get_X(){return coord_X;};
     int get_Y(){return coord_Y;};
+    static void check_Invalid_Char(std::string xy);
+    static std::string check_Lenght(std::string xy);
 };
 #endif //LDP_BATTLESHIP_COORDINATES_H

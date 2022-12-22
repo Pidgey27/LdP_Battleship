@@ -69,7 +69,8 @@
 			},
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				3
 			]
 		}
 	],
@@ -106,7 +107,8 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				3
 			]
 		},
 		{
@@ -123,18 +125,24 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Coordinates.cpp",
+			"path" : "src/Coordinates.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Coordinates.h",
+			"path" : "src/Coordinates.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Ship.h",
+			"path" : "src/Ship.h",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tst/test.cpp",
+			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "EXECUTABLE"
