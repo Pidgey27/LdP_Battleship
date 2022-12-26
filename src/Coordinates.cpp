@@ -33,6 +33,8 @@ std::string Coordinates::check_Lenght(std::string yx) {
     yx.erase(remove(yx.begin(), yx.end(), ' '), yx.end());
     if(yx.size() > 3)
         throw std::runtime_error("Hai inserito una stringa troppo lunga!");
+    if(yx.size() < 2)
+        throw std::runtime_error("Hai inserito una stringa troppo corta!");
     return yx;
 }
 
