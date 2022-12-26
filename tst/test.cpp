@@ -49,8 +49,46 @@ void test_char_coordinates_conversion() {
         std::cout << "prova conversione " << due << " " << b.get_Y() << " " << b.get_X() << std::endl;
         std::cout << "prova conversione " << invalid3 << " " << g.get_Y() << " " << g.get_X() << std::endl;
     }
+
+    void test_input_from_keyboard() {
+        char test_board[13][13] {'A', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'B', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'C', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'D', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'E', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'F', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'G', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'H', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'I', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'J', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'K', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 'L', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
+                                 ' ', '1', '2', '3', '4', '5', '6', '7', '8', '9', static_cast<char>('10'), static_cast<char>('11'), static_cast<char>('12') };
+        int i=0;
+        int j=0;
+        for(i=0; i<=12; i++ ) {
+            for(j=0; j<=12; j++) {
+                std::cout<<test_board[i][j]<<" ";
+            }
+            std::cout<<std::endl;
+        }
+        std::cout<<"Inserisci delle coordinate sotto forma A1"<<std::endl;
+        std::string coordinates;
+        std::cin>>coordinates;
+        Coordinates a(coordinates);
+        test_board[a.get_Y()][a.get_X()]='x';
+        std::cout<<"ho inserito "<<coordinates<<std::endl;
+        for(i=0; i<=12; i++ ) {
+            for(j=0; j<=12; j++) {
+                std::cout<<test_board[i][j]<<" ";
+            }
+            std::cout<<std::endl;
+        }
+        }
+
 int main () {
     //test_coordinates_basic_conversion();
-    test_char_coordinates_conversion();
+    //test_char_coordinates_conversion();
+    test_input_from_keyboard();
     return 0;
 }

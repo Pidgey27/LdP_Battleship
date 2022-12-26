@@ -24,7 +24,7 @@ Coordinates::Coordinates(std::string yx) {
 }
 //check input string for invalid char
 void Coordinates::check_Invalid_Char(std::string yx) {
-    std::string invalid="!£$%&/()=?^[]{}*ç@°#§+*-_;,<>òàùèé|";
+    std::string invalid="!£$%&/()=?^[]{}*ç@°#§+*-_;,<>òàùèéçì|";
     if(yx.find_first_of(invalid) != std::string::npos)
         throw std::runtime_error("Hai inserito una stringa non valida!");
 }
