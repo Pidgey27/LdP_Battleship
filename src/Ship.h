@@ -15,7 +15,7 @@ protected:
 public:
     Ship(Coordinates first, Coordinates last);  //to implement on Battle_Ship and Suppport_Ship
     Ship(Coordinates mono_Coord);   //to implement on Submarine
-    virtual action(Coordinates first, Coordinates last);
-    void reset_Armor();
+    virtual void action(Coordinates first, Coordinates last);
+    void reset_Armor(bool reset);     //
 };
 #endif //LDP_BATTLESHIP_SHIP_H

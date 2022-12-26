@@ -15,19 +15,20 @@ Coordinates::Coordinates(std::string yx) {
     }
     if(yx.size() == 3){
         coord_Y= yx[0] - 65;
-        coord_X= yx[2] - 39;
+        coord_X= yx[2] - 49 + (yx[1] - 48)*10;
     }
     if(coord_Y > 12)
         coord_Y= coord_Y - 32;
     if(coord_Y > 11 || coord_X > 11 || coord_Y < 0 || coord_X < 0)
         throw std::runtime_error("Hai inserito delle coordinate invalide!");
 }
-
+//check input string for invalid char
 void Coordinates::check_Invalid_Char(std::string yx) {
     std::string invalid="!£$%&/()=?^[]{}*ç@°#§+*-_;,<>òàùèé|";
     if(yx.find_first_of(invalid) != std::string::npos)
         throw std::runtime_error("Hai inserito una stringa non valida!");
 }
+//method that remove all spaces from string, and then checks string lenght
 std::string Coordinates::check_Lenght(std::string yx) {
     yx.erase(remove(yx.begin(), yx.end(), ' '), yx.end());
     if(yx.size() > 3)

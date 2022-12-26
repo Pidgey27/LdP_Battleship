@@ -18,9 +18,9 @@ void test_char_coordinates_conversion() {
                              };
     Coordinates uno("b10");
     Coordinates due("a3");
-    test_board[uno.get_X()][uno.get_Y()]='x';
-    test_board[due.get_X()][due.get_Y()]='x';
-    std::cout<<"Input "<<uno.to_String()<<" "<<due.to_String()<<std::endl;      //controllo toString: ok
+    test_board[uno.get_Y()][uno.get_X()]='x';
+    test_board[due.get_Y()][due.get_X()]='x';
+    std::cout<<"Input "<<uno.to_String()<<" "<<due.to_String()<<std::endl;      //check on method to_String: ok
     int i=0;
     int j=0;
     for(i=0; i<=11; i++ ) {
@@ -36,7 +36,7 @@ void test_char_coordinates_conversion() {
         std::string invalid1 = "%7";
         std::string invalid2 = "oooooo";
         std::string with_spaces = " b 2";
-        std::string invalid3 = "P15";
+        std::string invalid3 = "p132";
         std::string invalid4 = "p-2";
         Coordinates a(uno);
         Coordinates b(due);
@@ -44,10 +44,10 @@ void test_char_coordinates_conversion() {
         //Coordinates d(invalid2);      //riconosce le stringhe troppo lunghe, lancia eccezione
         Coordinates e(with_spaces); //riconosce ed elimina gli spazi
         //Coordinates f(invalid3);      //riconosce le coordinate fuori dalla scacchiera e lancia eccezione
-        //Coordinates g(invalid4);    //idem
-        std::cout << "prova conversione " << uno << " " << a.get_X() << " " << a.get_Y() << std::endl;
-        std::cout << "prova conversione " << due << " " << b.get_X() << " " << b.get_Y() << std::endl;
-        std::cout << "prova conversione " << with_spaces << " " << e.get_X() << " " << e.get_Y() << std::endl;
+        Coordinates g(invalid3);    //idem
+        std::cout << "prova conversione " << uno << " " << a.get_Y() << " " << a.get_X() << std::endl;
+        std::cout << "prova conversione " << due << " " << b.get_Y() << " " << b.get_X() << std::endl;
+        std::cout << "prova conversione " << invalid3 << " " << g.get_Y() << " " << g.get_X() << std::endl;
     }
 int main () {
     //test_coordinates_basic_conversion();
