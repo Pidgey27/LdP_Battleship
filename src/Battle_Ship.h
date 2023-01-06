@@ -9,13 +9,6 @@
 
 class Battle_Ship : protected Ship{   
 
-    protected:
-        int center_X;
-        int center_Y;
-        char name;
-        bool orientation; //0 for horizontal, 1 vertical
-        bool armor[5];   //the dimension of armor depends on the type of ship
-        
 
     public:
         
