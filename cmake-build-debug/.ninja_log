@@ -1,10 +1,4 @@
 # ninja log v5
-9	1015	6937773188069633	CMakeFiles/LdP_Battleship.dir/src/Coordinates.cpp.obj	f12ca9e6110908d2
-8	795	6937773539720404	CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj	6fc5f2e652a0c5ca
-796	1126	6937773543042860	LdP_Battleship.exe	62fe1f0d0fa0c18b
-8	826	6937773895654972	CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj	6fc5f2e652a0c5ca
-827	1090	6937773898275578	LdP_Battleship.exe	62fe1f0d0fa0c18b
-7	753	6937775301919007	CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj	6fc5f2e652a0c5ca
-754	1033	6937775304698729	LdP_Battleship.exe	62fe1f0d0fa0c18b
 8	928	6937788056938992	CMakeFiles/LdP_Battleship.dir/src/Coordinates.cpp.obj	f12ca9e6110908d2
+7	753	6937775301919007	CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj	6fc5f2e652a0c5ca
 940	1288	6937788060543848	LdP_Battleship.exe	62fe1f0d0fa0c18b

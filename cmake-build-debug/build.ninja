@@ -63,6 +63,34 @@ build CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj: CXX_COMPILER__LdP_Battlesh
   OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
   OBJECT_FILE_DIR = CMakeFiles\LdP_Battleship.dir\tst
 
+build CMakeFiles/LdP_Battleship.dir/src/Ship.cpp.obj: CXX_COMPILER__LdP_Battleship_Debug C$:/Users/Aless/Documents/GitHub/LdP_Battleship/src/Ship.cpp || cmake_object_order_depends_target_LdP_Battleship
+  DEP_FILE = CMakeFiles\LdP_Battleship.dir\src\Ship.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Aless/Documents/GitHub/LdP_Battleship/.
+  OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\LdP_Battleship.dir\src
+
+build CMakeFiles/LdP_Battleship.dir/src/Submarine.cpp.obj: CXX_COMPILER__LdP_Battleship_Debug C$:/Users/Aless/Documents/GitHub/LdP_Battleship/src/Submarine.cpp || cmake_object_order_depends_target_LdP_Battleship
+  DEP_FILE = CMakeFiles\LdP_Battleship.dir\src\Submarine.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Aless/Documents/GitHub/LdP_Battleship/.
+  OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\LdP_Battleship.dir\src
+
+build CMakeFiles/LdP_Battleship.dir/src/Support_Ship.cpp.obj: CXX_COMPILER__LdP_Battleship_Debug C$:/Users/Aless/Documents/GitHub/LdP_Battleship/src/Support_Ship.cpp || cmake_object_order_depends_target_LdP_Battleship
+  DEP_FILE = CMakeFiles\LdP_Battleship.dir\src\Support_Ship.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Aless/Documents/GitHub/LdP_Battleship/.
+  OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\LdP_Battleship.dir\src
+
+build CMakeFiles/LdP_Battleship.dir/src/Battle_Ship.cpp.obj: CXX_COMPILER__LdP_Battleship_Debug C$:/Users/Aless/Documents/GitHub/LdP_Battleship/src/Battle_Ship.cpp || cmake_object_order_depends_target_LdP_Battleship
+  DEP_FILE = CMakeFiles\LdP_Battleship.dir\src\Battle_Ship.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Aless/Documents/GitHub/LdP_Battleship/.
+  OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\LdP_Battleship.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target LdP_Battleship
@@ -71,7 +99,7 @@ build CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj: CXX_COMPILER__LdP_Battlesh
 #############################################
 # Link the executable LdP_Battleship.exe
 
-build LdP_Battleship.exe: CXX_EXECUTABLE_LINKER__LdP_Battleship_Debug CMakeFiles/LdP_Battleship.dir/src/Coordinates.cpp.obj CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj
+build LdP_Battleship.exe: CXX_EXECUTABLE_LINKER__LdP_Battleship_Debug CMakeFiles/LdP_Battleship.dir/src/Coordinates.cpp.obj CMakeFiles/LdP_Battleship.dir/tst/test.cpp.obj CMakeFiles/LdP_Battleship.dir/src/Ship.cpp.obj CMakeFiles/LdP_Battleship.dir/src/Submarine.cpp.obj CMakeFiles/LdP_Battleship.dir/src/Support_Ship.cpp.obj CMakeFiles/LdP_Battleship.dir/src/Battle_Ship.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\LdP_Battleship.dir
