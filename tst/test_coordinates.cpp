@@ -76,7 +76,7 @@ void test_char_coordinates_conversion() {
         std::string coordinates;
         std::cin>>coordinates;
         Coordinates a(coordinates);
-        test_board[a.get_Y()][a.get_X()]='x';
+        test_board[a.get_Y()][a.get_X()+1]='x';
         std::cout<<"ho inserito "<<coordinates<<std::endl;
         for(i=0; i<=12; i++ ) {
             for(j=0; j<=12; j++) {
@@ -86,9 +86,8 @@ void test_char_coordinates_conversion() {
         }
         }
 
-int main () {
+void test_coordinates () {
     //test_coordinates_basic_conversion();
     //test_char_coordinates_conversion();
     test_input_from_keyboard();
-    return 0;
 }
