@@ -1,7 +1,7 @@
 //
 // Created by Aless on 22/12/2022.
 //
-#include "C:\Users\Aless\Documents\GitHub\LdP_Battleship\src\Coordinates.h"
+#include "src\Coordinates.h"
 void test_char_coordinates_conversion() {
     char test_board[12][12] {'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
                              'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
