@@ -14,7 +14,7 @@
         }
 
         void Submarine::setCenter(Coordinates mono_Coord){
-            center = mono_Coord.get_X();
+            center_X = mono_Coord.get_X();
         }
         
         bool Submarine::getDirection(){
@@ -22,5 +22,5 @@
         }
 
         int Submarine::getCenter(){
-            return center;
+            return center_X;
         }
