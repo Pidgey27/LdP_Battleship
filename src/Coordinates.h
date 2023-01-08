@@ -9,6 +9,7 @@ class Coordinates{
 private:
     int coord_Y;
     int coord_X;
+    //check 
     static void check_Invalid_Char(std::string yx);
     static std::string check_Lenght(std::string yx);
 public:
