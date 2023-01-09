@@ -1,5 +1,6 @@
 //
-// Created by Aless on 22/12/2022.
+// Created by Alessandra Villarà  on 22/12/2022.
+// matricola 1137125
 //
 #include "src\Coordinates.h"
 void test_char_coordinates_conversion() {
