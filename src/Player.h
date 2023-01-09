@@ -12,12 +12,12 @@
 
 class Player {
 protected:
-    std::vector<Ship> Pieces;
+    std::vector<Ship> pieces;
 public:
     Player();
-    Ship search_For_Ship(Coordinates coord, char name);
+    int search_For_Ship(Coordinates coord, char name);
     std::string get_Coordinates_to_Move();
-    void remove_Ship(Ship to_Remove);
+    void remove_Ship(int i);
     int play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move);
     void check_For_Healing(Coordinates coordinates);
 };
