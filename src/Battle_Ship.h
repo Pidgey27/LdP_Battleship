@@ -7,7 +7,7 @@
 #include "Coordinates.h"
 
 
-class Battle_Ship : protected Ship{   
+class Battle_Ship : public Ship{   
 
 
     public:
