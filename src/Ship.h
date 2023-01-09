@@ -18,6 +18,8 @@ protected:
     bool *armor;
 
 public:
+    Ship(Ship&&)=delete;
+    Ship(Ship const&)= delete;
     Ship(Coordinates first, Coordinates last){};   //to implement on Battle_Ship and Suppport_Ship
     Ship(Coordinates mono_Coord){}; //to implement on Submarine
     virtual void action(Coordinates first, Coordinates last) {};
@@ -27,6 +29,9 @@ public:
     int get_Center_Y() { return center_Y;}
     int get_Dimension() {return dimension;}
     bool get_Orientation() {return orientation;}
+    void setName(char n) { name=n;}
+    void set_Center_X(int x) { center_X=x;}
+    void set_Center_Y(int y) { center_Y=y;}
 };
 
 #endif //LDP_BATTLESHIP_SHIP_H

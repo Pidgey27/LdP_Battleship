@@ -7,19 +7,19 @@
 //coordinates of the ship, then searches on the coordinates occupied by the ship.
 int Player::search_For_Ship(Coordinates coord, char name) {
     for(int i=0; i<pieces.size(); i++) {
-        if (pieces[i].get_Name() == name && pieces[i].get_Center_X() == coord.get_X() &&
-            pieces[i].get_Center_Y() == coord.get_Y())
+        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() &&
+            pieces[i]->get_Center_Y() == coord.get_Y())
             return i;
-        if (pieces[i].get_Name() == name && pieces[i].get_Center_X() == coord.get_X() && name != 'E') {
-            int j = pieces[i].get_Center_Y() - ((pieces[i].get_Dimension() - 1) / 2);
-            int end = j + pieces[i].get_Dimension();
+        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() && name != 'E') {
+            int j = pieces[i]->get_Center_Y() - ((pieces[i]->get_Dimension() - 1) / 2);
+            int end = j + pieces[i]->get_Dimension();
             for (j; j <= end; j++)
                 if (j == coord.get_Y())
                     return i;
         }
-        if (pieces[i].get_Name() == name && pieces[i].get_Center_Y() == coord.get_Y() && name != 'E') {
-            int j = pieces[i].get_Center_X() - ((pieces[i].get_Dimension() - 1) / 2);
-            int end = j + pieces[i].get_Dimension();
+        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_Y() == coord.get_Y() && name != 'E') {
+            int j = pieces[i]->get_Center_X() - ((pieces[i]->get_Dimension() - 1) / 2);
+            int end = j + pieces[i]->get_Dimension();
             for (j; j <= end; j++)
                 if (j == coord.get_X())
                     return i;
