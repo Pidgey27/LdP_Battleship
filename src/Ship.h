@@ -33,5 +33,8 @@ public:
     void set_Center_X(int x) { center_X=x;}
     void set_Center_Y(int y) { center_Y=y;}
 };
+static std::ostream& operator <<(std::ostream& os, Ship ship) {
+    return os<<ship.get_Name()<<" with center in "<<Coordinates(ship.get_Center_X(), ship.get_Center_Y());
+}
 
 #endif //LDP_BATTLESHIP_SHIP_H

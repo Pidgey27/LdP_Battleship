@@ -16,13 +16,15 @@
 
 class Player {
 protected:
-    std::vector<Ship*> pieces;
+    std::vector<std::shared_ptr<Ship>> pieces;
 public:
     Player();
+    ~Player();
     int search_For_Ship(Coordinates coord, char name);
-    virtual std::string get_Coordinates_to_Move() {};
+    virtual std::string get_Coordinates_to_Move() {return " ";};
     void remove_Ship(int i);
-    int play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move);
-    void check_For_Healing(Coordinates coordinates);
+    // int play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {}; to implement
+    void check_For_Healing(Coordinates coordinates) {};
+    void show_Pieces();
 };
 #endif

@@ -7,16 +7,14 @@
 
 #include "Player.h"
 
-class Com_Player: protected Player {
+class Com_Player: public Player {
 private:
     Coordinates get_First_Coordinate();
     Coordinates get_Second_Coordinate();
     bool check_For_Valid_Coordinates();
-
 public:
     Com_Player();
     std::string get_Coordinates_to_Move();
-
 };
 
 #endif //LDP_BATTLESHIP_COM_PLAYER_H

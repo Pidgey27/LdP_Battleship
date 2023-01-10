@@ -1,7 +1,7 @@
-#include "Battle_Ship.h"
 #include <iostream>
+#include "Com_Player.h"
+#include "tst/test_Com_Player.cpp"
 #include "tst/test_board.cpp"
-
 int main(int argc, char const *argv[])
 {
     std::string uno = "A3";
@@ -12,13 +12,19 @@ int main(int argc, char const *argv[])
     Coordinates ss(tre);
     //Submarine sb(ss);
     Battle_Ship bs (first ,last);
-    std::cout << bs.getDirection() << bs.getCenter_X() << bs.getCenter_Y();
+    std::cout << bs.getDirection() << bs.getCenter_X() << bs.getCenter_Y()<<std::endl;
     //std::cout << ss.get_X();
 
     std::cout << std::endl;
     //Testing Board
-    testBoard();
+    //testBoard();
     //std::cout << "\033[1;31mbold red text\033[0m\n";
-
+    test_Random_Get_Coordinates_to_Move();
+    test_Constructor_And_Search();
     return 0;
 }
+
+
+
+
+

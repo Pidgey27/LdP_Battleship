@@ -3,7 +3,7 @@
 // matricola 1137125
 //
 #include "src\Coordinates.h"
-void test_char_coordinates_conversion() {
+ static void test_char_coordinates_conversion() {
     char test_board[12][12] {'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
                              'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
                              'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
@@ -31,7 +31,7 @@ void test_char_coordinates_conversion() {
         std::cout<<std::endl;
     }
 }
-    void test_coordinates_basic_conversion() {       //test ok
+static void test_coordinates_basic_conversion() {       //test ok
         std::string uno = "A2";
         std::string due = "a2";
         std::string invalid1 = "%7";
@@ -51,7 +51,7 @@ void test_char_coordinates_conversion() {
         std::cout << "prova conversione " << invalid3 << " " << g.get_Y() << " " << g.get_X() << std::endl;
     }
 
-    void test_input_from_keyboard() {
+    static void test_input_from_keyboard() {
         char test_board[13][13] {'A', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
                                  'B', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
                                  'C', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o','o','o','o',
@@ -87,7 +87,7 @@ void test_char_coordinates_conversion() {
         }
         }
 
-void test_coordinates () {
+static void test_coordinates () {
     //test_coordinates_basic_conversion();
     //test_char_coordinates_conversion();
     test_input_from_keyboard();

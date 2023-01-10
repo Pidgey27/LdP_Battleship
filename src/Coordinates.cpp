@@ -24,7 +24,7 @@ Coordinates::Coordinates(std::string yx) {
         throw std::runtime_error("Hai inserito delle coordinate invalide!");
 }
 //check input string for invalid char
-void Coordinates::check_Invalid_Char(std::string yx) {
+void Coordinates::check_Invalid_Char(const std::string yx) {
     std::string invalid="!£$%&/()=?^[]{}*ç@°#§+*-_;,<>òàùèéçì|";
     if(yx.find_first_of(invalid) != std::string::npos)
         throw std::runtime_error("Hai inserito una stringa non valida!");
@@ -41,8 +41,7 @@ std::string Coordinates::check_Lenght(std::string yx) {
 
 std::string Coordinates::to_String() {
     char a= 'A' + coord_Y;
-    std::string yx="";
-    return yx+a+std::to_string(coord_X+1);
+    return {a+std::to_string(coord_X+1)};
 }
 
 std::ostream& operator <<(std::ostream& os, Coordinates coordinates) {
