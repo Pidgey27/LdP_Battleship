@@ -6,13 +6,24 @@
 #define BOARD_H
 #include "Coordinates.h"
 #include <iostream>
+#include "Battle_Ship.h"
+#include "Support_Ship.h"
+#include "Submarine.h"
+
+class Data{
+    public:
+    char tiles;
+    Battle_Ship bb;
+    Support_Ship sb;
+    Submarine sm;
+};
 
 class Board {
 
 private:
 
-    char attackBoard[12][12];
-    char defenseBoard[12][12];
+    Data attackBoard[12][12];
+    Data defenseBoard[12][12];
 
     static Board* instancePtr;
 
