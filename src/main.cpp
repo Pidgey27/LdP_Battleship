@@ -19,5 +19,8 @@ int main(int argc, char const *argv[])
     testBoard();
     //std::cout << "\033[1;31mbold red text\033[0m\n";
 
+    /*Coordinates a = Coordinates("j1");
+    std::cout << a.get_X() << a.get_Y() << std::endl;*/
+
     return 0;
 }

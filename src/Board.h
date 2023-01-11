@@ -9,19 +9,13 @@
 #include "Support_Ship.h"
 #include "Submarine.h"
 
-class Data{
-public:
-    char tiles;
-    Battle_Ship bs;
-    Support_Ship ss;
-    Submarine sm;
-};
+
 
 class Board {
 
 private:
-    Data attackBoard[12][12];
-    Data defenseBoard[12][12];
+    char attackBoard[12][12];
+    char defenseBoard[12][12];
     static Board* instancePtr;
 
     Board();
@@ -29,6 +23,8 @@ private:
     void addSupportShip(int i);
     void addSubmarine(int i);
     void prepareBoard();
+    void printDefBoard();
+    void printAtkBoard();
 
 public:
     Board(const Board& obj)
@@ -43,9 +39,16 @@ public:
         }
     }
 
-    void printDefBoard();
-    void printAtkBoard();
     void printBoard();
+    //TODO
+    /*
+    CLEAR "Y" from attack
+    CLEAR "O" from attack 
+    OUTPUT COORDINATA
+    HIT write something in table
+    IS EMPTY (C'E " " NELLA COORDINATA)  ???
+    */
+
 
 };
 #endif //BOARD_H
