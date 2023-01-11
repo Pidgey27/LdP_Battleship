@@ -5,11 +5,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include <iostream>
-#include "Battle_Ship.h"
-#include "Support_Ship.h"
-#include "Submarine.h"
-
-
+#include "Coordinates.h"
 
 class Board {
 
