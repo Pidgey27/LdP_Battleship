@@ -6,6 +6,8 @@
 #define LDP_BATTLESHIP_COM_PLAYER_H
 
 #include "Player.h"
+#include <cstdlib>
+#include <time.h>
 
 class Com_Player: public Player {
 private:

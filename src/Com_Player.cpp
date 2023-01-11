@@ -6,11 +6,13 @@
 #include "Ship.h"
 
 Coordinates Com_Player::get_First_Coordinate() {
+    std::srand(time(NULL));
     int n=rand() % pieces.size();
     return {pieces[n]->get_Center_X(), pieces[n]->get_Center_Y()};
 }
 
 Coordinates Com_Player::get_Second_Coordinate() {
+    std::srand(time(NULL));
     int x=rand()%12;
     int y=rand()%12;
     return {x, y};
