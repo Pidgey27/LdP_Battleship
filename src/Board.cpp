@@ -6,7 +6,6 @@
 
 Board* Board ::instancePtr = NULL;
 
-    //TODO : constructor have to initialize the board with boat
     Board::Board(){
         for(int i = 0; i < 12; i++){
             for(int j  =0; j < 12; j ++){ 
@@ -14,10 +13,10 @@ Board* Board ::instancePtr = NULL;
             this->attackBoard[i][j].tiles = ' ';
             }
         }
-        addBattleShip();
-
+        prepareBoard();
     }
 
+//--------------------------------------------printing function---------------------------
 void Board::printDefBoard(){
 
     std::cout << "      1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12|" << std::endl << std::endl;
@@ -65,7 +64,20 @@ void Board::printBoard(){
             C = 67 + i;
         std::cout << "  \033[1;36m"  << C << "\033[0m   ";
         for(int j  = 0; j < 12; j ++){ //row loop
-            std::cout << this->defenseBoard[i][j].tiles << " | ";
+            switch(this->defenseBoard[i][j].tiles){
+            case('C'):
+                std::cout << "\033[1;35m" << this->defenseBoard[i][j].tiles << "\033[0m" << " | ";
+                break;
+            case('S'):
+                std::cout << "\033[1;32m" << this->defenseBoard[i][j].tiles << "\033[0m" << " | ";
+                break;
+            case('E'):
+                std::cout << "\033[1;33m" << this->defenseBoard[i][j].tiles << "\033[0m" << " | ";
+                break;
+            case(' '):
+                std::cout << this->defenseBoard[i][j].tiles << " | ";
+                break;
+            }
         }
         std::cout <<"     ";
         std::cout << "  \033[1;36m"  << C << "\033[0m   ";
@@ -82,26 +94,105 @@ void Board::printBoard(){
     std::cout << std::endl;
 };
 
-void Board::addBattleShip(){
-        //TODO : try and catch of exception "input wrong"
+//------------------------------------------Constructor function-------------------------
+void Board::addBattleShip(int i){
         std::string input;
-        for(int i : {1,2,3}){
-            std::cout << "\033[1;31mInserisci le Coordinate della " << i << " corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
-            std::cin >> input;
-            Coordinates coorStart = Coordinates(input);
-            std::cin >> input;
-            Coordinates coorEnd = Coordinates(input);
-            if(coorStart.get_Y() == coorEnd.get_Y())
-                for(int i = 0; i < 5; i++ ){
-                    this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles = 'C';
-                    if(i == 2)
-                        this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].bb = Battle_Ship(coorStart,coorEnd);
-                }
-            if(coorStart.get_X() == coorEnd.get_X())
-                for(int i = 0; i < 5; i++ ){
-                    this->defenseBoard[i][coorEnd.get_X()].tiles = 'C';
-                    if(i == 2)
-                        this->defenseBoard[coorEnd.get_Y()][i].bb = Battle_Ship(coorStart,coorEnd);
+        std::cout << "\033[1;31mInserisci le Coordinate della " << i << " corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
+        std::cin >> input;
+        Coordinates coorStart = Coordinates(input);
+        std::cin >> input;
+        Coordinates coorEnd = Coordinates(input);
+        if(coorStart.get_Y() == coorEnd.get_Y()){
+            for(int i = 0; i < 5; i++ ){
+                if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles != ' ')
+                    throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
+            }
+            for(int i = 0; i < 5; i++ ){
+                this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles = 'C';
+                if(i == 2)
+                    this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].bs = Battle_Ship(coorStart,coorEnd);
                 }
         }
+        if(coorStart.get_X() == coorEnd.get_X()){
+            for(int i = 0; i < 5; i++ ){
+                if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles != ' ')
+                    throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
+            }
+            for(int i = 0; i < 5; i++ ){
+                this->defenseBoard[i][coorEnd.get_X()].tiles = 'C';
+                if(i == 2)
+                    this->defenseBoard[coorEnd.get_Y()][i].bs = Battle_Ship(coorStart,coorEnd);
+            }
+        }
+};
+
+void Board::addSupportShip(int i){
+        //TODO : try and catch of exception "input wrong"
+        std::string input;
+        std::cout << "\033[1;31mInserisci le Coordinate della " << i << " nave di supporto (esempio: a1 a3)\033[0m"<<  std::endl;
+        std::cin >> input;
+        Coordinates coorStart = Coordinates(input);
+        std::cin >> input;
+        Coordinates coorEnd = Coordinates(input);
+        if(coorStart.get_Y() == coorEnd.get_Y())
+            for(int i = 0; i < 3; i++ ){
+                    if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles != ' ')
+                        throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
+                }
+            for(int i = 0; i < 3; i++ ){
+                this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles = 'S';
+                if(i == 1)
+                    this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].ss = Support_Ship(coorStart,coorEnd);
+            }
+        if(coorStart.get_X() == coorEnd.get_X())
+            for(int i = 0; i < 3; i++ ){
+                        if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i].tiles != ' ')
+                            throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
+                    }
+            for(int i = 0; i < 3; i++ ){
+                this->defenseBoard[i][coorEnd.get_X()].tiles = 'S';
+                if(i == 1)
+                    this->defenseBoard[coorEnd.get_Y()][i].ss = Support_Ship(coorStart,coorEnd);
+            }
+};
+
+void Board::addSubmarine(int i){
+        //TODO : try and catch of exception "input wrong"
+        std::string input;
+        std::cout << "\033[1;31mInserisci la Coordinata del " << i << " sottomarino (esempio: a1)\033[0m"<<  std::endl;
+        std::cin >> input;
+        Coordinates coor = Coordinates(input);
+        if(this->defenseBoard[coor.get_Y()][coor.get_X()].tiles == ' '){
+            this->defenseBoard[coor.get_Y()][coor.get_X()].tiles = 'E';
+            this->defenseBoard[coor.get_Y()][coor.get_X()].sm = Submarine(coor);
+        }else{
+            throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
+        }
+};
+
+void Board::prepareBoard(){
+    for (int i = 1; i < 4; i++){
+        try{
+            addBattleShip(i);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
+    for (int i = 1; i < 4; i++){
+        try{
+            addSubmarine(i);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
+    for (int i = 1; i < 4; i++){
+        try{
+            addSupportShip(i);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
 };

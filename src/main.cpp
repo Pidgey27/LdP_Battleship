@@ -1,4 +1,3 @@
-#include "Battle_Ship.h"
 #include <iostream>
 #include "tst/test_board.cpp"
 
