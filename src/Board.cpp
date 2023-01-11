@@ -23,8 +23,6 @@ void Board::printDefBoard(){
 
     for(int i = 0; i < 12; i ++) { //column loop
         char C = 65 + i;
-        if((65+i) == 74 || (65+i) == 75 || (65+i) == 76)
-            C = 67 + i;
         std::cout << "  "  << C << "   ";
         for(int j  =0; j < 12; j ++){ //row loop
             std::cout << this->defenseBoard[i][j].tiles << " | ";
@@ -42,8 +40,6 @@ void Board::printAtkBoard(){
 
     for(int i = 0; i < 12; i ++) { //column loop
         char C = 65 + i;
-        if((65+i) == 74 || (65+i) == 75 || (65+i) == 76)
-            C = 67 + i;
         std::cout << "  "  << C << "   ";
         for(int j  =0; j < 12; j ++){ //row loop
             std::cout << this->attackBoard[i][j].tiles << " | ";
@@ -60,8 +56,6 @@ void Board::printBoard(){
 
     for(int i = 0; i < 12; i ++) { //column loop
         char C = 65 + i;
-        if((65+i) == 74 || (65+i) == 75 || (65+i) == 76)
-            C = 67 + i;
         std::cout << "  \033[1;36m"  << C << "\033[0m   ";
         for(int j  = 0; j < 12; j ++){ //row loop
             switch(this->defenseBoard[i][j].tiles){
@@ -127,7 +121,6 @@ void Board::addBattleShip(int i){
 };
 
 void Board::addSupportShip(int i){
-        //TODO : try and catch of exception "input wrong"
         std::string input;
         std::cout << "\033[1;31mInserisci le Coordinate della " << i << " nave di supporto (esempio: a1 a3)\033[0m"<<  std::endl;
         std::cin >> input;
@@ -181,7 +174,7 @@ void Board::prepareBoard(){
     }
     for (int i = 1; i < 4; i++){
         try{
-            addSubmarine(i);
+            addSupportShip(i);
         }catch(std::invalid_argument e){
             std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
             i--;
@@ -189,10 +182,11 @@ void Board::prepareBoard(){
     }
     for (int i = 1; i < 4; i++){
         try{
-            addSupportShip(i);
+            addSubmarine(i);
         }catch(std::invalid_argument e){
             std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
             i--;
         }
     }
+    
 };
