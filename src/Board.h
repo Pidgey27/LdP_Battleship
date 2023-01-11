@@ -34,17 +34,30 @@ public:
             return instancePtr;
         }
     }
-
-    void printBoard();
-    //TODO
     /*
-    CLEAR "Y" from attack
-    CLEAR "O" from attack 
-    OUTPUT COORDINATA
-    HIT write something in table
-    IS EMPTY (C'E " " NELLA COORDINATA)  ???
+        Print the board
     */
-
+    void printBoard();
+    /*
+        elimina nella tabella tutti i colpi assegnati
+   */
+   void clearHit();
+    /*
+        elimina nella tabella i risultati dello scan
+   */
+   void clearScan();
+    /*
+        get the value at a particular coordinate
+   */
+   char get(Coordinates coor);
+    /*
+        set a hit on a coordinate
+    */
+   void setHit(Coordinates coor);
+   /*
+        set a miss shot on a coordinate return:
+    */
+   void setMiss(Coordinates coor);
 
 };
 #endif //BOARD_H

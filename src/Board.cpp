@@ -181,3 +181,37 @@ void Board::prepareBoard(){
     }
     
 };
+//-------------------------------------------Public function----------------------------
+
+void Board::clearHit(){
+    for(int i = 0; i < 12; i ++) { //column loop
+        for(int j  =0; j < 12; j ++){ //row loop
+             if(attackBoard[i][j] == 'O')
+                attackBoard[i][j] = ' ';
+        }
+    }
+};
+ 
+void Board::clearScan(){
+    for(int i = 0; i < 12; i ++) { //column loop
+        for(int j  =0; j < 12; j ++){ //row loop
+        if(attackBoard[i][j] == 'Y')
+            attackBoard[i][j] = ' ';
+        }
+    }
+};
+
+char Board::get(Coordinates coor){
+    return defenseBoard[coor.get_X()][coor.get_Y()];
+};
+
+void Board::setHit(Coordinates coor){
+    this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
+};
+
+void Board::setMiss(Coordinates coor){
+    this->defenseBoard[coor.get_X()][coor.get_Y()] = 'O';
+};
+
+
+//Human Player TODO
