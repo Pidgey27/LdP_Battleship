@@ -30,5 +30,6 @@ Com_Player::Com_Player() {
 }
 
 std::string Com_Player::get_Coordinates_to_Move() {
+    //da implementare controllo su board!!
     return get_First_Coordinate().to_String() + " " + get_Second_Coordinate().to_String();
 }

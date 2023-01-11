@@ -22,7 +22,7 @@ public:
     Ship(Ship const&)= delete;
     Ship(Coordinates first, Coordinates last){};   //to implement on Battle_Ship and Suppport_Ship
     Ship(Coordinates mono_Coord){}; //to implement on Submarine
-    virtual void action(Coordinates first, Coordinates last) {};
+    virtual void action(Coordinates first, Coordinates last)=0;
     void reset_Armor(bool reset);
     char get_Name(){ return name;}
     int get_Center_X() {return center_X;}
@@ -33,8 +33,5 @@ public:
     void set_Center_X(int x) { center_X=x;}
     void set_Center_Y(int y) { center_Y=y;}
 };
-static std::ostream& operator <<(std::ostream& os, Ship ship) {
-    return os<<ship.get_Name()<<" with center in "<<Coordinates(ship.get_Center_X(), ship.get_Center_Y());
-}
 
 #endif //LDP_BATTLESHIP_SHIP_H
