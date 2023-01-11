@@ -4,39 +4,51 @@
 
 #ifndef BOARD_H
 #define BOARD_H
-#include "Coordinates.h"
 #include <iostream>
+#include "Battle_Ship.h"
+#include "Support_Ship.h"
+#include "Submarine.h"
+
+
 
 class Board {
 
 private:
-
     char attackBoard[12][12];
     char defenseBoard[12][12];
-
     static Board* instancePtr;
 
     Board();
-    void addBattleShip();
+    void addBattleShip(int i);
+    void addSupportShip(int i);
+    void addSubmarine(int i);
+    void prepareBoard();
+    void printDefBoard();
+    void printAtkBoard();
 
-    public:
+public:
     Board(const Board& obj)
         =delete;
     static Board* getInstance(){
-    if (instancePtr == NULL){
-        instancePtr = new Board();
-        return instancePtr;
-    }
-    else{
-        return instancePtr;
+        if (instancePtr == NULL){
+            instancePtr = new Board();
+            return instancePtr;
+        }
+        else{
+            return instancePtr;
+        }
     }
 
-  }
-
-    void printDefBoard();
-    void printAtkBoard();
     void printBoard();
+    //TODO
+    /*
+    CLEAR "Y" from attack
+    CLEAR "O" from attack 
+    OUTPUT COORDINATA
+    HIT write something in table
+    IS EMPTY (C'E " " NELLA COORDINATA)  ???
+    */
+
 
 };
-
 #endif //BOARD_H
