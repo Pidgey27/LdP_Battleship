@@ -14,7 +14,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
         setCenter_Y(first,last);
      }
      else
-        std::cout << "Coordinate non valide";
+        throw std::invalid_argument("- Error Coordinates -");
 
 }
 
@@ -31,6 +31,14 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
          orientation = 1;
 
  }
+
+ void Support_Ship::reset_Armor(bool reset){
+        memset(armour, 0, dimension);
+}
+
+void Support_Ship::setName(char n) { 
+        name = n;
+}
  
  bool Support_Ship::getDirection(){ return orientation; }
 
@@ -64,5 +72,13 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
     }
     return false;
  }
+
+ char Support_Ship::get_Name(){ 
+    return name;
+}
+
+int Support_Ship::get_Dimension(){
+    return dimension;
+}
 
  

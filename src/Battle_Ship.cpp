@@ -14,7 +14,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
         setCenter_Y(first,last);
      }
      else
-        std::cout << "Coordinate non valide";
+        throw std::invalid_argument("- Error Coordinates -");
 
 }
 
@@ -51,6 +51,14 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
 
  }
 
+ void Battle_Ship::reset_Armor(bool reset){
+    memset(armour, 0, dimension);
+ }
+
+  void Battle_Ship::setName(char n) { 
+    name = n;
+}
+
  int Battle_Ship::getCenter_X(){    return center_X; }
  int Battle_Ship::getCenter_Y(){    return center_Y; }
 
@@ -65,4 +73,11 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
     return false;
  }
 
+char Battle_Ship::get_Name(){ 
+    return name;
+}
+
+int Battle_Ship::get_Dimension(){
+    return dimension;
+}
  

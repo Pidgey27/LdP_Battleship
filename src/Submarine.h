@@ -7,14 +7,24 @@
 
 
 class Submarine : public Ship{   
-        
+
+    protected:
+        const int dimension = 1;
+         bool *armour = new bool[dimension];
+   
+
 
     public:
         
         Submarine(Coordinates mono_Coord);
         void action(Coordinates first, Coordinates last);
         void setCenter(Coordinates mono_Cord);
-        
+        void setName(char n);
+        void reset_Armor(bool reset);
+
+
         bool getDirection();
         int getCenter();
+        char get_Name();
+        int get_Dimension();
 };
