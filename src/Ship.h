@@ -6,7 +6,7 @@
 #ifndef LDP_BATTLESHIP_SHIP_H
 #define LDP_BATTLESHIP_SHIP_H
 #include "Coordinates.h"
-
+#include <cstring>
 class Ship {
 
 protected:

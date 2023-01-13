@@ -3,7 +3,7 @@
 // matricola 1137125
 
 #include "Player.h"
-//search ship does first a search on the name, then on the coordinates. THe first instance searches for a match on center
+//search ship does first a search on the name, then on the coordinates. The first instance searches for a match on center
 //coordinates of the ship, then searches on the coordinates occupied by the ship.
 int Player::search_For_Ship(Coordinates coord, char name) {
     name=toupper(name);      //turns name to upperCase, as default name for the ship is always on upperCase
@@ -51,5 +51,20 @@ Player::Player() {
 void Player::show_Pieces() {
     for(int i=0; i<pieces.size(); i++)
         std::cout<<pieces[i]->get_Name()<<" con centro in "<<Coordinates(pieces[i]->get_Center_X(), pieces[i]->get_Center_Y())<<std::endl;
+}
+
+//return 0 for battleship
+//return 1 for submarine
+//return 2 for support
+//aggiorna le coordinate se in movimento o segnala che è stato sparato un colpo in base alla nave che si muove.
+int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
+    int index=search_For_Ship(coord_Ship_to_Move, board.get(coord_Ship_to_Move));
+    pieces[index]->action(coord_Ship_to_Move, where_To_Move);
+    if(board.get(coord_Ship_to_Move)=='B'||board.get(coord_Ship_to_Move)=='b')
+        return 0;
+    if(board.get(coord_Ship_to_Move)=='E')
+        return 1;
+    if(board.get(coord_Ship_to_Move)=='S'||board.get(coord_Ship_to_Move)=='s')
+        return 2;
 }
 

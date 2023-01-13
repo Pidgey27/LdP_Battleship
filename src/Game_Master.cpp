@@ -16,3 +16,15 @@ Game_Master::Game_Master(bool game_mode, int max) {
     }
 }
 
+bool Game_Master::Execute_Turn() {
+    if(current_Turn%2==0)
+        current_Turn_Player=Player2;
+    else
+        current_Turn_Player=Player1;
+    moves=current_Turn_Player->get_Coordinates_to_Move();
+    // da inserire QUI la funzione per salvare in log;
+    Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
+    Coordinates second= Coordinates(moves.substr(moves.find_first_of(' '), moves.length()));
+    current_Turn_Player->play(first, second);
+
+}

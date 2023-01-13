@@ -17,6 +17,7 @@ private:
     int max_Turns;
     int current_Turn;
     std::string moves;
+    Player* current_Turn_Player;
 
 public:
 
