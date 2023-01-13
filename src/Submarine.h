@@ -24,7 +24,8 @@ class Submarine : public Ship{
 
 
         bool getDirection();
-        int getCenter();
+        int get_Center_X();
+        int get_Center_Y();
         char get_Name();
         int get_Dimension();
 };

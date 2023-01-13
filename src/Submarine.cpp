@@ -15,6 +15,7 @@
 
         void Submarine::setCenter(Coordinates mono_Coord){
             center_X = mono_Coord.get_X();
+            center_Y = mono_Coord.get_Y();
         }
 
         void Submarine::reset_Armor(bool reset){
@@ -29,8 +30,12 @@
             return orientation;
         }
 
-        int Submarine::getCenter(){
+        int Submarine::get_Center_X(){
             return center_X;
+        }
+
+        int Submarine::get_Center_Y(){
+            return center_Y;
         }
 
         char Submarine::get_Name(){ 
