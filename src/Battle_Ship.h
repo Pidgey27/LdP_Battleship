@@ -10,7 +10,6 @@
 class Battle_Ship : public Ship{   
 
     protected:
-        int dimension = 5;
          bool *armour = new bool[dimension];
    
 
