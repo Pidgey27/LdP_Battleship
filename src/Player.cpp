@@ -6,7 +6,12 @@
 //search ship does first a search on the name, then on the coordinates. The first instance searches for a match on center
 //coordinates of the ship, then searches on the coordinates occupied by the ship.
 int Player::search_For_Ship(Coordinates coord, char name) {
-    name=toupper(name);      //turns name to upperCase, as default name for the ship is always on upperCase
+    name=toupper(name);//turns name to upperCase, as default name for the ship is always on upperCase
+    int dim;
+    if(name=='b'|| name=='B')
+        dim=5;
+    if(name=='s'|| name=='S')
+        dim=3;
     for(int i=0; i<pieces.size(); i++) {
         //search for center coordinates
         if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() &&
@@ -14,21 +19,17 @@ int Player::search_For_Ship(Coordinates coord, char name) {
             return i;
         //search for with fixed x, builds the ship and verifies if any of the coordinates fits
         if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() && name != 'E') {
-            std::cout<<"1)Verifico che il pezzo con centro in "<<Coordinates(pieces[i]->get_Center_X(), pieces[i]->get_Center_Y())<<std::endl;
-            int j = pieces[i]->get_Center_Y() - ((pieces[i]->get_Dimension() - 1) / 2);
-            int end = j + pieces[i]->get_Dimension();
+            int j = pieces[i]->get_Center_Y() - ((dim - 1) / 2);
+            int end = j + dim;
             for (j; j <= end; j++)
                 if (j == coord.get_Y())
                     return i;
         }
         //search for with fixed y, builds the ship and verifies if any of the coordinates fits
         if (pieces[i]->get_Name() == name && pieces[i]->get_Center_Y() == coord.get_Y() && name != 'E') {
-            std::cout<<"2)Verifico che il pezzo con centro in "<<Coordinates(pieces[i]->get_Center_X(), pieces[i]->get_Center_Y())<<std::endl;
-            int j =(int) pieces[i]->get_Center_X() - ((pieces[i]->get_Dimension() - 1) / 2);
-            int end = j + pieces[i]->get_Dimension();
-            std::cout<<"cerco in "<< Coordinates(j, coord.get_Y())<<std::endl;
+            int j =(int) pieces[i]->get_Center_X() - ((dim - 1) / 2);
+            int end = j + dim;
             for (j; j <= end; j++) {
-                std::cout<<"cerco in "<< Coordinates(j, coord.get_Y())<<std::endl;
                 if (j == coord.get_X())
                     return i;
             }
