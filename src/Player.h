@@ -28,5 +28,8 @@ public:
     void check_For_Healing(Coordinates coordinates);
     void show_Pieces();
     bool check_For_Endgame();
+    bool under_Fire(Coordinates coord);
+    void remove_Spotted_Marks();
+    void print_Def_Board();
 };
 #endif

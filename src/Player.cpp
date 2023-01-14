@@ -88,3 +88,36 @@ bool Player::check_For_Endgame() {
     else
         return false;
 }
+
+bool Player::under_Fire(Coordinates coord) {
+    bool shot=board->Shot(coord);
+    int mid;
+    if(!shot)
+        return false;
+    else {
+        int injured= search_For_Ship(coord, board->get(coord));
+        if(pieces[injured]->get_Name()=='B')
+            mid=2;
+        if(pieces[injured]->get_Name()=='S')
+            mid=1;
+        int where_hit;
+        if(pieces[injured]->get_Center_X()==coord.get_X()) {
+            where_hit=pieces[injured]->get_Center_Y()-coord.get_Y()+mid;
+            pieces[injured]->set_Injured(where_hit);
+        }
+        if(pieces[injured]->get_Center_Y()==coord.get_Y()){
+            where_hit=pieces[injured]->get_Center_X()-coord.get_X()+mid;
+            pieces[injured]->set_Injured(where_hit);
+            //da aggiungere un check per vedere se il pezzo è ancora vivo!!!
+        }
+        return true;
+    }
+}
+
+void Player::remove_Spotted_Marks() {
+    board->clearScan();
+}
+
+void Player::print_Def_Board() {
+    board->P
+}

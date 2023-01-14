@@ -17,11 +17,15 @@ Game_Master::Game_Master(bool game_mode, int max) {
 }
 //false until you reach the maximum number of turns, or one of the player loses all ships
 bool Game_Master::Execute_Turn() {
-    if(current_Turn%2==0)
-        current_Turn_Player=Player2;
-    else
-        current_Turn_Player=Player1;
-    moves=current_Turn_Player->get_Coordinates_to_Move();
+    if(current_Turn%2==0) {
+        current_Turn_Player = Player2;
+        opponent=Player1;
+    }
+    else {
+        current_Turn_Player = Player1;
+        opponent=Player2;
+    }
+    while(ask_For_Coordinates());
     // da inserire QUI la funzione per salvare in log;
     Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
     Coordinates second= Coordinates(moves.substr(moves.find_first_of(' '), moves.length()));
@@ -43,4 +47,32 @@ void Game_Master::who_Wins() {
         std::cout<<"Ha vinto il giocatore 2!!!"<<std::endl;
     if(Player2->check_For_Endgame())
         std::cout<<"Ha vinto il giocatore 1!!!"<<std::endl;
+}
+
+void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
+    if(current_Turn%2==0){
+        current_Turn_Player=Player2;
+        opponent=Player1;
+    }
+    else {
+        current_Turn_Player = Player1;
+        opponent = Player2;
+    }
+    bool shot=opponent->under_Fire(where_To_Fire);
+    if(shot)
+        std::cout<<"Colpito!"<<std::endl;
+    else
+        std::cout<<"Buco nell'acqua"<<std::endl;
+}
+
+bool Game_Master::ask_For_Coordinates() {
+    moves=current_Turn_Player->get_Coordinates_to_Move();
+    if(moves.compare("AA AA")==0) {
+        current_Turn_Player->remove_Spotted_Marks();
+        return false;
+    }
+    if(moves.compare("XX XX")==0){
+        return false;
+    }
+    return true;
 }

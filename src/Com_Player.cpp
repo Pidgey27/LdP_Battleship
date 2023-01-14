@@ -59,7 +59,7 @@ Coordinates Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coo
             x = first_coord.get_X();
             y = first_coord.get_Y() - dim;
         }
-        std::cout << x << " " << y << std::endl;
     return Coordinates(x,y);
 }
+
 

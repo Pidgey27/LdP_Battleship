@@ -19,5 +19,5 @@ add_executable(LdP_Battleship
         src/main.cpp 
         
         tst/test_coordinates.cpp
-        tst/test_board.cpp src/Player.h src/Player.cpp src/Com_Player.h src/Com_Player.cpp tst/test_Com_Player.cpp src/Game_Master.h src/Game_Master.cpp)
+        tst/test_board.cpp src/Player.h src/Player.cpp src/Com_Player.h src/Com_Player.cpp tst/test_Com_Player.cpp src/Game_Master.h src/Game_Master.cpp src/Human_Player.cpp)
 

@@ -27,11 +27,8 @@ public:
     char get_Name(){ return name;}
     int get_Center_X() {return center_X;}
     int get_Center_Y() { return center_Y;}
-    int get_Dimension() {return dimension;}
-    bool get_Orientation() {return orientation;}
     void setName(char n) { name=n;}
-    void set_Center_X(int x) { center_X=x;}
-    void set_Center_Y(int y) { center_Y=y;}
+    void set_Injured(int n) { armor[n]=1;}
 };
 
 #endif //LDP_BATTLESHIP_SHIP_H
