@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
     //Testing Board
     //testBoard();
     test_Random_Get_Coordinates_to_Move();
-    test_Constructor_And_Search();
+    test_Dummy_Constructor_And_Search();
     return 0;
 }
 
