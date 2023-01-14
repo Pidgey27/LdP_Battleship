@@ -20,7 +20,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
 }
 
  void Battle_Ship::action(Coordinates first, Coordinates last){
-    
+    std::cout << "fire into " << last.get_X() << last.get_Y();
  }
 
  void Battle_Ship::setDirection(Coordinates first, Coordinates last){
