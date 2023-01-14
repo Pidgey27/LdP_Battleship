@@ -10,11 +10,9 @@ static void test_Constructor_And_Search() {
     int i=computer.search_For_Ship(Coordinates("A8"), 'b'); //trova anche con name in minuscolo
     if (i==0)
         std::cout<<"Test centro riuscito!!!"<<std::endl;
-    std::cout<<i;
     i=computer.search_For_Ship(Coordinates("C5"), 'b');
     if(i==1)
-        std::cout<<"Test  riuscito!!!"<<std::endl;
-    std::cout<<i;
+        std::cout<<"Test ricerca fuori dal centro riuscito!!!"<<std::endl;
 }
 static void test_Random_Get_Coordinates_to_Move() {
     Com_Player computer;
