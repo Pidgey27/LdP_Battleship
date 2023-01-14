@@ -23,7 +23,7 @@ public:
     Ship(Coordinates first, Coordinates last){};   //to implement on Battle_Ship and Suppport_Ship
     Ship(Coordinates mono_Coord){}; //to implement on Submarine
     virtual void action(Coordinates first, Coordinates last)=0;
-    void reset_Armor(bool reset);
+    virtual void reset_Armor(bool reset)=0;
     char get_Name(){ return name;}
     int get_Center_X() {return center_X;}
     int get_Center_Y() { return center_Y;}

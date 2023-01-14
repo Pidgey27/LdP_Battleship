@@ -13,7 +13,7 @@ Board* Board ::instancePtr = NULL;
             this->attackBoard[i][j] = ' ';
             }
         }
-        prepareBoard();
+        //prepareBoard();
     }
 
 //--------------------------------------------printing function---------------------------

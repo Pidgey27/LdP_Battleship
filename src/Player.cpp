@@ -24,7 +24,7 @@ int Player::search_For_Ship(Coordinates coord, char name) {
         //search for with fixed y, builds the ship and verifies if any of the coordinates fits
         if (pieces[i]->get_Name() == name && pieces[i]->get_Center_Y() == coord.get_Y() && name != 'E') {
             std::cout<<"2)Verifico che il pezzo con centro in "<<Coordinates(pieces[i]->get_Center_X(), pieces[i]->get_Center_Y())<<std::endl;
-            int j = pieces[i]->get_Center_X() - ((pieces[i]->get_Dimension() - 1) / 2);
+            int j =(int) pieces[i]->get_Center_X() - ((pieces[i]->get_Dimension() - 1) / 2);
             int end = j + pieces[i]->get_Dimension();
             std::cout<<"cerco in "<< Coordinates(j, coord.get_Y())<<std::endl;
             for (j; j <= end; j++) {
@@ -38,11 +38,13 @@ int Player::search_For_Ship(Coordinates coord, char name) {
 }
 
 void Player::remove_Ship(int i) {
+    //da implementare un remove from board per il pezzo
     pieces.erase(pieces.begin()+i);
 }
 
 Player::~Player() {
     pieces.clear();
+    delete board;
 }
 Player::Player() {
     pieces.clear();
@@ -58,13 +60,30 @@ void Player::show_Pieces() {
 //return 2 for support
 //aggiorna le coordinate se in movimento o segnala che è stato sparato un colpo in base alla nave che si muove.
 int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
-    int index=search_For_Ship(coord_Ship_to_Move, board.get(coord_Ship_to_Move));
+    int index=search_For_Ship(coord_Ship_to_Move, board->get(coord_Ship_to_Move));
     pieces[index]->action(coord_Ship_to_Move, where_To_Move);
-    if(board.get(coord_Ship_to_Move)=='B'||board.get(coord_Ship_to_Move)=='b')
+    if(board->get(coord_Ship_to_Move)=='B'||board->get(coord_Ship_to_Move)=='b')
         return 0;
-    if(board.get(coord_Ship_to_Move)=='E')
+    if(board->get(coord_Ship_to_Move)=='E')
         return 1;
-    if(board.get(coord_Ship_to_Move)=='S'||board.get(coord_Ship_to_Move)=='s')
+    if(board->get(coord_Ship_to_Move)=='S'||board->get(coord_Ship_to_Move)=='s')
         return 2;
 }
 
+void Player::check_For_Healing(Coordinates coordinates) {
+    for(int j=0; j<3; j++) {
+        for(int i=0; i<3; i++) {
+            if(board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j))!=' ') {
+                int index= search_For_Ship(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j)));
+                pieces[index]->reset_Armor(true);
+            }
+        }
+    }
+}
+
+bool Player::check_For_Endgame() {
+    if(pieces.size()==0)
+        return true;
+    else
+        return false;
+}
