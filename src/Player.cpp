@@ -72,8 +72,8 @@ int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
 }
 
 void Player::check_For_Healing(Coordinates coordinates) {
-    for(int j=0; j<3; j++) {
-        for(int i=0; i<3; i++) {
+    for(int j=-1; j<2; j++) {
+        for(int i=-1; i<2; i++) {
             if(board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j))!=' ') {
                 int index= search_For_Ship(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j)));
                 pieces[index]->reset_Armor(true);

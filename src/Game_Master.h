@@ -26,6 +26,7 @@ public:
     void Execute_Special_Command(std::string);
     bool is_It_Endgame();
     void fire_Protocol(Coordinates where_To_Fire) {};
+    void who_Wins();
 
 };
 #endif //LDP_BATTLESHIP_GAME_MASTER_H

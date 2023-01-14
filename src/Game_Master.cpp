@@ -35,3 +35,12 @@ bool Game_Master::Execute_Turn() {
     current_Turn++;
     return current_Turn==max_Turns || Player2->check_For_Endgame() || Player1->check_For_Endgame();
 }
+
+void Game_Master::who_Wins() {
+    if(current_Turn==max_Turns)
+        std::cout<<"Sono stati giocati "<<max_Turns<<", la partita è finita in parità"<<std::endl;
+    if(Player1->check_For_Endgame())
+        std::cout<<"Ha vinto il giocatore 2!!!"<<std::endl;
+    if(Player2->check_For_Endgame())
+        std::cout<<"Ha vinto il giocatore 1!!!"<<std::endl;
+}
