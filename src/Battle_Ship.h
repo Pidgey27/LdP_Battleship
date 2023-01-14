@@ -10,8 +10,8 @@
 class Battle_Ship : public Ship{   
 
     protected:
-         int dimension; 
-         bool *armour = new bool[dimension];
+        const int dimension = 5;
+        bool *armour = new bool[dimension];
    
 
     public:
@@ -22,7 +22,6 @@ class Battle_Ship : public Ship{
         void setCenter_X(Coordinates first, Coordinates last);
         void setCenter_Y(Coordinates first, Coordinates last);
         void setName(char n);
-        void setDimension();
         void reset_Armor(bool reset);
 
 
