@@ -12,6 +12,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
         setDirection(first,last);
         setCenter_X(first,last);
         setCenter_Y(first,last);
+        setName('B');
      }
      else
         throw std::invalid_argument("- Error Coordinates -");
