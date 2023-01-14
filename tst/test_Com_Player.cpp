@@ -7,11 +7,11 @@ static void test_Constructor_And_Search() {
     std::cout<<"Ho inserito queste navi di default"<<std::endl;
     computer.show_Pieces();
     std::cout<<"Cerco una nave in A8"<<std::endl;
-    int i=computer.search_For_Ship(Coordinates("A8"), 's'); //trova anche con name in minuscolo
+    int i=computer.search_For_Ship(Coordinates("A8"), 'b'); //trova anche con name in minuscolo
     if (i==0)
         std::cout<<"Test centro riuscito!!!"<<std::endl;
     std::cout<<i;
-    i=computer.search_For_Ship(Coordinates("C5"), 's');
+    i=computer.search_For_Ship(Coordinates("C5"), 'b');
     if(i==1)
         std::cout<<"Test  riuscito!!!"<<std::endl;
     std::cout<<i;

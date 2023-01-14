@@ -12,6 +12,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
         setDirection(first,last);
         setCenter_X(first,last);
         setCenter_Y(first,last);
+        setName('S');
      }
      else
         throw std::invalid_argument("- Error Coordinates -");

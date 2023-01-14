@@ -7,6 +7,7 @@
         
         Submarine::Submarine(Coordinates mono_Coord) : Ship(mono_Coord){
             setCenter(mono_Coord);
+            setName('E');
         }
 
         void Submarine::action(Coordinates first, Coordinates last){
