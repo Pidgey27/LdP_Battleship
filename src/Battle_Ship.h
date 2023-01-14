@@ -10,7 +10,7 @@
 class Battle_Ship : public Ship{   
 
     protected:
-        const int dimension = 5;
+        int dimension = 5;
          bool *armour = new bool[dimension];
    
 
