@@ -20,7 +20,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
 }
 
  void Support_Ship::action(Coordinates first, Coordinates last){
-    
+    std::cout << "move to " << last.get_X() << last.get_Y();
  }
 
  void Support_Ship::setDirection(Coordinates first, Coordinates last){
