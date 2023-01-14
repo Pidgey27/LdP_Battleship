@@ -87,7 +87,7 @@ void Board::printBoard(){
     std::cout << std::endl;
 };
 
-//------------------------------------------Constructor function-------------------------
+//------------------------------------------draw and check boat function-------------------------
 void Board::addBattleShip(Coordinates start,Coordinates end){
         if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 5; i++ ){
@@ -169,12 +169,24 @@ bool Board::Shot(Coordinates coor){
     this->defenseBoard[coor.get_X()][coor.get_Y()] = 'O';
     return false;
 };
-/*bool Board::Exploring(Coordinates coor){
+
+bool Board::Exploring(Coordinates coor){
     int pos1 = coor.get_X()-2;
     int pos2 = coor.get_Y()-2;
-    for(int i = 0; i < 5; i++){
-        for(int j = 0; j < 5; j++){
-
+    bool checks = false;
+    int i = 0;
+    int j = 0;
+    for(i ; i < 5; i++){
+        for(j ; j < 5; j++){
+            if(pos1+i == 13)
+                return checks;
+            if(pos2+j == 13)
+                continue;
+            if( this->defenseBoard[pos1+i][pos2+j] == 'C' || this->defenseBoard[pos1+i][pos2+j] == 'S' || this->defenseBoard[pos1+i][pos2+j] == 'E'){
+                this->attackBoard[pos1+i][pos2+j] == 'Y';
+                checks = true;
+            }
         }
-    } 
-};*/
+    }
+    return checks;
+}
