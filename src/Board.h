@@ -53,11 +53,8 @@ public:
     /*
         set a hit on a coordinate
     */
-   void setHit(Coordinates coor);
-   /*
-        set a miss shot on a coordinate return:
-    */
-   void setMiss(Coordinates coor);
+   bool Shot(Coordinates coor);
+   bool Exploring(Coordinates coor);
 
 };
 #endif //BOARD_H

@@ -13,7 +13,6 @@ Board* Board ::instancePtr = NULL;
             this->attackBoard[i][j] = ' ';
             }
         }
-        //prepareBoard();
     }
 
 //--------------------------------------------printing function---------------------------
@@ -205,13 +204,21 @@ char Board::get(Coordinates coor){
     return defenseBoard[coor.get_X()][coor.get_Y()];
 };
 
-void Board::setHit(Coordinates coor){
-    this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
-};
-
-void Board::setMiss(Coordinates coor){
+bool Board::Shot(Coordinates coor){
+    char tiles = this->defenseBoard[coor.get_X()][coor.get_Y()];
+    if(tiles == 'C' || tiles == 'S' || tiles == 'E'){
+        this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
+        return true;
+    }
     this->defenseBoard[coor.get_X()][coor.get_Y()] = 'O';
+    return false;
 };
+/*bool Board::Exploring(Coordinates coor){
+    int pos1 = coor.get_X()-2;
+    int pos2 = coor.get_Y()-2;
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
 
-
-//Human Player TODO
+        }
+    } 
+};*/

@@ -18,7 +18,6 @@ int main(int argc, char const *argv[])
     std::cout << std::endl;
     //Testing Board
     //testBoard();
-    //std::cout << "\033[1;31mbold red text\033[0m\n";
     test_Random_Get_Coordinates_to_Move();
     test_Constructor_And_Search();
     return 0;
