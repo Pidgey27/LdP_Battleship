@@ -30,5 +30,9 @@ public:
     bool under_Fire(Coordinates coord);
     void remove_Spotted_Marks();
     void print_Def_Board();
+    void print_Atk_Board();
+    void erase_Missed_Atk();
+    char search_in_Def_Board(Coordinates coordinates);
+    void write_in_Atk_Board(Coordinates coordinates, char name);
 };
 #endif

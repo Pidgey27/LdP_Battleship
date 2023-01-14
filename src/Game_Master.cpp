@@ -15,6 +15,8 @@ Game_Master::Game_Master(bool game_mode, int max) {
         Player2=new Com_Player();
     }
 }
+
+//method uses to actually play
 //false until you reach the maximum number of turns, or one of the player loses all ships
 bool Game_Master::Execute_Turn() {
     if(current_Turn%2==0) {
@@ -32,14 +34,15 @@ bool Game_Master::Execute_Turn() {
     int i=current_Turn_Player->play(first, second);
     if(i==0)
         fire_Protocol(second);
-    //if(i==1)
-        //set exploring protocol;
+    if(i==1)
+        exploring_Protocol(second);
     if(i==2)
         current_Turn_Player->check_For_Healing(second);
     current_Turn++;
     return current_Turn==max_Turns || Player2->check_For_Endgame() || Player1->check_For_Endgame();
 }
 
+//method that says who wins the game
 void Game_Master::who_Wins() {
     if(current_Turn==max_Turns)
         std::cout<<"Sono stati giocati "<<max_Turns<<", la partita è finita in parità"<<std::endl;
@@ -49,6 +52,8 @@ void Game_Master::who_Wins() {
         std::cout<<"Ha vinto il giocatore 1!!!"<<std::endl;
 }
 
+//method that implements firing on pieces, eliminates the piece if armour is destroyed
+//DA IMPLEMENTARE L'AGGIORNAMENTO SULL'ATTACK BOARD, MANCA IL METODO
 void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
     if(current_Turn%2==0){
         current_Turn_Player=Player2;
@@ -65,6 +70,7 @@ void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
         std::cout<<"Buco nell'acqua"<<std::endl;
 }
 
+//method that implements special commands, like show def board, remove spotted or remove missed on attack board
 bool Game_Master::ask_For_Coordinates() {
     moves=current_Turn_Player->get_Coordinates_to_Move();
     if(moves.compare("AA AA")==0) {
@@ -72,7 +78,29 @@ bool Game_Master::ask_For_Coordinates() {
         return false;
     }
     if(moves.compare("XX XX")==0){
+        current_Turn_Player->print_Def_Board();
         return false;
     }
+    if(moves.compare("OO OO")){
+        current_Turn_Player->erase_Missed_Atk();
+    }
     return true;
+}
+
+//method to implement exploring for submarine
+//MI SERVE IL METODO PER SCRIVERE SULLA BOARD
+void Game_Master::exploring_Protocol(Coordinates coordinates) {
+    for(int i=-2; i<3; i++){
+        for(int j=-2; j<3; j++) {
+            if(opponent->search_in_Def_Board(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j))!=' ')
+                current_Turn_Player->write_in_Atk_Board(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), 'Y');
+        }
+    }
+}
+
+Game_Master::~Game_Master() {
+    delete current_Turn_Player;
+    delete opponent;
+    delete Player2;
+    delete Player1;
 }

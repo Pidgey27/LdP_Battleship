@@ -101,7 +101,7 @@ void Board::addBattleShip(Coordinates start,Coordinates end){
         }
         if(start.get_X() == end.get_X()){
             for(int i = 0; i < 5; i++ ){
-                if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
+                if(this->defenseBoard[start.get_Y()+i][start.get_X()] != ' ')
                     throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
             }
             for(int i = 0; i < 5; i++ ){
@@ -122,7 +122,7 @@ void Board::addSupportShip(Coordinates start,Coordinates end){
         }
         if(start.get_X() == end.get_X()){
             for(int i = 0; i < 3; i++ ){
-                        if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
+                        if(this->defenseBoard[start.get_Y()+i][start.get_X()] != ' ')
                             throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
                     }
             for(int i = 0; i < 3; i++ ){

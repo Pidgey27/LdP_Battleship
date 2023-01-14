@@ -2,6 +2,7 @@
 #include "Com_Player.h"
 #include "tst/test_Com_Player.cpp"
 #include "tst/test_board.cpp"
+#include "tst/test_on_vectors.cpp"
 int main(int argc, char const *argv[])
 {
     /*std::string uno = "A3";
@@ -21,7 +22,8 @@ int main(int argc, char const *argv[])
     test_Dummy_Constructor_And_Search();*/
 
     //Testing Board
-    testBoard();
+    //testBoard();
+    test_vector();
     return 0;
 }
 

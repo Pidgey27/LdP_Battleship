@@ -29,6 +29,9 @@ public:
     void fire_Protocol(Coordinates where_To_Fire);
     void who_Wins();
     bool ask_For_Coordinates();
+    void exploring_Protocol(Coordinates coordinates);
+
+    virtual ~Game_Master();
 
 };
 #endif //LDP_BATTLESHIP_GAME_MASTER_H

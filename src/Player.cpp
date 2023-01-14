@@ -90,7 +90,7 @@ bool Player::check_For_Endgame() {
 }
 
 bool Player::under_Fire(Coordinates coord) {
-    bool shot=board->Shot(coord);
+    bool shot=board->get(coord)!=' ';
     int mid;
     if(!shot)
         return false;
@@ -108,7 +108,8 @@ bool Player::under_Fire(Coordinates coord) {
         if(pieces[injured]->get_Center_Y()==coord.get_Y()){
             where_hit=pieces[injured]->get_Center_X()-coord.get_X()+mid;
             pieces[injured]->set_Injured(where_hit);
-            //da aggiungere un check per vedere se il pezzo è ancora vivo!!!
+            if (pieces[injured]->isDead())
+                pieces.erase(pieces.cbegin()+injured);
         }
         return true;
     }
@@ -119,5 +120,21 @@ void Player::remove_Spotted_Marks() {
 }
 
 void Player::print_Def_Board() {
-    board->P
+    board->printDefBoard();
+}
+
+void Player::print_Atk_Board() {
+    board->printAtkBoard();
+}
+
+void Player::erase_Missed_Atk() {
+    board->clearHit();
+}
+
+char Player::search_in_Def_Board(Coordinates coordinates) {
+    return board->get(coordinates);
+}
+
+void Player::write_in_Atk_Board(Coordinates coordinates, char name) {
+
 }

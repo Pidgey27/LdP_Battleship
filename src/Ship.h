@@ -29,6 +29,7 @@ public:
     int get_Center_Y() { return center_Y;}
     void setName(char n) { name=n;}
     void set_Injured(int n) { armor[n]=1;}
+    virtual bool isDead()=0;
 };
 
 #endif //LDP_BATTLESHIP_SHIP_H
