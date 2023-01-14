@@ -1,6 +1,6 @@
 #include "Human_Player.h"
 
-void Human_Player::addBattleShip(Coordinates start,Coordinates end){
+/*void Human_Player::addBattleShip(Coordinates start,Coordinates end){
         if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 5; i++ ){
                 if(shipPosition[12*start.get_Y() + i] == 1)
@@ -41,7 +41,7 @@ void Human_Player::addSubmarine(Coordinates start){
             throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
         }
 };
-
+*/
 void Human_Player::prepareBoard(){
-    
+
 }

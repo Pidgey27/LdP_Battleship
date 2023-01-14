@@ -10,11 +10,6 @@
 
 class Human_Player: public Player {
 private:
-    int shipPosition[144] = {0};
-
-    void addBattleShip(Coordinates start,Coordinates end);
-    void addSupportShip(Coordinates start,Coordinates end);
-    void addSubmarine(Coordinates start);
 
 public:
     Human_Player();
