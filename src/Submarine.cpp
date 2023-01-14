@@ -8,6 +8,7 @@
         Submarine::Submarine(Coordinates mono_Coord) : Ship(mono_Coord){
             setCenter(mono_Coord);
             setName('E');
+            reset_Armor(true);
         }
 
         void Submarine::action(Coordinates first, Coordinates last){
@@ -25,6 +26,12 @@
 
         void Submarine::setName(char n) { 
             name = n;
+        }
+
+        void  Submarine::set_Injured(int n){
+            if(armour[n] == 1)
+                    std::cout << " You've already hit!!! ";
+                else armour[n] = 1; 
         }
         
         bool Submarine::getDirection(){
@@ -45,4 +52,13 @@
 
         int Submarine::get_Dimension(){
             return dimension;
+        }
+
+        bool Submarine::isDead(){
+            for(int i=0 ; i<dimension ; i++){
+                if(armour[i] == 0){
+                    return false;
+                }
+            }
+            return true;
         }

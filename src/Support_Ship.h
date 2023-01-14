@@ -22,6 +22,8 @@ class Support_Ship : public Ship{
         void setCenter_Y(Coordinates first, Coordinates last);
         void setName(char n);
         void reset_Armor(bool reset);
+        void set_Injured(int n);
+
 
         bool checkSupportShip(Coordinates first, Coordinates last);
         bool getDirection();
@@ -29,4 +31,5 @@ class Support_Ship : public Ship{
         int getCenter_Y();
         char get_Name();
         int get_Dimension();
+        bool isDead();
 };

@@ -13,6 +13,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
         setCenter_X(first,last);
         setCenter_Y(first,last);
         setName('B');
+         reset_Armor(true);
      }
      else
         throw std::invalid_argument("- Error Coordinates -");
@@ -60,6 +61,12 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
     name = n;
 }
 
+void  Battle_Ship::set_Injured(int n){
+       if(armour[n] == 1)
+             std::cout << " You've already hit!!! ";
+        else armour[n] = 1; 
+ }
+
  int Battle_Ship::getCenter_X(){    return center_X; }
  int Battle_Ship::getCenter_Y(){    return center_Y; }
 
@@ -80,5 +87,14 @@ char Battle_Ship::get_Name(){
 
 int Battle_Ship::get_Dimension(){
     return dimension;
+}
+
+bool Battle_Ship::isDead(){
+    for(int i=0 ; i<dimension ; i++){
+        if(armour[i] == 0){
+            return false;
+        }
+    }
+    return true;
 }
  

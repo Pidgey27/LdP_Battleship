@@ -21,6 +21,7 @@ class Submarine : public Ship{
         void setCenter(Coordinates mono_Cord);
         void setName(char n);
         void reset_Armor(bool reset);
+        void set_Injured(int n);
 
 
         bool getDirection();
@@ -28,4 +29,5 @@ class Submarine : public Ship{
         int get_Center_Y();
         char get_Name();
         int get_Dimension();
+        bool isDead();
 };

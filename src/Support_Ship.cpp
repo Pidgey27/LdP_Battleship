@@ -13,6 +13,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
         setCenter_X(first,last);
         setCenter_Y(first,last);
         setName('S');
+        reset_Armor(true);
      }
      else
         throw std::invalid_argument("- Error Coordinates -");
@@ -60,6 +61,12 @@ void Support_Ship::setName(char n) {
 
  }
 
+    void  Support_Ship::set_Injured(int n){
+        if(armour[n] == 1)
+                std::cout << " You've already hit!!! ";
+            else armour[n] = 1; 
+    }
+
  int Support_Ship::getCenter_X(){    return center_X; }
  int Support_Ship::getCenter_Y(){    return center_Y; }
 
@@ -80,6 +87,15 @@ void Support_Ship::setName(char n) {
 
 int Support_Ship::get_Dimension(){
     return dimension;
+}
+
+bool Support_Ship::isDead(){
+    for(int i=0 ; i<dimension ; i++){
+        if(armour[i] == 0){
+            return false;
+        }
+    }
+    return true;
 }
 
  
