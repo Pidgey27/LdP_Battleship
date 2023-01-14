@@ -13,7 +13,6 @@ Board* Board ::instancePtr = NULL;
             this->attackBoard[i][j] = ' ';
             }
         }
-        //prepareBoard();
     }
 
 //--------------------------------------------printing function---------------------------
@@ -89,98 +88,54 @@ void Board::printBoard(){
 };
 
 //------------------------------------------Constructor function-------------------------
-void Board::addBattleShip(int i){
-        std::string input;
-        std::cout << "\033[1;31mInserisci le Coordinate della " << i << " corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
-        std::cin >> input;
-        Coordinates coorStart = Coordinates(input);
-        std::cin >> input;
-        Coordinates coorEnd = Coordinates(input);
-        if(coorStart.get_Y() == coorEnd.get_Y()){
+void Board::addBattleShip(Coordinates start,Coordinates end){
+        if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 5; i++ ){
-                if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] != ' ')
+                if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                     throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
             }
             for(int i = 0; i < 5; i++ ){
-                this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] = 'C';
+                this->defenseBoard[end.get_Y()][start.get_X()+i] = 'C';
             }
         }
-        if(coorStart.get_X() == coorEnd.get_X()){
+        if(start.get_X() == end.get_X()){
             for(int i = 0; i < 5; i++ ){
-                if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] != ' ')
+                if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                     throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
             }
             for(int i = 0; i < 5; i++ ){
-                this->defenseBoard[i][coorEnd.get_X()] = 'C';
+                this->defenseBoard[i][end.get_X()] = 'C';
             }
         }
 };
 
-void Board::addSupportShip(int i){
-        std::string input;
-        std::cout << "\033[1;31mInserisci le Coordinate della " << i << " nave di supporto (esempio: a1 a3)\033[0m"<<  std::endl;
-        std::cin >> input;
-        Coordinates coorStart = Coordinates(input);
-        std::cin >> input;
-        Coordinates coorEnd = Coordinates(input);
-        if(coorStart.get_Y() == coorEnd.get_Y())
+void Board::addSupportShip(Coordinates start,Coordinates end){
+        if(start.get_Y() == end.get_Y())
             for(int i = 0; i < 3; i++ ){
-                    if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] != ' ')
+                    if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                         throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
                 }
             for(int i = 0; i < 3; i++ ){
-                this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] = 'S';
+                this->defenseBoard[end.get_Y()][start.get_X()+i] = 'S';
             }
-        if(coorStart.get_X() == coorEnd.get_X())
+        if(start.get_X() == end.get_X())
             for(int i = 0; i < 3; i++ ){
-                        if(this->defenseBoard[coorEnd.get_Y()][coorStart.get_X()+i] != ' ')
+                        if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                             throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
                     }
             for(int i = 0; i < 3; i++ ){
-                this->defenseBoard[i][coorEnd.get_X()] = 'S';
+                this->defenseBoard[i][end.get_X()] = 'S';
             }
 };
 
-void Board::addSubmarine(int i){
-        //TODO : try and catch of exception "input wrong"
-        std::string input;
-        std::cout << "\033[1;31mInserisci la Coordinata del " << i << " sottomarino (esempio: a1)\033[0m"<<  std::endl;
-        std::cin >> input;
-        Coordinates coor = Coordinates(input);
-        if(this->defenseBoard[coor.get_Y()][coor.get_X()] == ' '){
-            this->defenseBoard[coor.get_Y()][coor.get_X()] = 'E';
+void Board::addSubmarine(Coordinates start){
+        if(this->defenseBoard[start.get_Y()][start.get_X()] == ' '){
+            this->defenseBoard[start.get_Y()][start.get_X()] = 'E';
         }else{
             throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
         }
 };
 
-void Board::prepareBoard(){
-    for (int i = 1; i < 4; i++){
-        try{
-            addBattleShip(i);
-        }catch(std::invalid_argument e){
-            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
-            i--;
-        }
-    }
-    for (int i = 1; i < 4; i++){
-        try{
-            addSupportShip(i);
-        }catch(std::invalid_argument e){
-            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
-            i--;
-        }
-    }
-    for (int i = 1; i < 4; i++){
-        try{
-            addSubmarine(i);
-        }catch(std::invalid_argument e){
-            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
-            i--;
-        }
-    }
-    
-};
 //-------------------------------------------Public function----------------------------
 
 void Board::clearHit(){
@@ -205,13 +160,21 @@ char Board::get(Coordinates coor){
     return defenseBoard[coor.get_X()][coor.get_Y()];
 };
 
-void Board::setHit(Coordinates coor){
-    this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
-};
-
-void Board::setMiss(Coordinates coor){
+bool Board::Shot(Coordinates coor){
+    char tiles = this->defenseBoard[coor.get_X()][coor.get_Y()];
+    if(tiles == 'C' || tiles == 'S' || tiles == 'E'){
+        this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
+        return true;
+    }
     this->defenseBoard[coor.get_X()][coor.get_Y()] = 'O';
+    return false;
 };
+/*bool Board::Exploring(Coordinates coor){
+    int pos1 = coor.get_X()-2;
+    int pos2 = coor.get_Y()-2;
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
 
-
-//Human Player TODO
+        }
+    } 
+};*/

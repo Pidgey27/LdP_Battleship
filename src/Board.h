@@ -15,9 +15,9 @@ private:
     static Board* instancePtr;
 
     Board();
-    void addBattleShip(int i);
-    void addSupportShip(int i);
-    void addSubmarine(int i);
+    void addBattleShip(Coordinates start,Coordinates end);
+    void addSupportShip(Coordinates start,Coordinates end);
+    void addSubmarine(Coordinates start);
     void prepareBoard();
     void printDefBoard();
     void printAtkBoard();
@@ -53,11 +53,8 @@ public:
     /*
         set a hit on a coordinate
     */
-   void setHit(Coordinates coor);
-   /*
-        set a miss shot on a coordinate return:
-    */
-   void setMiss(Coordinates coor);
+   bool Shot(Coordinates coor);
+   bool Exploring(Coordinates coor);
 
 };
 #endif //BOARD_H
