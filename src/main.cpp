@@ -4,7 +4,7 @@
 #include "tst/test_board.cpp"
 int main(int argc, char const *argv[])
 {
-    std::string uno = "A3";
+    /*std::string uno = "A3";
     std::string due = "A7";
     std::string tre = "A2";
     Coordinates first(uno);
@@ -16,10 +16,12 @@ int main(int argc, char const *argv[])
     //std::cout << ss.get_X();
 
     std::cout << std::endl;
-    //Testing Board
-    //testBoard();
+    
     test_Random_Get_Coordinates_to_Move();
-    test_Dummy_Constructor_And_Search();
+    test_Dummy_Constructor_And_Search();*/
+
+    //Testing Board
+    testBoard();
     return 0;
 }
 

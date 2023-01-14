@@ -89,6 +89,7 @@ void Board::printBoard(){
 
 //------------------------------------------draw and check boat function-------------------------
 void Board::addBattleShip(Coordinates start,Coordinates end){
+    Battle_Ship(start,end);
         if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 5; i++ ){
                 if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
@@ -104,13 +105,13 @@ void Board::addBattleShip(Coordinates start,Coordinates end){
                     throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
             }
             for(int i = 0; i < 5; i++ ){
-                this->defenseBoard[i][end.get_X()] = 'C';
+                this->defenseBoard[start.get_Y()+i][start.get_X()] = 'C';
             }
         }
 };
 
 void Board::addSupportShip(Coordinates start,Coordinates end){
-        if(start.get_Y() == end.get_Y())
+        if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 3; i++ ){
                     if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                         throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
@@ -118,14 +119,16 @@ void Board::addSupportShip(Coordinates start,Coordinates end){
             for(int i = 0; i < 3; i++ ){
                 this->defenseBoard[end.get_Y()][start.get_X()+i] = 'S';
             }
-        if(start.get_X() == end.get_X())
+        }
+        if(start.get_X() == end.get_X()){
             for(int i = 0; i < 3; i++ ){
                         if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
                             throw std::invalid_argument("Coordinate non valide, una barca e' gia presente in queste coordinate");
                     }
             for(int i = 0; i < 3; i++ ){
-                this->defenseBoard[i][end.get_X()] = 'S';
+                this->defenseBoard[start.get_Y()+i][start.get_X()] = 'S';
             }
+        }
 };
 
 void Board::addSubmarine(Coordinates start){
@@ -160,7 +163,7 @@ char Board::get(Coordinates coor){
     return defenseBoard[coor.get_X()][coor.get_Y()];
 };
 
-bool Board::Shot(Coordinates coor){
+/*bool Board::Shot(Coordinates coor){
     char tiles = this->defenseBoard[coor.get_X()][coor.get_Y()];
     if(tiles == 'C' || tiles == 'S' || tiles == 'E'){
         this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
@@ -189,4 +192,4 @@ bool Board::Exploring(Coordinates coor){
         }
     }
     return checks;
-}
+}*/
