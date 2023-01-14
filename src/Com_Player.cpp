@@ -24,6 +24,8 @@ Com_Player::Com_Player() {
     pieces.emplace_back(new Battle_Ship(prua, poppa));
     pieces.emplace_back(new Battle_Ship(Coordinates("C1"), Coordinates("C5")));
     pieces.emplace_back(new Submarine(Coordinates("D5")));
+    Coordinates prua1=get_Real_Random_Coordinates();
+    pieces.emplace_back(new Battle_Ship(prua1, Random_Coordinates_to_Construct_Ship('B', prua1 )));
 }
 
 std::string Com_Player::get_Coordinates_to_Move() {
@@ -33,27 +35,31 @@ std::string Com_Player::get_Coordinates_to_Move() {
 
 Coordinates Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord) {
     std::srand(time(NULL));
-    bool left_or_right=rand()%2;
-    bool up_or_down=rand()%2;
+    bool direction=rand()%2;
+    bool plus_or_minus=rand()%2;
     int dim;
     int x, y;
     if(name_ship=='S')
         dim=2;
     if(name_ship=='B')
         dim=4;
-    if(left_or_right || first_coord.get_X()+dim<12)
-        x=first_coord.get_X()+dim;
-     else if(!left_or_right || first_coord.get_X()-dim>0)
-        x=first_coord.get_X()-dim;
-    if(up_or_down || first_coord.get_Y()+dim<12)
-        y=first_coord.get_Y()+dim;
-    else if(!up_or_down || first_coord.get_Y()-dim>0)
-        y=first_coord.get_Y()-dim;
-    try{
-        Coordinates (x, y);
-    }catch(std::invalid_argument &e) {
-        Random_Coordinates_to_Construct_Ship(name_ship, first_coord);
-    }
+        if (direction && (first_coord.get_X() + dim) < 12) {
+            x = first_coord.get_X() + dim;
+            y = first_coord.get_Y();
+        }
+        if (direction && (first_coord.get_X() - dim) > 0) {
+            x = first_coord.get_X() - dim;
+            y = first_coord.get_Y();
+        }
+        if (!direction && (first_coord.get_Y() + dim) < 12) {
+            x = first_coord.get_X();
+            y = first_coord.get_Y() + dim;
+        }
+        if (!direction && (first_coord.get_Y() - dim) > 0) {
+            x = first_coord.get_X();
+            y = first_coord.get_Y() - dim;
+        }
+        std::cout << x << " " << y << std::endl;
     return Coordinates(x,y);
 }
 

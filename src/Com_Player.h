@@ -15,7 +15,7 @@ private:
     Coordinates get_Real_Random_Coordinates();
     bool check_For_Valid_Coordinates();
     Coordinates Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord);
-    
+
 public:
     Com_Player();
     std::string get_Coordinates_to_Move();
