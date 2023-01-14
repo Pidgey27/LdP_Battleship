@@ -6,6 +6,7 @@
 #define BOARD_H
 #include <iostream>
 #include "Coordinates.h"
+#include "Battle_Ship.h"
 
 class Board {
 
@@ -15,14 +16,10 @@ private:
     static Board* instancePtr;
 
     Board();
-    void addBattleShip(Coordinates start,Coordinates end);
-    void addSupportShip(Coordinates start,Coordinates end);
-    void addSubmarine(Coordinates start);
     void prepareBoard();
-    void printDefBoard();
-    void printAtkBoard();
 
 public:
+
     Board(const Board& obj)
         =delete;
     static Board* getInstance(){
@@ -34,6 +31,10 @@ public:
             return instancePtr;
         }
     }
+    void addBattleShip(Coordinates start,Coordinates end);
+    void addSupportShip(Coordinates start,Coordinates end);
+    void addSubmarine(Coordinates start);
+
     /*
         Print the board
     */
@@ -53,8 +54,11 @@ public:
     /*
         set a hit on a coordinate
     */
-   bool Shot(Coordinates coor);
-   bool Exploring(Coordinates coor);
+   /*bool Shot(Coordinates coor);
+   bool Exploring(Coordinates coor);*/
+
+   void printDefBoard();
+   void printAtkBoard();
 
 };
 #endif //BOARD_H
