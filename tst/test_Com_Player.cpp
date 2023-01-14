@@ -2,7 +2,7 @@
 // Created by Alessandra Villarà on 10/01/2023.
 // matricola 1137125
 #include "src/Com_Player.h"
-static void test_Constructor_And_Search() {
+static void test_Dummy_Constructor_And_Search() {
     Com_Player computer;
     std::cout<<"Ho inserito queste navi di default"<<std::endl;
     computer.show_Pieces();
@@ -19,3 +19,12 @@ static void test_Random_Get_Coordinates_to_Move() {
     std::string prova=computer.get_Coordinates_to_Move();
     std::cout<<"Mossa casuale uscita: "<<prova<<std::endl;
 }
+ /* Dummy Constructor for com_Player
+  * Com_Player::Com_Player() {
+    Coordinates prua("A6");
+    Coordinates poppa("A10");
+    pieces.emplace_back(new Battle_Ship(prua, poppa));
+    pieces.emplace_back(new Battle_Ship(Coordinates("C1"), Coordinates("C5")));
+    pieces.emplace_back(new Submarine(Coordinates("D5")));
+}
+  */

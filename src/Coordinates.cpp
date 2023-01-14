@@ -44,6 +44,13 @@ std::string Coordinates::to_String() {
     return {a+std::to_string(coord_X+1)};
 }
 
+Coordinates::Coordinates(int x, int y) {
+    if (x<0||y<0||x>11||y>11)
+        throw std::invalid_argument("");
+    coord_X=x;
+    coord_Y=y;
+}
+
 std::ostream& operator <<(std::ostream& os, Coordinates coordinates) {
     return os<<coordinates.to_String();
 }
