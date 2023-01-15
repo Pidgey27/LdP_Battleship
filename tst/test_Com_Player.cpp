@@ -28,3 +28,10 @@ static void test_Random_Get_Coordinates_to_Move() {
     pieces.emplace_back(new Submarine(Coordinates("D5")));
 }
   */
+
+ static void test_Real_Constructor() {
+     std::cout<<"Ho inserito queste navi di casuali"<<std::endl;
+     Com_Player computer;
+     computer.print_Def_Board();
+ }
+

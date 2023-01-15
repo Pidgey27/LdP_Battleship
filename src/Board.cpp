@@ -89,7 +89,6 @@ void Board::printBoard(){
 
 //------------------------------------------draw and check boat function-------------------------
 void Board::addBattleShip(Coordinates start,Coordinates end){
-    Battle_Ship(start,end);
         if(start.get_Y() == end.get_Y()){
             for(int i = 0; i < 5; i++ ){
                 if(this->defenseBoard[end.get_Y()][start.get_X()+i] != ' ')
