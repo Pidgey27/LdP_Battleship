@@ -56,7 +56,8 @@ public:
     */
    /*bool Shot(Coordinates coor);
    bool Exploring(Coordinates coor);*/
-
+   void write_On_Attack_Board(Coordinates coordinate,char input);
+   void write_On_Defense_Board(Coordinates coordinate,char input);
    void printDefBoard();
    void printAtkBoard();
 
