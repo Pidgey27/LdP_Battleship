@@ -19,6 +19,9 @@ protected:
     Board* board=Board::getInstance();
 public:
     Player();
+
+    virtual ~Player();
+
     int search_For_Ship(Coordinates coord, char name);
     std::string get_Coordinates_to_Move() {};
     void remove_Ship(int i);

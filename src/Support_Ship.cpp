@@ -103,4 +103,8 @@ bool Support_Ship::isDead(){
     return true;
 }
 
+Support_Ship::~Support_Ship() {
+    delete armour;
+}
+
  

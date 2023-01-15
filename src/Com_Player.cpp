@@ -53,19 +53,16 @@ Com_Player::Com_Player() {
     }
     while(!declare_Submarine());
     while(!declare_Submarine());
-    std::cout<<"Elementi scacchiera creati"<<std::endl;
+    std::cout<<"*Elementi scacchiera creati"<<std::endl;
 }
 
 bool Com_Player::declare_Submarine() {
     get_Real_Random_Coordinates();
-    std::cout<<"Provo a dichiare un submarine con coordinate "<<temp1<<std::endl;
     try {
         board->addSubmarine(temp1);
         pieces.emplace_back(new Submarine(temp1));
-        std::cout<<"Success!"<<std::endl;
         return true;
     }catch(std::invalid_argument &e) {
-        std::cout<<"Failure"<<std::endl;
         return false;
     }
 }
@@ -75,14 +72,11 @@ bool Com_Player::declare_SupportShip() {
     try {
         Random_Coordinates_to_Construct_Ship('S', temp1);
         order_Coord();
-        std::cout << "Provo a costruire una support ship con coordinate " << temp1 << " " << temp2 << std::endl;
         try {
             board->addSupportShip(temp1, temp2);
             pieces.emplace_back(new Support_Ship(temp1, temp2));
-            std::cout << "Success!" << std::endl;
             return true;
         } catch (std::invalid_argument &e) {
-            std::cout << "Failure" << std::endl;
             return false;
         }
     } catch (std::invalid_argument &e) {
@@ -97,14 +91,11 @@ bool Com_Player::declare_Battleship() {
     try{
         Random_Coordinates_to_Construct_Ship('B', temp1);
         order_Coord();
-        std::cout<<"Provo a dichiarare una battleship con coordinate "<<temp1<<" "<<temp2<<std::endl;
         try {
             board->addBattleShip(temp1, temp2);
             pieces.emplace_back(new Battle_Ship(temp1, temp2));
-            std::cout<<"Success!"<<std::endl;
             return true;
         }catch (std::invalid_argument &e) {
-            std::cout<<"Failure"<<std::endl;
             return false;
         }
     }
@@ -133,6 +124,10 @@ void Com_Player::order_Coord() {
             temp2=temp1;
             temp1=realTemp;
         }
+}
+
+Com_Player::~Com_Player() {
+    pieces.clear();
 }
 
 

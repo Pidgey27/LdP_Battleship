@@ -133,3 +133,7 @@ char Player::search_in_Def_Board(Coordinates coordinates) {
 void Player::write_in_Atk_Board(Coordinates coordinates, char name) {
 
 }
+
+Player::~Player() {
+    pieces.clear();
+}
