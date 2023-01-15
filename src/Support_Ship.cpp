@@ -17,7 +17,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
         reset_Armor(true);
      }
      else
-        throw std::invalid_argument("- Error Coordinates -");
+        throw std::invalid_argument("- Error Coordinates Support_ship -");
 
 }
 
