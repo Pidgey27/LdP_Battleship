@@ -4,6 +4,7 @@
         
         #include "Submarine.h"
         #include <iostream>
+
         
         Submarine::Submarine(Coordinates mono_Coord) : Ship(mono_Coord){
             setCenter(mono_Coord);

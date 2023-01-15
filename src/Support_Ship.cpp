@@ -5,6 +5,7 @@
 
 #include "Support_Ship.h"
 #include <iostream>
+#include <stdlib.h> 
 
 Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,last){
 
@@ -46,17 +47,21 @@ void Support_Ship::setName(char n) {
 
 //Essendo la barca lung a 5 il centro è sempre l'ultimo valore -2 nel caco sia in verticale 
  void Support_Ship::setCenter_X(Coordinates first, Coordinates last){
-    if(first.get_X() != last.get_X())
-        center_X = last.get_X() - 1;
-    else 
+    if(first.get_X() != last.get_X()){
+        if(first.get_X() < last.get_X())
+             center_X = last.get_X() - 1;
+        else center_X = first.get_X() - 1;
+    }else 
         center_X = last.get_X();
 
  }
 
   void Support_Ship::setCenter_Y(Coordinates first, Coordinates last){
-    if(first.get_Y() != last.get_Y())
-        center_Y = last.get_Y() - 1;
-    else 
+    if(first.get_Y() != last.get_Y()){
+        if(first.get_Y() < last.get_Y())
+            center_Y = last.get_Y() - 1;
+        else center_Y = first.get_Y() - 1;
+    }else 
         center_Y = last.get_Y();
 
  }

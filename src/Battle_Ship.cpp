@@ -5,6 +5,7 @@
 
 #include "Battle_Ship.h"
 #include <iostream>
+#include <stdlib.h> 
 
 Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last){
 
@@ -38,17 +39,21 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
 
 //Essendo la barca lung a 5 il centro è sempre l'ultimo valore -2 nel caco sia in verticale 
  void Battle_Ship::setCenter_X(Coordinates first, Coordinates last){
-    if(first.get_X() != last.get_X())
-        center_X = last.get_X() - 2;
-    else 
+    if(first.get_X() != last.get_X()){
+        if(first.get_X() < last.get_X())
+             center_X = last.get_X() - 2;
+        else center_X = first.get_X() - 2;
+    }else 
         center_X = last.get_X();
 
  }
 
   void Battle_Ship::setCenter_Y(Coordinates first, Coordinates last){
-    if(first.get_Y() != last.get_Y())
-        center_Y = last.get_Y() - 2;
-    else 
+    if(first.get_Y() != last.get_Y()){
+        if(first.get_Y() < last.get_Y())
+            center_Y = last.get_Y() - 2;
+        else center_Y = first.get_Y() - 2;
+    }else 
         center_Y = last.get_Y();
 
  }
@@ -73,9 +78,9 @@ void  Battle_Ship::set_Injured(int n){
 //Check coordinates
  bool Battle_Ship::checkBattleShip(Coordinates first, Coordinates last){
     
-    if((first.get_X() == last.get_X()) && ((last.get_Y() - first.get_Y()) == 4)){
+    if((first.get_X() == last.get_X()) && (abs(last.get_Y() - first.get_Y()) == 4)){
         return true;
-    }else if ((first.get_Y() == last.get_Y()) && ((last.get_X() - first.get_X()) == 4)){
+    }else if ((first.get_Y() == last.get_Y()) && (abs(last.get_X() - first.get_X()) == 4)){
         return true;
     }
     return false;
