@@ -31,7 +31,5 @@ public:
     bool ask_For_Coordinates();
     void exploring_Protocol(Coordinates coordinates);
 
-    virtual ~Game_Master();
-
 };
 #endif //LDP_BATTLESHIP_GAME_MASTER_H

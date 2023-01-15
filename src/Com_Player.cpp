@@ -47,7 +47,7 @@ Com_Player::Com_Player() {
         while (!declare_Battleship());
         i++;
     }
-    for(int i=0; i<3; i++) {
+    for(int i=0; i<3;) {
         while (!declare_SupportShip());
         i++;
     }
@@ -119,11 +119,6 @@ std::string Com_Player::get_Coordinates_to_Move() {
     return temp1.to_String() + " " + temp2.to_String();
 }
 
-Com_Player::~Com_Player() {
-    pieces.clear();
-    delete board;
-}
-
 void Com_Player::order_Coord() {
     Coordinates realTemp;
     if(temp1.get_X()==temp2.get_X())
@@ -139,6 +134,5 @@ void Com_Player::order_Coord() {
             temp1=realTemp;
         }
 }
-
 
 

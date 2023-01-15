@@ -31,9 +31,6 @@ public:
     void set_Injured(int n) { armor[n]=1;}
     virtual bool isDead()=0;
 
-    virtual ~Ship() {
-        delete armor;
-    }
 };
 
 #endif //LDP_BATTLESHIP_SHIP_H

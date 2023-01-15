@@ -25,8 +25,6 @@ private:
 public:
     Com_Player();
 
-    virtual ~Com_Player();
-
     std::string get_Coordinates_to_Move();
 };
 

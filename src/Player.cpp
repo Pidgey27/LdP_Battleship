@@ -43,12 +43,7 @@ void Player::remove_Ship(int i) {
     pieces.erase(pieces.begin()+i);
 }
 
-Player::~Player() {
-    pieces.clear();
-    delete board;
-}
 Player::Player() {
-    pieces.clear();
 }
 
 void Player::show_Pieces() {

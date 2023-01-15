@@ -17,7 +17,6 @@ class Support_Ship : public Ship{
     public:
         
         Support_Ship(Coordinates first, Coordinates last);
-        ~Support_Ship(){};
         void action(Coordinates first, Coordinates last);
         void setDirection(Coordinates first, Coordinates last);
         void setCenter_X(Coordinates first, Coordinates last);

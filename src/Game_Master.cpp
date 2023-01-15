@@ -98,9 +98,3 @@ void Game_Master::exploring_Protocol(Coordinates coordinates) {
     }
 }
 
-Game_Master::~Game_Master() {
-    delete current_Turn_Player;
-    delete opponent;
-    delete Player2;
-    delete Player1;
-}
