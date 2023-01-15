@@ -13,6 +13,7 @@ private:
 
 public:
     Human_Player();
+    virtual ~Human_Player();
     std::string get_Coordinates_to_Move();
     void prepareBoard(); 
 };

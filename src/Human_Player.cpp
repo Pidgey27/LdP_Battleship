@@ -44,4 +44,53 @@ void Human_Player::addSubmarine(Coordinates start){
 */
 void Human_Player::prepareBoard(){
 
+    for (int i = 1; i < 4; i++){
+        std::string input;
+        std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
+        std::cin >> input;
+        Coordinates startBoat = Coordinates(input);
+        std::cin >> input;
+        Coordinates endBoat = Coordinates(input);
+        try{
+            board->addBattleShip(startBoat,endBoat);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
+    for (int i = 1; i < 4; i++){
+        std::string input;
+        std::cin >> input;
+        std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" support ship (esempio: a1 a3)\033[0m"<<  std::endl;
+        Coordinates startBoat = Coordinates(input);
+        std::cin >> input;
+        Coordinates endBoat = Coordinates(input);
+        try{
+            board->addSupportShip(startBoat,endBoat);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
+    for (int i = 1; i < 4; i++){
+        std::string input;
+        std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" sottomarino (esempio: a1)\033[0m"<<  std::endl;
+        std::cin >> input;
+        Coordinates startBoat = Coordinates(input);
+        try{
+            board->addSubmarine(startBoat);
+        }catch(std::invalid_argument e){
+            std::cout << "\033[1;31mCoordinate non valide, una barca e' gia presente in queste coordinate.Riprova\033[0m"<<  std::endl;
+            i--;
+        }
+    }
+    
+};
+Human_Player::Human_Player(){
+    prepareBoard();
+}
+
+Human_Player::~Human_Player(){
+    pieces.clear();
+    delete board;
 }

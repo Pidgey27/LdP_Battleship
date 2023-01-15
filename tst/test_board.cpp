@@ -6,6 +6,7 @@
 
 static void testBoard(){
     bool check = true;
+    std::cout << "Board Test" << std::endl;
     //******************************
     //Check if singleton is correct
     Board* test = Board::getInstance();
@@ -92,26 +93,25 @@ static void testBoard(){
         test2->addSupportShip(Coordinates("h8"), Coordinates("h10"));     
     }catch(std::invalid_argument e){
         check = false;
-        std::cout << "error line 95";
-        }
+        std::cout << "error line 95";}
+    try{
+        test2->addSupportShip(Coordinates("a8"), Coordinates("c8"));
+    }catch(std::invalid_argument e){
+        std::cout << "error line 100";
+        check = false;}
     // test collisioni
     try{
-        test2->addBattleShip(Coordinates("h8"), Coordinates("j8"));
-        std::cout << "error line 100";
-        check = false;
-    }catch(std::invalid_argument e){}
-    try{
-        test2->addBattleShip(Coordinates("h1"), Coordinates("h3"));
+        test2->addSupportShip(Coordinates("h8"), Coordinates("j8"));
         std::cout << "error line 105";
         check = false;
     }catch(std::invalid_argument e){}
     try{
-        test2->addBattleShip(Coordinates("a8"), Coordinates("c8"));
+        test2->addSupportShip(Coordinates("h1"), Coordinates("h3"));
         std::cout << "error line 110";
         check = false;
     }catch(std::invalid_argument e){}
     try{
-        test2->addBattleShip(Coordinates("a1"), Coordinates("a3"));
+        test2->addSupportShip(Coordinates("a1"), Coordinates("a3"));
         std::cout << "error line 115";
         check = false;
     }catch(std::invalid_argument e){}
@@ -170,10 +170,10 @@ static void testBoard(){
         check = false;
     }
     
-
+    std::cout << std::endl;
     test->printBoard();
-    test->printAtkBoard();
-    test->printDefBoard();
+    //test->printAtkBoard();
+    //test->printDefBoard();
     if(check)
-        std::cout << "all Board test are successfull";
+        std::cout << "all Board test are successfull" << std::endl;
 }
