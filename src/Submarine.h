@@ -17,6 +17,7 @@ class Submarine : public Ship{
     public:
         
         Submarine(Coordinates mono_Coord);
+        ~Submarine(){};
         void action(Coordinates first, Coordinates last);
         void setCenter(Coordinates mono_Cord);
         void setName(char n);
