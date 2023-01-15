@@ -11,13 +11,16 @@
 
 class Com_Player: public Player {
 private:
-    Coordinates Randomly_get_Ship();
-    Coordinates get_Real_Random_Coordinates();
+    Coordinates temp1; //coordinata più piccola
+    Coordinates temp2; //coordinata più grande
+    void Randomly_get_Ship();    //usano temp1
+    void get_Real_Random_Coordinates(); //usano temp1
     bool check_For_Valid_Coordinates();
-    Coordinates Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord);
+    void Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord); //usa temp2
     bool declare_Battleship();
     bool declare_Submarine();
     bool declare_SupportShip();
+    void order_Coord();
 
 public:
     Com_Player();

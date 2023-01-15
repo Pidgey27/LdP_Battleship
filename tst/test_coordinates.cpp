@@ -86,9 +86,3 @@ static void test_coordinates_basic_conversion() {       //test ok
             std::cout<<std::endl;
         }
         }
-
-static void test_coordinates () {
-    //test_coordinates_basic_conversion();
-    //test_char_coordinates_conversion();
-    test_input_from_keyboard();
-}

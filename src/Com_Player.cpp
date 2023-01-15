@@ -3,56 +3,43 @@
 // matricola 1137125
 #include "Com_Player.h"
 #include "Player.h"
-#include "Ship.h"
 #include <chrono>
-#include <ctime>
+#include "Coordinates.h"
 
-Coordinates Com_Player::Randomly_get_Ship() {
+ void Com_Player::Randomly_get_Ship() {
     unsigned seed1;
     seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     int n=rand() % pieces.size();
-    return {pieces[n]->get_Center_X(), pieces[n]->get_Center_Y()};
+    temp1={pieces[n]->get_Center_X(), pieces[n]->get_Center_Y()};
 }
 
-Coordinates Com_Player::get_Real_Random_Coordinates() {
-    unsigned seed1;
-    seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+void Com_Player::get_Real_Random_Coordinates() {
+    unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     int x=rand()%12;
     int y=rand()%12;
-    return {x, y};
+    temp1={x, y};
 }
 
-Coordinates Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord) {
-    unsigned seed1;
-    seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+void Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord) {
+    unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     bool direction=rand()%2;
-    bool plus_or_minus=rand()%2;
     int dim;
-    int x, y;
     if(name_ship=='S')
         dim=2;
     if(name_ship=='B')
         dim=4;
-    if (direction && (first_coord.get_X() + dim) < 12) {
-        x = first_coord.get_X() + dim;
-        y = first_coord.get_Y();
-    }
-    if (direction && (first_coord.get_X() - dim) > 0) {
-        x = first_coord.get_X() - dim;
-        y = first_coord.get_Y();
-    }
-    if (!direction && (first_coord.get_Y() + dim) < 12) {
-        x = first_coord.get_X();
-        y = first_coord.get_Y() + dim;
-    }
-    if (!direction && (first_coord.get_Y() - dim) > 0) {
-        x = first_coord.get_X();
-        y = first_coord.get_Y() - dim;
-    }
-    return Coordinates(x,y);
+    if (direction && (first_coord.get_X() + dim) < 12)
+        temp2={first_coord.get_X() + dim, first_coord.get_Y()};
+    else if (direction && (first_coord.get_X() - dim) > 0)
+        temp2={first_coord.get_X() - dim, first_coord.get_Y()};
+    else if (!direction && (first_coord.get_Y() + dim) < 12)
+        temp2={first_coord.get_X(), first_coord.get_Y() + dim};
+    else if (!direction && (first_coord.get_Y() - dim) > 0)
+        temp2={first_coord.get_X(), first_coord.get_Y() - dim};
+    else throw std::invalid_argument("Eccezione in Random Construct ship");
 }
 
 Com_Player::Com_Player() {
@@ -60,7 +47,7 @@ Com_Player::Com_Player() {
         while (!declare_Battleship());
         i++;
     }
-    for(int i=0; i<4; i++) {
+    for(int i=0; i<3; i++) {
         while (!declare_SupportShip());
         i++;
     }
@@ -70,52 +57,66 @@ Com_Player::Com_Player() {
 }
 
 bool Com_Player::declare_Submarine() {
-    Coordinates monocoord=get_Real_Random_Coordinates();
-    std::cout<<"Provo a dichiare un submarine con coordinate "<<monocoord<<std::endl;
+    get_Real_Random_Coordinates();
+    std::cout<<"Provo a dichiare un submarine con coordinate "<<temp1<<std::endl;
     try {
-        board->addSubmarine(monocoord);
+        board->addSubmarine(temp1);
+        pieces.emplace_back(new Submarine(temp1));
+        std::cout<<"Success!"<<std::endl;
+        return true;
     }catch(std::invalid_argument &e) {
         std::cout<<"Failure"<<std::endl;
         return false;
     }
-    pieces.emplace_back(new Submarine(monocoord));
-    std::cout<<"Success!"<<std::endl;
-    return true;
 }
 
 bool Com_Player::declare_SupportShip() {
-    Coordinates first=get_Real_Random_Coordinates();
-    Coordinates second = Random_Coordinates_to_Construct_Ship('S', first);
-    std::cout<<"Provo a costruire una support ship con coordinate"<<first<<" "<<second<<std::endl;
+    get_Real_Random_Coordinates();
     try {
-        board->addSupportShip(first, second);
-}catch (std::invalid_argument &e) {
-        std::cout<<"Failure"<<std::endl;
+        Random_Coordinates_to_Construct_Ship('S', temp1);
+        order_Coord();
+        std::cout << "Provo a costruire una support ship con coordinate " << temp1 << " " << temp2 << std::endl;
+        try {
+            board->addSupportShip(temp1, temp2);
+            pieces.emplace_back(new Support_Ship(temp1, temp2));
+            std::cout << "Success!" << std::endl;
+            return true;
+        } catch (std::invalid_argument &e) {
+            std::cout << "Failure" << std::endl;
+            return false;
+        }
+    } catch (std::invalid_argument &e) {
+        std::cout << "Eccezione in Random Construct ship" << std::endl;
         return false;
     }
-    pieces.emplace_back(new Support_Ship(first, second));
-    std::cout<<"Success!"<<std::endl;
-    return true;
-}
+    }
+
 
 bool Com_Player::declare_Battleship() {
-    Coordinates first=get_Real_Random_Coordinates();
-    Coordinates second=Random_Coordinates_to_Construct_Ship('B', first);
-    std::cout<<"Provo a dichiarare una battleship con coordinate "<<first<<" "<<second<<std::endl;
-    try {
-        board->addBattleShip(first, second);
-    }catch (std::invalid_argument &e) {
-        std::cout<<"Failure"<<std::endl;
+    get_Real_Random_Coordinates();
+    try{
+        Random_Coordinates_to_Construct_Ship('B', temp1);
+        order_Coord();
+        std::cout<<"Provo a dichiarare una battleship con coordinate "<<temp1<<" "<<temp2<<std::endl;
+        try {
+            board->addBattleShip(temp1, temp2);
+            pieces.emplace_back(new Battle_Ship(temp1, temp2));
+            std::cout<<"Success!"<<std::endl;
+            return true;
+        }catch (std::invalid_argument &e) {
+            std::cout<<"Failure"<<std::endl;
+            return false;
+        }
+    }
+    catch (std::invalid_argument &e) {
+        std::cout << "Eccezione in Random Construct ship" << std::endl;
         return false;
     }
-        pieces.emplace_back(new Battle_Ship(first, second));
-    std::cout<<"Success!"<<std::endl;
-    return true;
 }
 
 std::string Com_Player::get_Coordinates_to_Move() {
     //da implementare controllo su board!!
-    return Randomly_get_Ship().to_String() + " " + get_Real_Random_Coordinates().to_String();
+    return temp1.to_String() + " " + temp2.to_String();
 }
 
 Com_Player::~Com_Player() {
@@ -123,7 +124,21 @@ Com_Player::~Com_Player() {
     delete board;
 }
 
-
+void Com_Player::order_Coord() {
+    Coordinates realTemp;
+    if(temp1.get_X()==temp2.get_X())
+        if(temp2.get_Y()<temp1.get_Y()) {
+            realTemp=temp2;
+            temp2=temp1;
+            temp1=realTemp;
+        }
+    if(temp1.get_Y()==temp2.get_Y())
+        if(temp2.get_X()<temp1.get_X()) {
+            realTemp=temp2;
+            temp2=temp1;
+            temp1=realTemp;
+        }
+}
 
 
 

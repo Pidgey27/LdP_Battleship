@@ -5,6 +5,7 @@
 #include "tst/test_on_vectors.cpp"
 int main(int argc, char const *argv[])
 {
+    test_Real_Constructor();
     return 0;
 }
 
