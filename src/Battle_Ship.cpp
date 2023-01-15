@@ -17,7 +17,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
          reset_Armor(true);
      }
      else
-        throw std::invalid_argument("- Error Coordinates -");
+        throw std::invalid_argument("- Error Coordinates Battle_Ship -");
 
 }
 

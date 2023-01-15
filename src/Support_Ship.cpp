@@ -17,7 +17,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
         reset_Armor(true);
      }
      else
-        throw std::invalid_argument("- Error Coordinates -");
+        throw std::invalid_argument("- Error Coordinates Support_ship -");
 
 }
 
@@ -78,9 +78,9 @@ void Support_Ship::setName(char n) {
 //Check coordinates
  bool Support_Ship::checkSupportShip(Coordinates first, Coordinates last){
     
-    if((first.get_X() == last.get_X()) && ((last.get_Y() - first.get_Y()) == 2)){
+    if((first.get_X() == last.get_X()) && (abs(last.get_Y() - first.get_Y()) == 2)){
         return true;
-    }else if ((first.get_Y() == last.get_Y()) && ((last.get_X() - first.get_X()) == 2)){
+    }else if ((first.get_Y() == last.get_Y()) && (abs(last.get_X() - first.get_X()) == 2)){
         return true;
     }
     return false;
