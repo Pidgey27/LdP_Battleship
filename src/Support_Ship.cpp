@@ -27,10 +27,10 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
 
  void Support_Ship::setDirection(Coordinates first, Coordinates last){
     if(first.get_X() == last.get_X())
-        //Orizzontale 
+        //Verticale
          orientation = 0;
     else 
-        //Verticale
+        //Orizzontale
          orientation = 1;
 
  }

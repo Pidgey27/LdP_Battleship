@@ -10,7 +10,7 @@
 class Ship {
 
 protected:
-    bool orientation;   //0 for horizontal, 1 for vertical
+    bool orientation;   //1 for horizontal, 0 for vertical
     int center_X;
     int center_Y;
     int dimension;      //number of spaces occupied by the ship, used to construct it
@@ -27,10 +27,10 @@ public:
     char get_Name(){ return name;}
     int get_Center_X() {return center_X;}
     int get_Center_Y() { return center_Y;}
-    void setName(char n) { name=n;}
+    void set_Name(char n) { name=n;}
     void set_Injured(int n) { armor[n]=1;}
     virtual bool isDead()=0;
-
+    bool getDirection(){return orientation;}
     virtual ~Ship() {
     delete armor;
     }

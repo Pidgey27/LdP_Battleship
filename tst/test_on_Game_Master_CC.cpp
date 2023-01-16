@@ -10,7 +10,7 @@ Alcuni di questi test(quelli commentati) funzionano solo se si impostano le vari
  Questi test sono nati per testare il memory leak del programma.
 ************************************************/
 
-static void test_costruttore() {
+static void test_costructor_Game_Master() {
     Game_Master master(1, 10);
     //il costruttore funziona!
 }

@@ -34,3 +34,12 @@ static void test_Random_Get_Coordinates_to_Move() {
      Com_Player computer;
  }
 
+ //test riuscito, ritorna 0 per verticale, 1 per orizzontale.
+ static void test_orientation() {
+    Com_Player computer;
+    computer.show_Pieces();
+    computer.print_Def_Board();
+    computer.show_Ship(2);
+    std::cout<<"orientamento del pezzo uguale a "<<computer.get_Orientation(2);
+ }
+

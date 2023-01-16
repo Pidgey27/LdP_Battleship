@@ -27,7 +27,7 @@ bool Game_Master::Execute_Turn() {
         current_Turn_Player = Player1;
         opponent=Player2;
     }
-    while(ask_For_Coordinates());
+    while(!ask_For_Coordinates());
     // da inserire QUI la funzione per salvare in log;
     Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
     Coordinates second= Coordinates(moves.substr(moves.find_first_of(' '), moves.length()));
@@ -45,15 +45,14 @@ bool Game_Master::Execute_Turn() {
 //method that says who wins the game
 void Game_Master::who_Wins() {
     if(current_Turn==max_Turns)
-        std::cout<<"Sono stati giocati "<<max_Turns<<", la partita è finita in parità"<<std::endl;
+        std::cout<<"*Sono stati giocati "<<max_Turns<<", la partita è finita in parità"<<std::endl;
     if(Player1->check_For_Endgame())
-        std::cout<<"Ha vinto il giocatore 2!!!"<<std::endl;
+        std::cout<<"*Ha vinto il giocatore 2!!!"<<std::endl;
     if(Player2->check_For_Endgame())
-        std::cout<<"Ha vinto il giocatore 1!!!"<<std::endl;
+        std::cout<<"*Ha vinto il giocatore 1!!!"<<std::endl;
 }
 
 //method that implements firing on pieces, eliminates the piece if armour is destroyed
-//DA IMPLEMENTARE L'AGGIORNAMENTO SULL'ATTACK BOARD, MANCA IL METODO
 void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
     if(current_Turn%2==0){
         current_Turn_Player=Player2;
@@ -64,31 +63,34 @@ void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
         opponent = Player2;
     }
     bool shot=opponent->under_Fire(where_To_Fire);
-    if(shot)
-        std::cout<<"Colpito!"<<std::endl;
-    else
-        std::cout<<"Buco nell'acqua"<<std::endl;
+    if(shot) {
+        std::cout << "*Colpito!" << std::endl;
+        current_Turn_Player->write_in_Atk_Board(where_To_Fire, 'X');
+    }
+    else {
+        std::cout << "*Buco nell'acqua" << std::endl;
+        current_Turn_Player->write_in_Atk_Board(where_To_Fire, 'O');
+    }
 }
 
 //method that implements special commands, like show def board, remove spotted or remove missed on attack board
 bool Game_Master::ask_For_Coordinates() {
     moves=current_Turn_Player->get_Coordinates_to_Move();
-    if(moves.compare("AA AA")==0) {
+    if(moves=="AA AA") {
         current_Turn_Player->remove_Spotted_Marks();
         return false;
     }
-    if(moves.compare("XX XX")==0){
+    if(moves=="XX XX"){
         current_Turn_Player->print_Def_Board();
         return false;
     }
-    if(moves.compare("OO OO")){
+    if(moves=="OO OO"){
         current_Turn_Player->erase_Missed_Atk();
     }
     return true;
 }
 
 //method to implement exploring for submarine
-//MI SERVE IL METODO PER SCRIVERE SULLA BOARD
 void Game_Master::exploring_Protocol(Coordinates coordinates) {
     for(int i=-2; i<3; i++){
         for(int j=-2; j<3; j++) {

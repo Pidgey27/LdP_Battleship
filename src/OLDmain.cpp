@@ -6,7 +6,7 @@
 #include "tst/test_on_Game_Master_CC.cpp"
 int main(int argc, char const *argv[])
 {
-    test_costruttore();
+    test_costructor_Game_Master();
     return 0;
 }
 

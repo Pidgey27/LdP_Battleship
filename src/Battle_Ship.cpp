@@ -27,10 +27,10 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
 
  void Battle_Ship::setDirection(Coordinates first, Coordinates last){
     if(first.get_X() == last.get_X())
-        //Orizzontale 
+        //Verticale
          orientation = 0;
     else 
-        //Verticale
+        //Orizzontale
          orientation = 1;
 
  }
