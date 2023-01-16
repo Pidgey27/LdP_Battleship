@@ -22,6 +22,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
 }
 
  void Support_Ship::action(Coordinates first, Coordinates last){
+    setCenter(last);
     std::cout << "move to " << last.get_X() << last.get_Y();
  }
 
@@ -64,6 +65,11 @@ void Support_Ship::setName(char n) {
     }else 
         center_Y = last.get_Y();
 
+ }
+
+ void Support_Ship::setCenter(Coordinates last){
+    center_X = last.get_X();
+    center_Y = last.get_Y();
  }
 
     void  Support_Ship::set_Injured(int n){

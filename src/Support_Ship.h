@@ -24,6 +24,7 @@ class Support_Ship : public Ship{
         void setDirection(Coordinates first, Coordinates last);
         void setCenter_X(Coordinates first, Coordinates last);
         void setCenter_Y(Coordinates first, Coordinates last);
+        void setCenter(Coordinates last);
         void setName(char n);
         void reset_Armor(bool reset);
         void set_Injured(int n);

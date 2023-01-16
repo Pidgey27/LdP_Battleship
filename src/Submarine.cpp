@@ -13,6 +13,7 @@
         }
 
         void Submarine::action(Coordinates first, Coordinates last){
+            setCenter(last);
             std::cout << "move to " << last.get_X() << last.get_Y();
         }
 
