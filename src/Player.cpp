@@ -219,13 +219,13 @@ void Player::update_Board(Coordinates first, Coordinates last, int index, char n
        if(pieces[index]->getDirection()==0) {
            for(int i=-1; i<2; i++) {
                board->write_On_Defense_Board(Coordinates(first.get_X(), first.get_Y()+i), ' ');
-               board->write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 'E');
+               board->write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 'S');
            }
        }
        else {
            for(int i=-1; i<2; i++) {
                board->write_On_Defense_Board(Coordinates(first.get_X()+i, first.get_Y()), ' ');
-               board->write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'E');
+               board->write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
            }
        }
     }
