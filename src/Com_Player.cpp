@@ -11,7 +11,7 @@
     unsigned seed1;
     seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
-    int n=rand() % pieces.size();
+    int n=rand() % ships;
     temp1={pieces[n]->get_Center_X(), pieces[n]->get_Center_Y()};
 }
 
@@ -46,13 +46,11 @@ void Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinate
 }
 
 Com_Player::Com_Player() {
-    for(int i=0; i<3;) {
+    for(int i=0; i<3; i++) {
         while (!declare_Battleship());
-        i++;
     }
-    for(int i=0; i<3;) {
+    for(int i=0; i<3; i++) {
         while (!declare_SupportShip());
-        i++;
     }
     while(!declare_Submarine());
     while(!declare_Submarine());
@@ -116,6 +114,7 @@ bool Com_Player::declare_Battleship() {
 std::string Com_Player::get_Coordinates_to_Move() {
     Randomly_get_Ship();
     Coordinates temporary=temp1;
+    std::cout<<temp1<<std::endl;
     get_Real_Random_Coordinates();
     if(board->get(temporary)!='B' && board->get(temporary)!='b') {
         while(board->get(temp2)!=' ') {

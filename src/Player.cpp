@@ -67,6 +67,7 @@ void Player::remove_Ship(int j) {
     else if(pieces[j]->get_Name()=='E') {
         board->write_On_Defense_Board(Coordinates(pieces[j]->get_Center_X(), pieces[j]->get_Center_Y()), ' ');
         pieces.erase(pieces.begin()+j); }
+    ships--;
 }
 
 Player::Player() {
@@ -74,8 +75,10 @@ Player::Player() {
 
 //print every piece avaible
 void Player::show_Pieces() {
-    for(int i=0; i<pieces.size(); i++)
-        std::cout<<pieces[i]->get_Name()<<" con centro in "<<Coordinates(pieces[i]->get_Center_X(), pieces[i]->get_Center_Y())<<std::endl;
+    for (int i = 0; i <5; i++) {
+        std::cout << pieces.at(i)->get_Name() << " con centro in "
+                  << Coordinates(pieces.at(i)->get_Center_X(), pieces.at(i)->get_Center_Y()) << std::endl;
+    }
 }
 
 //return 0 for battleship
@@ -112,6 +115,7 @@ void Player::check_For_Healing(Coordinates coordinates) {
                 try {
                     int index= search_For_Ship(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j)));
                     pieces[index]->reset_Armor(true);
+                    j++;
                 }catch (std::runtime_error &e) {
                     throw std::runtime_error("La Board non risulta aggiornata, correggere il programma");
                 }

@@ -31,6 +31,7 @@ public:
     void set_Injured(int n) { armor[n]=1;}
     virtual bool isDead()=0;
     bool getDirection(){return orientation;}
+
     virtual ~Ship() {
     delete armor;
     }

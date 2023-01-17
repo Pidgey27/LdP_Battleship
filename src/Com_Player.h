@@ -21,7 +21,6 @@ private:
     bool declare_Submarine();
     bool declare_SupportShip();
     void order_Coord();
-
 public:
     Com_Player();
 

@@ -19,6 +19,7 @@ Game_Master::Game_Master(bool game_mode, int max) {
 //method uses to actually play
 //false until you reach the maximum number of turns, or one of the player loses all ships
 bool Game_Master::Execute_Turn() {
+    std::cout<<"*Turno n."<<current_Turn<<std::endl;
     if(current_Turn%2==0) {
         current_Turn_Player = Player2;
         opponent=Player1;
@@ -27,6 +28,9 @@ bool Game_Master::Execute_Turn() {
         current_Turn_Player = Player1;
         opponent=Player2;
     }
+    current_Turn_Player->print_Def_Board();
+    current_Turn_Player->print_Atk_Board();
+    current_Turn_Player->show_Pieces();
     while(!ask_For_Coordinates());
     // da inserire QUI la funzione per salvare in log;
     Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
@@ -76,6 +80,7 @@ void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
 //method that implements special commands, like show def board, remove spotted or remove missed on attack board
 bool Game_Master::ask_For_Coordinates() {
     moves=current_Turn_Player->get_Coordinates_to_Move();
+    std::cout<<moves<<std::endl;
     if(moves=="AA AA") {
         current_Turn_Player->remove_Spotted_Marks();
         return false;

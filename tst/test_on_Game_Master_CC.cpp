@@ -15,6 +15,13 @@ static void test_costructor_Game_Master() {
     //il costruttore funziona!
 }
 
+static void test_partita(){
+    Game_Master master(1, 10);
+    for(int i=0; i<11; i++)
+        master.Execute_Turn();
+    master.who_Wins();
+}
+
 /*
 //il test rimuove la nave senza causare memory leak, ritorna un return 0 senza alcun problema.
 static void test_rimuovi_nave() {

@@ -20,6 +20,7 @@ protected:
     Board* board=Board::getInstance();
     void remove_Ship(int i);
     void update_Board(Coordinates first, Coordinates last, int index, char name);
+    int ships=8;
 public:
 
     Player();

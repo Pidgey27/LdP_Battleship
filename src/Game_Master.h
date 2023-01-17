@@ -15,10 +15,10 @@ private:
     Com_Player* Player2;
     Player*  Player1;
     int max_Turns;
-    int current_Turn;
+    int current_Turn=1;
     std::string moves;
-    Player* current_Turn_Player;
-    Player* opponent;
+    Player* current_Turn_Player=NULL;
+    Player* opponent=NULL;
 
 public:
 
