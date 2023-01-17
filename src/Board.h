@@ -16,11 +16,9 @@ private:
     static Board* instancePtr;
 
     Board();
-    void prepareBoard();
-
 public:
 
-    Board(const Board& obj)
+    Board(const Board& board)
         =delete;
     static Board* getInstance(){
         if (instancePtr == NULL){

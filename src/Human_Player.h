@@ -10,12 +10,15 @@
 
 class Human_Player: public Player {
 private:
-
+    void prepareBoard();
+    bool checkBattleShip(Coordinates first, Coordinates last);
+    bool checkSupportShip(Coordinates first, Coordinates last);
+    //bool checkBattleShip(Coordinates first, Coordinates last);
 public:
     Human_Player();
     virtual ~Human_Player();
     std::string get_Coordinates_to_Move();
-    void prepareBoard(); 
+    
 };
 
 #endif //LDP_BATTLESHIP_HUMAN_PLAYER_H

@@ -169,7 +169,7 @@ static void testBoard(){
         std::cout << "error line 169: get method not working";
         check = false;
     }
-    
+
     std::cout << std::endl;
     test->printBoard();
     //test->printAtkBoard();
