@@ -13,10 +13,12 @@ private:
     void prepareBoard();
     bool checkBattleShip(Coordinates first, Coordinates last);
     bool checkSupportShip(Coordinates first, Coordinates last);
-    //bool checkBattleShip(Coordinates first, Coordinates last);
 public:
     Human_Player();
     virtual ~Human_Player();
+    /*Ask user for coordinates then check if that coordinates are valid
+    * @return a string with coordinates from the player.
+    */
     std::string get_Coordinates_to_Move();
     
 };

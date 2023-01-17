@@ -170,7 +170,7 @@ void Board::write_On_Defense_Board(Coordinates coordinate,char input){
     defenseBoard[coordinate.get_X()][coordinate.get_Y()] = input;
 };
 
-/*bool Board::Shot(Coordinates coor){
+bool Board::Shot(Coordinates coor){
     char tiles = this->defenseBoard[coor.get_X()][coor.get_Y()];
     if(tiles == 'C' || tiles == 'S' || tiles == 'E'){
         this->defenseBoard[coor.get_X()][coor.get_Y()] = 'X';
@@ -199,4 +199,4 @@ bool Board::Exploring(Coordinates coor){
         }
     }
     return checks;
-}*/
+}
