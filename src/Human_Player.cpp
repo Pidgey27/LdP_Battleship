@@ -84,7 +84,7 @@ Human_Player::Human_Player(){
     prepareBoard();
 }
 
-std::string Human_Player::get_Coordinates_to_Move(){
+std::string Human_Player::check_Input_Coordinate(){
     std::string input;
     std::string output;
     std::string coordinates1;
@@ -119,18 +119,28 @@ std::string Human_Player::get_Coordinates_to_Move(){
                 try{
                     search_For_Ship(origin, 'E');
                 }catch(std::runtime_error e){
-                    std::cout << "\033[1;31m Comando non valido\033[0m"<<  std::endl;
+                    throw std::invalid_argument("Coordinate non valide");
                     return "";
                 }
             }
         }
         return output;
     }catch(std::runtime_error e){  
-        std::cout << "\033[1;31m Coordinate non valide\033[0m"<<  std::endl;
+        throw std::invalid_argument("Coordinate non valide");
         return "";
     }
 }
-
+std::string Human_Player::get_Coordinates_to_Move(){
+    for(int i = 0; i < 1; i++){
+        try{
+            std::string playerMove = check_Input_Coordinate();
+            return playerMove;
+        }catch(std::invalid_argument e){
+            i--;
+            std::cout << "\033[1;31mCoordinate non valide. Riprova\033[0m"<<  std::endl;
+        }
+    }
+}
 bool Human_Player::checkBattleShip(Coordinates first, Coordinates last){ 
     if((first.get_X() == last.get_X()) && (abs(last.get_Y() - first.get_Y()) == 4)){
         return true;

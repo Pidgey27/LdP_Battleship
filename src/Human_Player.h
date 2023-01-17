@@ -13,6 +13,7 @@ private:
     void prepareBoard();
     bool checkBattleShip(Coordinates first, Coordinates last);
     bool checkSupportShip(Coordinates first, Coordinates last);
+    std::string check_Input_Coordinate();
 public:
     Human_Player();
     virtual ~Human_Player();
