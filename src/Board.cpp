@@ -18,13 +18,26 @@ Board* Board ::instancePtr = NULL;
 //--------------------------------------------printing function---------------------------
 void Board::printDefBoard(){
 
-    std::cout << "      1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12|" << std::endl << std::endl;
+    std::cout << "\033[1;36m      1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12|\033" << std::endl << std::endl;
 
     for(int i = 0; i < 12; i ++) { //column loop
         char C = 65 + i;
-        std::cout << "  "  << C << "   ";
+        std::cout << "  \033[1;36m"  << C << "\033[0m   ";
         for(int j  =0; j < 12; j ++){ //row loop
-            std::cout << this->defenseBoard[i][j] << " | ";
+            switch(this->defenseBoard[i][j]){
+            case('C'):
+                std::cout << "\033[1;35m" << this->defenseBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('S'):
+                std::cout << "\033[1;32m" << this->defenseBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('E'):
+                std::cout << "\033[1;33m" << this->defenseBoard[i][j] << "\033[0m" << " | ";
+                break;
+            default:
+                std::cout << this->defenseBoard[i][j] << " | ";
+                break;
+            }
         }
         std::cout << std::endl; //new line at end of column
         std::cout <<"     ------------------------------------------------";
@@ -35,13 +48,25 @@ void Board::printDefBoard(){
 
 void Board::printAtkBoard(){
 
-        std::cout << "      1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12|" << std::endl << std::endl;
-
+        std::cout << "\033[1;36m      1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12|\033" << std::endl << std::endl;
     for(int i = 0; i < 12; i ++) { //column loop
         char C = 65 + i;
-        std::cout << "  "  << C << "   ";
+        std::cout << "  \033[1;36m"  << C << "\033[0m   ";
         for(int j  =0; j < 12; j ++){ //row loop
-            std::cout << this->attackBoard[i][j] << " | ";
+            switch(this->attackBoard[i][j]){
+            case('X'):
+                std::cout << "\033[1;31m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('O'):
+                std::cout << "\033[1;34m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('Y'):
+                std::cout << "\033[1;33m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            default:
+                std::cout << this->attackBoard[i][j] << " | ";
+                break;
+            }
         }
         std::cout << std::endl; //new line at end of column
         std::cout <<"     ------------------------------------------------";
@@ -67,15 +92,28 @@ void Board::printBoard(){
             case('E'):
                 std::cout << "\033[1;33m" << this->defenseBoard[i][j] << "\033[0m" << " | ";
                 break;
-            case(' '):
+            default:
                 std::cout << this->defenseBoard[i][j] << " | ";
                 break;
             }
         }
         std::cout <<"     ";
         std::cout << "  \033[1;36m"  << C << "\033[0m   ";
-        for(int j  =0; j < 12; j ++){ //row loop 2 table
-            std::cout << this->attackBoard[i][j] << " | ";
+        for(int j  =0; j < 12; j ++){ //row loop 2 table  
+            switch(this->attackBoard[i][j]){
+            case('X'):
+                std::cout << "\033[1;31m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('O'):
+                std::cout << "\033[1;34m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            case('Y'):
+                std::cout << "\033[1;33m" << this->attackBoard[i][j] << "\033[0m" << " | ";
+                break;
+            default:
+                std::cout << this->attackBoard[i][j] << " | ";
+                break;
+            }
         }
 
         std::cout << std::endl; //new line at end of column

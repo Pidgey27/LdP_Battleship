@@ -7,7 +7,7 @@ void Human_Player::prepareBoard(){
     for (int i = 1; i < 4; i++){
         try{
             std::string input;
-            std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
+            std::cout << "\033[1;34mInserisci le Coordinate per la "<< i <<" corazzata (esempio: a1 a5)\033[0m"<<  std::endl;
             std::cin >> input;
             Coordinates startBoat = Coordinates(input);
             std::cin >> input;
@@ -33,7 +33,7 @@ void Human_Player::prepareBoard(){
     for (int i = 1; i < 4; i++){
         try{
             std::string input;
-            std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" support ship (esempio: a1 a3)\033[0m"<<  std::endl;
+            std::cout << "\033[1;34mInserisci le Coordinate per la "<< i <<" support ship (esempio: a1 a3)\033[0m"<<  std::endl;
             std::cin >> input;
             Coordinates startBoat = Coordinates(input);
             std::cin >> input;
@@ -60,7 +60,7 @@ void Human_Player::prepareBoard(){
     for (int i = 1; i < 3; i++){
         try{
             std::string input;
-            std::cout << "\033[1;31mInserisci le Coordinate per la "<< i <<" sottomarino (esempio: a1)\033[0m"<<  std::endl;
+            std::cout << "\033[1;34mInserisci le Coordinate per la "<< i <<" sottomarino (esempio: a1)\033[0m"<<  std::endl;
             std::cin >> input;
             Coordinates startBoat = Coordinates(input);
             try{
@@ -87,14 +87,29 @@ Human_Player::Human_Player(){
 std::string Human_Player::get_Coordinates_to_Move(){
     std::string input;
     std::string output;
+    std::string coordinates1;
+    std::string coordinates2;
     try{
-        std::cout << "\033[1;31mInserisci un comando di gioco(esempio: a1 g10)\033[0m"<<  std::endl;
+        std::cout << "\033[1;34mInserisci un comando di gioco(esempio: a1 g10)\033[0m"<<  std::endl;
         std::cin >> input;
         output = input;
-        Coordinates origin = Coordinates(input);
+        coordinates1 = input;
         std::cin >> input;
+        coordinates2 = input;
         output = output + " " + input;
-        Coordinates target = Coordinates(input);
+        if(coordinates1 == "AA" & coordinates2 == "AA")
+            return output;
+        else if(coordinates1 == "XX" & coordinates2 == "XX")
+            return output;
+        else if(coordinates1 == "OO" & coordinates2 == "OO")
+            return output;
+        else if(coordinates1 == "aa" & coordinates2 == "aa")
+            return output;
+        else if(coordinates1 == "xx" & coordinates2 == "xx")
+            return output;
+        else if(coordinates1 == "oo" & coordinates2 == "oo")
+            return output;
+        Coordinates origin = Coordinates(coordinates1);
         try{
             search_For_Ship(origin, 'B');
         }catch(std::runtime_error e){
@@ -102,7 +117,7 @@ std::string Human_Player::get_Coordinates_to_Move(){
                 search_For_Ship(origin, 'S');
             }catch(std::runtime_error e){
                 try{
-                    search_For_Ship(origin, 'S');
+                    search_For_Ship(origin, 'E');
                 }catch(std::runtime_error e){
                     std::cout << "\033[1;31m Comando non valido\033[0m"<<  std::endl;
                     return "";

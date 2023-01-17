@@ -8,6 +8,7 @@
 static void test_Get_Coordinates_to_Move() {
  
     Human_Player player;
+    player.show_Pieces();
     while(true){
         std::string prova = player.get_Coordinates_to_Move();
         std::cout << prova;
