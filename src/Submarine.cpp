@@ -60,3 +60,11 @@
             }
             return true;
         }
+
+        bool Submarine::getDirection(){
+            return 1;
+        }
+
+        bool Submarine::where_Hit(int n) {
+            return {armour[n]};
+        }

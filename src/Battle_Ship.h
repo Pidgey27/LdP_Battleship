@@ -34,4 +34,5 @@ class Battle_Ship : public Ship{
         char get_Name();
         int get_Dimension();
         bool isDead();
+        bool where_Hit(int n);
 };

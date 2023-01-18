@@ -102,4 +102,8 @@ bool Battle_Ship::isDead(){
     }
     return true;
 }
+
+bool Battle_Ship::where_Hit(int n) {
+    return {armour[n]};
+}
  

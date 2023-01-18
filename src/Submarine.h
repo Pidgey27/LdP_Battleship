@@ -31,4 +31,6 @@ public:
         char get_Name();
         int get_Dimension();
         bool isDead();
+        bool getDirection();
+        bool where_Hit(int n);
 };
