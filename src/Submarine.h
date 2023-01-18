@@ -16,9 +16,7 @@ class Submarine : public Ship{
 
 
 public:
-        Submarine(Submarine &&)=delete;
-        Submarine(Submarine const&)=delete;
-        Submarine operator= (Submarine const&)=delete;
+        
         Submarine(Coordinates mono_Coord);
         ~Submarine(){};
         void action(Coordinates first, Coordinates last) override;

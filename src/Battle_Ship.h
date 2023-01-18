@@ -15,9 +15,6 @@ class Battle_Ship : public Ship{
         char name='C';          //letter to identify the ship (S for support_ship, E for Submarine, C for Battle_ship)
 
     public:
-        Battle_Ship(Battle_Ship &&)=delete;
-        Battle_Ship(Battle_Ship const&)=delete;
-        Battle_Ship operator =(Battle_Ship const&)=delete;
         Battle_Ship(Coordinates first, Coordinates last);
         ~Battle_Ship(){ delete armour;};
         void action(Coordinates first, Coordinates last) override;

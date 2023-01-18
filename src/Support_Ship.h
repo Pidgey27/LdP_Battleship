@@ -16,9 +16,7 @@ class Support_Ship : public Ship{
         bool orientation;   //1 for horizontal, 0 for vertical
 
 public:
-        Support_Ship(Support_Ship &&)=delete;
-        Support_Ship(Support_Ship const&)=delete;
-        Support_Ship operator=(Support_Ship const&)=delete;
+        
         Support_Ship(Coordinates first, Coordinates last, bool boh);
 
         ~Support_Ship() override;
