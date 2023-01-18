@@ -10,25 +10,21 @@ int Player::search_For_Ship(Coordinates coord) {
     int dim;
     for(int i=0; i<pieces.size(); i++) {
         if(pieces.at(i)->get_Name()=='C')
-            dim=5;
+            dim=2;
         if(pieces.at(i)->get_Name()=='S')
-            dim=3;
+            dim=1;
         //search for center coordinates
         if (pieces.at(i)->get_Center_X() == coord.get_X() && pieces.at(i)->get_Center_Y() == coord.get_Y())
             return i;
         //search for with fixed x, builds the ship and verifies if any of the coordinates fits
         if (pieces.at(i)->getDirection() == 0  && pieces.at(i)->get_Name()!= 'E') {
-            int j = pieces.at(i)->get_Center_Y() - ((dim - 1) / 2);
-            int end = j + dim;
-            for (j; j <= end; j++) {
+            for (int j=pieces.at(i)->get_Center_Y()-dim; j <= pieces.at(i)->get_Center_Y()+i; j++) {
                 if (j == coord.get_Y())
                     return i; }
         }
         //search for with fixed y, builds the ship and verifies if any of the coordinates fits
         if (pieces.at(i)->getDirection() == 1 && pieces.at(i)->get_Name()!= 'E') {
-            int k =(int) pieces.at(i)->get_Center_X() - ((dim - 1) / 2);
-            int end = k + dim;
-            for (k; k <= end; k++) {
+            for (int k=pieces.at(i)->get_Center_X(); k <=pieces.at(i)->get_Center_X()+dim; k++) {
                 if (k == coord.get_X())
                     return i;
             }
