@@ -18,7 +18,6 @@ private:
     bool check_Target_Coordinate(Coordinates target);
 public:
     Human_Player();
-    virtual ~Human_Player();
     /*Ask user for coordinates then check if that coordinates are valid
     * @return a string with coordinates from the player.
     */
