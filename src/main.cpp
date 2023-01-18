@@ -1,3 +1,8 @@
+//
+// Created by Damiano Marconato
+//  matr 1221875
+//
+
 #include <iostream>
 #include "Battle_Ship.h"
 #include "Support_Ship.h"
