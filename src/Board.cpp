@@ -4,7 +4,6 @@
 
 #include "Board.h"
 
-Board* Board ::instancePtr = NULL;
 
     Board::Board(){
         for(int i = 0; i < 12; i++){

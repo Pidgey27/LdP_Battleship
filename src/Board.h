@@ -13,23 +13,13 @@ class Board {
 private:
     char attackBoard[12][12];
     char defenseBoard[12][12];
-    static Board* instancePtr;
-
-    Board();
+    
 public:
-
+    Board();
     Board(const Board& board)
         =delete;
-    void operator=(const Board &) = delete;
-    static Board* getInstance(){
-        if (instancePtr == NULL){
-            instancePtr = new Board();
-            return instancePtr;
-        }
-        else{
-            return instancePtr;
-        }
-    }
+    void operator=(const Board &) 
+        =delete;
 
     /*Add a Battle_Ship type boat one the board while checking
     * for collision.
