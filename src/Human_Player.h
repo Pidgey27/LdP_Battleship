@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include <cstdlib>
+#include "writeLog.h"
 
 class Human_Player: public Player {
 private:
@@ -14,6 +15,7 @@ private:
     bool checkBattleShip(Coordinates first, Coordinates last);
     bool checkSupportShip(Coordinates first, Coordinates last);
     std::string check_Input_Coordinate();
+    bool check_Target_Coordinate(Coordinates target);
 public:
     Human_Player();
     virtual ~Human_Player();
