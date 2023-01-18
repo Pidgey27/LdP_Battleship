@@ -6,7 +6,7 @@
         #include <iostream>
 
         
-        Submarine::Submarine(Coordinates mono_Coord) : Ship(mono_Coord){
+        Submarine::Submarine(Coordinates mono_Coord){
             setCenter(mono_Coord);
             setName('E');
             reset_Armor(true);
@@ -14,7 +14,7 @@
 
         void Submarine::action(Coordinates first, Coordinates last){
             setCenter(last);
-            std::cout << "move to " << last.get_X() << last.get_Y();
+            std::cout << "*Si muove verso " << last<<std::endl;
         }
 
         void Submarine::setCenter(Coordinates mono_Coord){
@@ -35,10 +35,6 @@
                     std::cout << " You've already hit!!! ";
                 else armour[n] = 1; 
         }
-        
-        bool Submarine::getDirection(){
-            return orientation;
-        }
 
         int Submarine::get_Center_X(){
             return center_X;
@@ -49,7 +45,7 @@
         }
 
         char Submarine::get_Name(){ 
-            return name;
+            return 'E';
         }
 
         int Submarine::get_Dimension(){

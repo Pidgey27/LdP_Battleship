@@ -20,18 +20,20 @@ protected:
 public:
     Ship(Ship&&)=delete;
     Ship(Ship const&)= delete;
-    Ship(Coordinates first, Coordinates last){};   //to implement on Battle_Ship and Suppport_Ship
-    Ship(Coordinates mono_Coord){}; //to implement on Submarine
+    Ship& operator=(const Ship&)=delete;
+    Ship() {
+    name='B';
+    }
     virtual void action(Coordinates first, Coordinates last)=0;
     virtual void reset_Armor(bool reset)=0;
     char get_Name(){ return name;}
-    int get_Center_X() {return center_X;}
-    int get_Center_Y() { return center_Y;}
+    int get_Center_X(){return center_X;};
+    int get_Center_Y(){return center_Y;};
     void set_Name(char n) { name=n;}
     void set_Injured(int n) { armor[n]=1;}
     virtual bool isDead()=0;
-    bool getDirection(){return orientation;}
-
+    virtual bool getDirection(){return orientation;}
+    bool where_Hit(int n){};
     virtual ~Ship() {
     delete armor;
     }

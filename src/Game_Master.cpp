@@ -7,12 +7,12 @@
 Game_Master::Game_Master(bool game_mode, int max) {
     max_Turns=max;
     if(game_mode) {
-        Player1= new Com_Player();  //in questo modo si carica automaticamente il costruttore per ogni nave del gioco
-        Player2=new Com_Player();
+        Player1= new Com_Player("P1");  //in questo modo si carica automaticamente il costruttore per ogni nave del gioco
+        Player2=new Com_Player("P2");
     }
     else {
-        //Player1=new Human_Player();   Da implementare
-        Player2=new Com_Player();
+        //Player1=new Human_Player("P1");   Da implementare
+        Player2=new Com_Player("P2");
     }
 }
 
@@ -29,8 +29,6 @@ bool Game_Master::Execute_Turn() {
         opponent=Player2;
     }
     current_Turn_Player->print_Def_Board();
-    current_Turn_Player->print_Atk_Board();
-    current_Turn_Player->show_Pieces();
     while(!ask_For_Coordinates());
     // da inserire QUI la funzione per salvare in log;
     Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
@@ -79,8 +77,9 @@ void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
 
 //method that implements special commands, like show def board, remove spotted or remove missed on attack board
 bool Game_Master::ask_For_Coordinates() {
+    std::cout<<"Tocca al player "<<current_Turn_Player->get_Name()<<std::endl;
     moves=current_Turn_Player->get_Coordinates_to_Move();
-    std::cout<<moves<<std::endl;
+    std::cout<<current_Turn_Player->get_Name()<<"   "<<moves<<std::endl;
     if(moves=="AA AA") {
         current_Turn_Player->remove_Spotted_Marks();
         return false;
@@ -97,11 +96,25 @@ bool Game_Master::ask_For_Coordinates() {
 
 //method to implement exploring for submarine
 void Game_Master::exploring_Protocol(Coordinates coordinates) {
-    for(int i=-2; i<3; i++){
-        for(int j=-2; j<3; j++) {
-            if(opponent->search_in_Def_Board(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j))!=' ')
-                current_Turn_Player->write_in_Atk_Board(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), 'Y');
+    for (int i =coordinates.get_Y() -2; i <coordinates.get_Y()+ 3; i++) {
+        if (i < 0)
+            i++;
+        else if (i > 12)
+            break;
+        else {
+            for (int j =coordinates.get_X()-2; j <coordinates.get_X()+3; j++) {
+                if (j < 0)
+                    j++;
+                else if (j> 12)
+                    break;
+                else {
+                    if (opponent->search_in_Def_Board(Coordinates(i, j)) !=
+                        ' ')
+                        current_Turn_Player->write_in_Atk_Board(
+                                Coordinates(i, j), 'Y');
+                }
+            }
         }
     }
-}
 
+}

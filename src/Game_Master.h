@@ -13,12 +13,12 @@ class Game_Master {
 private:
 
     Com_Player* Player2;
-    Player*  Player1;
+    Com_Player*  Player1;
     int max_Turns;
     int current_Turn=1;
     std::string moves;
-    Player* current_Turn_Player=NULL;
-    Player* opponent=NULL;
+    Com_Player* current_Turn_Player=NULL;
+    Com_Player* opponent=NULL;
 
 public:
 

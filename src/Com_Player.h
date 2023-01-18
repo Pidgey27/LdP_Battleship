@@ -11,10 +11,12 @@
 
 class Com_Player: public Player {
 private:
+    std::string name;
     Coordinates temp1; //coordinata più piccola
     Coordinates temp2; //coordinata più grande
-    void Randomly_get_Ship();    //usa temp1
-    void get_Real_Random_Coordinates(); //usa temp1
+    int Randomly_get_Ship();    //usa temp1
+    void get_Real_Random_Coordinates(int i); //usa temp1
+    void get_Random_Coordinates();
     bool check_For_Valid_Coordinates();
     void Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord); //usa temp2
     bool declare_Battleship();
@@ -22,8 +24,8 @@ private:
     bool declare_SupportShip();
     void order_Coord();
 public:
-    Com_Player();
-
+    Com_Player(std::string nome);
+    std::string get_Name(){return name;}
     std::string get_Coordinates_to_Move();
 
     ~Com_Player() override;

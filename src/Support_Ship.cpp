@@ -7,7 +7,7 @@
 #include <iostream>
 #include <stdlib.h> 
 
-Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,last){
+Support_Ship::Support_Ship(Coordinates first, Coordinates last, bool boh){
 
      if(checkSupportShip(first,last)){
         setDirection(first,last);
@@ -23,7 +23,7 @@ Support_Ship::Support_Ship(Coordinates first, Coordinates last) : Ship(first,las
 
  void Support_Ship::action(Coordinates first, Coordinates last){
     setCenter(last);
-    std::cout << "move to " << last.get_X() << last.get_Y();
+    std::cout << "*Si muove verso " << last<<" e cura"<<std::endl;
  }
 
  void Support_Ship::setDirection(Coordinates first, Coordinates last){
@@ -93,7 +93,7 @@ void Support_Ship::setName(char n) {
  }
 
  char Support_Ship::get_Name(){ 
-    return name;
+    return 'S';
 }
 
 int Support_Ship::get_Dimension(){
@@ -109,8 +109,10 @@ bool Support_Ship::isDead(){
     return true;
 }
 
+bool Support_Ship::where_Hit(int n) {
+    return {armour[n]};
+}
+
 Support_Ship::~Support_Ship() {
     delete armour;
 }
-
- 

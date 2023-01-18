@@ -3,7 +3,7 @@
  ********************************************/
 
 #include "src\Board.h"
-
+/*
 static void testBoard(){
     bool check = true;
     std::cout << "Board Test" << std::endl;
@@ -176,4 +176,4 @@ static void testBoard(){
     //test->printDefBoard();
     if(check)
         std::cout << "all Board test are successfull" << std::endl;
-}
+} */

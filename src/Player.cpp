@@ -6,32 +6,30 @@
 
 //search ship does first a search on the name, then on the coordinates. The first instance searches for a match on center
 //coordinates of the ship, then searches on the coordinates occupied by the ship.
-int Player::search_For_Ship(Coordinates coord, char name) {
-    name=toupper(name);//turns name to upperCase, as default name for the ship is always on upperCase
+int Player::search_For_Ship(Coordinates coord) {
     int dim;
-    if(name=='b'|| name=='B')
-        dim=5;
-    if(name=='s'|| name=='S')
-        dim=3;
     for(int i=0; i<pieces.size(); i++) {
+        if(pieces.at(i)->get_Name()=='C')
+            dim=5;
+        if(pieces.at(i)->get_Name()=='S')
+            dim=3;
         //search for center coordinates
-        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() &&
-            pieces[i]->get_Center_Y() == coord.get_Y())
+        if (pieces.at(i)->get_Center_X() == coord.get_X() && pieces.at(i)->get_Center_Y() == coord.get_Y())
             return i;
         //search for with fixed x, builds the ship and verifies if any of the coordinates fits
-        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_X() == coord.get_X() && name != 'E') {
-            int j = pieces[i]->get_Center_Y() - ((dim - 1) / 2);
+        if (pieces.at(i)->getDirection() == 0  && pieces.at(i)->get_Name()!= 'E') {
+            int j = pieces.at(i)->get_Center_Y() - ((dim - 1) / 2);
             int end = j + dim;
             for (j; j <= end; j++) {
                 if (j == coord.get_Y())
                     return i; }
         }
         //search for with fixed y, builds the ship and verifies if any of the coordinates fits
-        if (pieces[i]->get_Name() == name && pieces[i]->get_Center_Y() == coord.get_Y() && name != 'E') {
-            int j =(int) pieces[i]->get_Center_X() - ((dim - 1) / 2);
-            int end = j + dim;
-            for (j; j <= end; j++) {
-                if (j == coord.get_X())
+        if (pieces.at(i)->getDirection() == 1 && pieces.at(i)->get_Name()!= 'E') {
+            int k =(int) pieces.at(i)->get_Center_X() - ((dim - 1) / 2);
+            int end = k + dim;
+            for (k; k <= end; k++) {
+                if (k == coord.get_X())
                     return i;
             }
         }
@@ -42,32 +40,24 @@ int Player::search_For_Ship(Coordinates coord, char name) {
 //removes a dead ship from the vector containing them and updates the board removing the dead ship
 void Player::remove_Ship(int j) {
     //to remove a battleship I have to construct it using its orientation, 0 for vertical, 1 for horyzonthal
-    if(pieces[j]->get_Name()=='B') {
-        if (pieces[j]->getDirection() == 0)
-            for (int i = pieces[j]->get_Center_Y() - 2; i <= pieces[j]->get_Center_Y() + 2; i++)
-                board->write_On_Defense_Board(Coordinates(pieces[j]->get_Center_X(), i), ' ');
+    int dim;
+    if(pieces.at(j)->get_Name()=='C')
+        dim=2;
+    else if(pieces.at(j)->get_Name()=='S')
+        dim=1;
+    if(pieces.at(j)->get_Name()!='E') {
+        if (pieces.at(j)->getDirection() == 0)
+            for (int i = pieces.at(j)->get_Center_Y() - dim; i <= pieces.at(j)->get_Center_Y() + dim; i++)
+                board.write_On_Defense_Board(Coordinates(pieces.at(j)->get_Center_X(), i), ' ');
         else {
-            for (int i = pieces[j]->get_Center_X() - 2; i <= pieces[j]->get_Center_Y() + 2; i++)
-                board->write_On_Defense_Board(Coordinates(i, pieces[j]->get_Center_Y()), ' ');
+            for (int i = pieces.at(j)->get_Center_X() - dim; i <= pieces.at(j)->get_Center_Y() + dim; i++)
+                board.write_On_Defense_Board(Coordinates(i, pieces.at(j)->get_Center_Y()), ' ');
         }
-        pieces.erase(pieces.begin()+j);
+        pieces.erase(pieces.begin() + j);
     }
-    //to remove a SupportShip I have to construct it using its orientation, 0 for vertical, 1 for horyzonthal
-    else if(pieces[j]->get_Name()=='S'){
-        if(pieces[j]->getDirection() == 0)
-            for(int i=pieces[j]->get_Center_Y()-1; i<=pieces[j]->get_Center_Y()+1; i++)
-                board->write_On_Defense_Board(Coordinates(pieces[j]->get_Center_X(), i), ' ');
-        else {
-            for(int i=pieces[j]->get_Center_X()-1; i<=pieces[j]->get_Center_Y()+1; i++)
-                board->write_On_Defense_Board(Coordinates(i, pieces[j]->get_Center_Y()), ' ');
-        }
-        pieces.erase(pieces.begin()+j);
-    }
-    //submarine occupies only one cell, so to delete if I just
-    else if(pieces[j]->get_Name()=='E') {
-        board->write_On_Defense_Board(Coordinates(pieces[j]->get_Center_X(), pieces[j]->get_Center_Y()), ' ');
+    else {
+        board.write_On_Defense_Board(Coordinates(pieces.at(j)->get_Center_X(), pieces.at(j)->get_Center_Y()), ' ');
         pieces.erase(pieces.begin()+j); }
-    ships--;
 }
 
 Player::Player() {
@@ -75,7 +65,7 @@ Player::Player() {
 
 //print every piece avaible
 void Player::show_Pieces() {
-    for (int i = 0; i <5; i++) {
+    for (int i = 0; i <pieces.size(); i++) {
         std::cout << pieces.at(i)->get_Name() << " con centro in "
                   << Coordinates(pieces.at(i)->get_Center_X(), pieces.at(i)->get_Center_Y()) << std::endl;
     }
@@ -87,17 +77,18 @@ void Player::show_Pieces() {
 //update coordinates for submarine and support, signaling their different power(respectively searching and healing), signals a shot
 //on the other board for battleship
 int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
+    char n=board.get(coord_Ship_to_Move);
     try {
-        int index=search_For_Ship(coord_Ship_to_Move, board->get(coord_Ship_to_Move));
-        pieces[index]->action(coord_Ship_to_Move, where_To_Move);
-        if(pieces[index]->get_Name()=='B')
+        int index=search_For_Ship(coord_Ship_to_Move);
+        pieces.at(index)->action(coord_Ship_to_Move, where_To_Move);
+        if(n=='C'||n=='c')
             return 0;
-        else if(pieces[index]->get_Name()=='E') {
-            update_Board(coord_Ship_to_Move, where_To_Move, index, 'E');
+        else if(n=='E') {
+            update_Board(coord_Ship_to_Move, where_To_Move, index);
             return 1;
         }
-        else if(pieces[index]->get_Name()=='S') {
-            update_Board(coord_Ship_to_Move, where_To_Move, index, 'S');
+        else if(n=='S'|| n=='s') {
+            update_Board(coord_Ship_to_Move, where_To_Move, index);
             return 2;
         }
     throw std::invalid_argument("Inserita tra i pezzi del giocatore una nave sconosciuta! Non riconosco il nome del pezzo");
@@ -109,15 +100,27 @@ int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
 
 //check in the board if there's an injured ship, and if there is one it heals it.
 void Player::check_For_Healing(Coordinates coordinates) {
-    for(int j=-1; j<2; j++) {
-        for(int i=-1; i<2; i++) {
-            if(board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j))!=' ') {
-                try {
-                    int index= search_For_Ship(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j), board->get(Coordinates(coordinates.get_X()+i, coordinates.get_Y()+j)));
-                    pieces[index]->reset_Armor(true);
-                    j++;
-                }catch (std::runtime_error &e) {
-                    throw std::runtime_error("La Board non risulta aggiornata, correggere il programma");
+    int sub = search_For_Ship(coordinates);
+    for (int j = coordinates.get_Y() - 1; j < coordinates.get_Y() + 2; j++) {
+        if (j < 0)
+            j++;
+        else if (j > 12)
+            return;
+        else {
+            for (int i =coordinates.get_X() -1; i < coordinates.get_X()+2; i++) {
+                if (i < 0)
+                    i++;
+                else if (i > 12)
+                    return;
+                else {
+                    if(board.get(Coordinates(i, j)) != ' '){
+                        try {
+                            int index = search_For_Ship(Coordinates(i, j));
+                            if (sub != index)
+                                pieces.at(index)->reset_Armor(true);
+                        } catch (std::runtime_error &e) {
+                        }
+                    }
                 }
             }
         }
@@ -135,34 +138,34 @@ bool Player::check_For_Endgame() {
 //this players board is under fire. if missed, returns false signaling miss; if hit, updates ship condition, and removes it
 //if its dead
 bool Player::under_Fire(Coordinates coord) {
-    bool shot=board->get(coord)!=' ';
+    bool shot=board.get(coord)!=' ';
     int mid;
     if(!shot) {
         return false;
     }
     else {
-        int injured= search_For_Ship(coord, board->get(coord));
+        int injured= search_For_Ship(coord);
         char temp;
-        if(pieces[injured]->get_Name()=='B') {
+        if(board.get(coord)=='C'||board.get(coord)=='c') {
             mid=2;
-            temp='b';
+            temp='c';
         }
-        if(pieces[injured]->get_Name()=='S') {
+        if(board.get(coord)=='S'||board.get(coord)=='s') {
             mid = 1;
             temp = 's';
         }
         int where_hit;
-        if(pieces[injured]->getDirection() == 0) {
-            where_hit=pieces[injured]->get_Center_Y()-coord.get_Y()+mid;
-            pieces[injured]->set_Injured(where_hit);
-            board->write_On_Defense_Board(coord, temp);
+        if(pieces.at(injured)->getDirection() == 0) {
+            where_hit=pieces.at(injured)->get_Center_Y()-coord.get_Y()+mid;
+            pieces.at(injured)->set_Injured(where_hit);
+            board.write_On_Defense_Board(coord, temp);
         }
-        if(pieces[injured]->getDirection() == 1){
-            where_hit=pieces[injured]->get_Center_X()-coord.get_X()+mid;
-            pieces[injured]->set_Injured(where_hit);
-            board->write_On_Defense_Board(coord, temp);
+        if(pieces.at(injured)->getDirection() == 1){
+            where_hit=pieces.at(injured)->get_Center_X()-coord.get_X()+mid;
+            pieces.at(injured)->set_Injured(where_hit);
+            board.write_On_Defense_Board(coord, temp);
             }
-        if(pieces[injured]->isDead()){
+        if(pieces.at(injured)->isDead()){
             remove_Ship(injured);
         }
         return true;
@@ -171,32 +174,32 @@ bool Player::under_Fire(Coordinates coord) {
 
 //removes spotted marks from attack board
 void Player::remove_Spotted_Marks() {
-    board->clearScan();
+    board.clearScan();
 }
 
 //prints defence board
 void Player::print_Def_Board() {
-    board->printDefBoard();
+    board.printDefBoard();
 }
 
 //prints attack board
 void Player::print_Atk_Board() {
-    board->printAtkBoard();
+    board.printAtkBoard();
 }
 
 //erase every missed from attack board
 void Player::erase_Missed_Atk() {
-    board->clearHit();
+    board.clearHit();
 }
 
 //searches in defense board and returns its coordinates value. Used on architecture's upper level.
 char Player::search_in_Def_Board(Coordinates coordinates) {
-    return board->get(coordinates);
+    return board.get(coordinates);
 }
 
 //writes in attack board a fixed char. Used on architecture's upper level.
 void Player::write_in_Atk_Board(Coordinates coordinates, char name) {
-    board->write_On_Attack_Board(coordinates, name);
+    board.write_On_Attack_Board(coordinates, name);
 }
 
 Player::~Player() {
@@ -205,31 +208,35 @@ Player::~Player() {
 
 //returns orientation for a single piece. Created for a test to check correct orientation return
 bool Player::get_Orientation(int n) {
-    return pieces[n]->getDirection();
+    return pieces.at(n)->getDirection();
 }
 
 //Prints a single ship in vector pieces, with int n as its index.
 void Player::show_Ship(int n){
-    std::cout<<"La nave richiesta e' una "<<pieces[n]->get_Name()<<" con centro in "<<Coordinates(pieces[n]->get_Center_X(), pieces[n]->get_Center_Y())<<std::endl;
+    std::cout<<"La nave richiesta e' una "<<pieces.at(n)->get_Name()<<" con centro in "<<Coordinates(pieces.at(n)->get_Center_X(), pieces.at(n)->get_Center_Y())<<std::endl;
 }
 
 //updates board after action. deletes previous coordinates in board, writes last in board.
-void Player::update_Board(Coordinates first, Coordinates last, int index, char name) {
-    if (name=='E') {
-        board->write_On_Defense_Board(first, ' ');
-        board->write_On_Defense_Board(last, 'E');
+void Player::update_Board(Coordinates first, Coordinates last, int index) {
+    if (board.get(first)=='E') {
+        board.write_On_Defense_Board(first, ' ');
+        board.write_On_Defense_Board(last, 'E');
     }
-    else if(name=='S'){
-       if(pieces[index]->getDirection()==0) {
+    else if(board.get(first)=='S'|| board.get(first)=='s'){
+       if(pieces.at(index)->getDirection()==0) {
            for(int i=-1; i<2; i++) {
-               board->write_On_Defense_Board(Coordinates(first.get_X(), first.get_Y()+i), ' ');
-               board->write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 'S');
+               board.write_On_Defense_Board(Coordinates(first.get_X(), first.get_Y()+i), ' ');
+               if(pieces.at(index)->where_Hit(i+1)==0)
+                   board.write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 'S');
+               else
+                   board.write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 's');
+
            }
        }
        else {
            for(int i=-1; i<2; i++) {
-               board->write_On_Defense_Board(Coordinates(first.get_X()+i, first.get_Y()), ' ');
-               board->write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
+               board.write_On_Defense_Board(Coordinates(first.get_X()+i, first.get_Y()), ' ');
+               board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
            }
        }
     }

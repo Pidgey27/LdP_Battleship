@@ -7,13 +7,13 @@
 #include <iostream>
 #include <stdlib.h> 
 
-Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last){
+Battle_Ship::Battle_Ship(Coordinates first, Coordinates last){
 
      if(checkBattleShip(first,last)){
         setDirection(first,last);
         setCenter_X(first,last);
         setCenter_Y(first,last);
-        setName('B');
+        setName('C');
          reset_Armor(true);
      }
      else
@@ -22,7 +22,7 @@ Battle_Ship::Battle_Ship(Coordinates first, Coordinates last) : Ship(first,last)
 }
 
  void Battle_Ship::action(Coordinates first, Coordinates last){
-    std::cout << "fire into " << last.get_X() << last.get_Y();
+    std::cout << "*Fuoco su " << last <<std::endl;
  }
 
  void Battle_Ship::setDirection(Coordinates first, Coordinates last){
@@ -87,7 +87,7 @@ void  Battle_Ship::set_Injured(int n){
  }
 
 char Battle_Ship::get_Name(){ 
-    return name;
+    return 'C';
 }
 
 int Battle_Ship::get_Dimension(){

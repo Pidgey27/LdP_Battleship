@@ -14,7 +14,7 @@ void Human_Player::prepareBoard(){
             Coordinates endBoat = Coordinates(input);
             if(checkBattleShip(startBoat, endBoat)){
                 try{
-                    board->addBattleShip(startBoat,endBoat);
+                    board.addBattleShip(startBoat,endBoat);
                 }catch(std::invalid_argument e){
                     std::cout << "\033[1;31mCoordinate non valide. Riprova\033[0m"<<  std::endl;
                     i--;
@@ -40,13 +40,13 @@ void Human_Player::prepareBoard(){
             Coordinates endBoat = Coordinates(input);
             if(checkSupportShip(startBoat, endBoat)){
                 try{
-                    board->addSupportShip(startBoat,endBoat);
+                    board.addSupportShip(startBoat,endBoat);
                 }catch(std::invalid_argument e){
                     std::cout << "\033[1;31mCoordinate non valide. Riprova\033[0m"<<  std::endl;
                     i--;
                     continue;
                 }
-                pieces.emplace_back(new Support_Ship(startBoat, endBoat));
+                pieces.emplace_back(new Support_Ship(startBoat, endBoat, true));
                 
             }else{
                 std::cout << "\033[1;31mCoordinate non valide. Riprova\033[0m"<<  std::endl;
@@ -66,7 +66,7 @@ void Human_Player::prepareBoard(){
             try{
                 Submarine* ship = new Submarine(startBoat);
                 pieces.emplace_back(ship);
-                board->addSubmarine(startBoat);
+                board.addSubmarine(startBoat);
             }catch(std::invalid_argument e){
                 std::cout << "\033[1;31mCoordinate non valide. Riprova\033[0m"<<  std::endl;
                 i--;
@@ -77,7 +77,7 @@ void Human_Player::prepareBoard(){
         }
     }
     // todo delete this line
-    board->printBoard();
+    board.printBoard();
 };
 
 Human_Player::Human_Player(){
@@ -111,13 +111,13 @@ std::string Human_Player::check_Input_Coordinate(){
             return output;
         Coordinates origin = Coordinates(coordinates1);
         try{
-            search_For_Ship(origin, 'B');
+            search_For_Ship(origin);
         }catch(std::runtime_error e){
             try{
-                search_For_Ship(origin, 'S');
+                search_For_Ship(origin);
             }catch(std::runtime_error e){
                 try{
-                    search_For_Ship(origin, 'E');
+                    search_For_Ship(origin);
                 }catch(std::runtime_error e){
                     throw std::invalid_argument("Coordinate non valide");
                     return "";

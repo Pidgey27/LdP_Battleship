@@ -16,17 +16,17 @@
 class Player {
 protected:
 
-    std::vector<std::shared_ptr<Ship>> pieces;
-    Board* board=Board::getInstance();
+    std::vector<Ship*> pieces;
+    Board board;
     void remove_Ship(int i);
-    void update_Board(Coordinates first, Coordinates last, int index, char name);
-    int ships=8;
+    void update_Board(Coordinates first, Coordinates last, int index);
+
 public:
 
     Player();
     virtual ~Player();
     std::string get_Coordinates_to_Move() {};
-    int search_For_Ship(Coordinates coord, char name);
+    int search_For_Ship(Coordinates coord);
     int play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move);
     void check_For_Healing(Coordinates coordinates);
     void show_Pieces();
