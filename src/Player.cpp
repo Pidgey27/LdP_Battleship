@@ -180,11 +180,11 @@ bool Player::under_Fire(Coordinates coord) {
             submarine.erase(submarine.cbegin()+injured);
             board.write_On_Defense_Board(coord, ' ');
         }
-
-        tolower(temp);
-        if(battleship.at(injured).isDead()||support.at(injured).isDead()){
-            remove_Ship(injured);
+        if(battleship.at(injured).isDead()){
+            remove_Ship(injured, 'C');
         }
+        if(support.at(injured).isDead())
+            remove_Ship(injured, 'S');
         return true;
     }
 }
@@ -237,8 +237,14 @@ bool Player::get_Orientation(int n, char name) {
 void Player::show_Ship(int n, char name){
     if(name=='C')
     std::cout<<"La nave richiesta e' una "<<battleship.at(n).get_Name()<<" con centro in "<<Coordinates(battleship.at(n).get_Center_X(), battleship.at(n).get_Center_Y())<<std::endl;
+    else if(name=='S')
+        std::cout<<"La nave richiesta e' una "<<support.at(n).get_Name()<<" con centro in "<<Coordinates(support.at(n).get_Center_X(), support.at(n).get_Center_Y())<<std::endl;
+    else
+    if(name=='E')
+        std::cout<<"La nave richiesta e' una "<<submarine.at(n).get_Name()<<" con centro in "<<Coordinates(submarine.at(n).get_Center_X(), submarine.at(n).get_Center_Y())<<std::endl;
+
 }
-/*
+
 //updates board after action. deletes previous coordinates in board, writes last in board.
 void Player::update_Board(Coordinates first, Coordinates last, int index) {
     if (board.get(first)=='E') {
@@ -246,10 +252,10 @@ void Player::update_Board(Coordinates first, Coordinates last, int index) {
         board.write_On_Defense_Board(last, 'E');
     }
     else if(board.get(first)=='S'|| board.get(first)=='s'){
-       if(pieces.at(index)->getDirection()==0) {
+       if(support.at(index).getDirection()==0) {
            for(int i=-1; i<2; i++) {
                board.write_On_Defense_Board(Coordinates(first.get_X(), first.get_Y()+i), ' ');
-               if(pieces.at(index)->where_Hit(i+1)==0)
+               if(support.at(index).where_Hit(i+1)==0)
                    board.write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 'S');
                else
                    board.write_On_Defense_Board(Coordinates(last.get_X(), last.get_Y()+i), 's');
@@ -259,7 +265,7 @@ void Player::update_Board(Coordinates first, Coordinates last, int index) {
        else {
            for(int i=-1; i<2; i++) {
                board.write_On_Defense_Board(Coordinates(first.get_X()+i, first.get_Y()), ' ');
-               if(pieces.at(index)->where_Hit(i+1)==1)
+               if(support.at(index).where_Hit(i+1)==1)
                    board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 's');
                else
                    board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
@@ -269,25 +275,30 @@ void Player::update_Board(Coordinates first, Coordinates last, int index) {
     }
 }
 //removes a dead ship from the vector containing them and updates the board removing the dead ship
-void Player::remove_Ship(int j) {
+void Player::remove_Ship(int j, char name) {
     //to remove a battleship I have to construct it using its orientation, 0 for vertical, 1 for horyzonthal
     int dim;
-    if(pieces.at(j)->get_Name()=='C')
-        dim=2;
-    else if(pieces.at(j)->get_Name()=='S')
-        dim=1;
-    if(pieces.at(j)->get_Name()!='E') {
-        if (pieces.at(j)->getDirection() == 0)
-            for (int i = pieces.at(j)->get_Center_Y() - dim; i <= pieces.at(j)->get_Center_Y() + dim; i++)
-                board.write_On_Defense_Board(Coordinates(pieces.at(j)->get_Center_X(), i), ' ');
+    if(name=='C') {
+        dim = 2;
+        if (battleship.at(j).getDirection() == 0)
+            for (int i =battleship.at(j).get_Center_Y() - dim; i <= battleship.at(j).get_Center_Y() + dim; i++)
+                board.write_On_Defense_Board(Coordinates(battleship.at(j).get_Center_X(), i), ' ');
         else {
-            for (int i = pieces.at(j)->get_Center_X() - dim; i <= pieces.at(j)->get_Center_Y() + dim; i++)
-                board.write_On_Defense_Board(Coordinates(i, pieces.at(j)->get_Center_Y()), ' ');
+            for (int i = battleship.at(j).get_Center_X() - dim; i <= battleship.at(j).get_Center_Y() + dim; i++)
+                board.write_On_Defense_Board(Coordinates(i, battleship.at(j).get_Center_Y()), ' ');
         }
-        pieces.erase(pieces.begin() + j);
     }
+    else if(name=='S') {
+            dim = 1;
+            if (support.at(j).getDirection() == 0)
+                for (int i =support.at(j).get_Center_Y() - dim; i <= support.at(j).get_Center_Y() + dim; i++)
+                    board.write_On_Defense_Board(Coordinates(support.at(j).get_Center_X(), i), ' ');
+            else {
+                for (int i = support.at(j).get_Center_X() - dim; i <= support.at(j).get_Center_Y() + dim; i++)
+                    board.write_On_Defense_Board(Coordinates(i, support.at(j).get_Center_Y()), ' ');
+            }
+        }
     else {
-        board.write_On_Defense_Board(Coordinates(pieces.at(j)->get_Center_X(), pieces.at(j)->get_Center_Y()), ' ');
-        pieces.erase(pieces.begin()+j); }
+        board.write_On_Defense_Board(Coordinates(submarine.at(j).get_Center_X(), submarine.at(j).get_Center_Y()), ' ');
+        submarine.erase(submarine.begin()+j); }
 }
- */

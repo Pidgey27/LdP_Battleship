@@ -20,7 +20,7 @@ protected:
     std::vector<Submarine> submarine;
     std::vector<Support_Ship> support;
     Board board;
-    void remove_Ship(int i);
+    void remove_Ship(int i, char name);
     void update_Board(Coordinates first, Coordinates last, int index);
 
 public:
