@@ -1,6 +1,7 @@
-        //
-        // Created by Damiano 
-        //
+     //
+// Created by Damiano Marconato
+//  matr 1221875
+//
         
         #include "Submarine.h"
         #include <iostream>
