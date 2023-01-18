@@ -236,7 +236,11 @@ void Player::update_Board(Coordinates first, Coordinates last, int index) {
        else {
            for(int i=-1; i<2; i++) {
                board.write_On_Defense_Board(Coordinates(first.get_X()+i, first.get_Y()), ' ');
-               board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
+               if(pieces.at(index)->where_Hit(i+1)==1)
+                   board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 's');
+               else
+                   board.write_On_Defense_Board(Coordinates(last.get_X()+i, last.get_Y()), 'S');
+
            }
        }
     }

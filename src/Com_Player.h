@@ -10,8 +10,9 @@
 #include <time.h>
 
 class Com_Player: public Player {
-private:
-    std::string name;
+
+protected:
+
     Coordinates temp1; //coordinata più piccola
     Coordinates temp2; //coordinata più grande
     int Randomly_get_Ship();    //usa temp1
@@ -22,10 +23,11 @@ private:
     bool declare_Battleship();
     bool declare_Submarine();
     bool declare_SupportShip();
+
     void order_Coord();
 public:
+
     Com_Player(std::string nome);
-    std::string get_Name(){return name;}
     std::string get_Coordinates_to_Move();
 
     ~Com_Player() override;

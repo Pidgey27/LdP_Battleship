@@ -15,7 +15,7 @@
 
 class Player {
 protected:
-
+    std::string name;
     std::vector<Ship*> pieces;
     Board board;
     void remove_Ship(int i);
@@ -40,6 +40,7 @@ public:
     void write_in_Atk_Board(Coordinates coordinates, char name);
     bool get_Orientation(int n);
     void show_Ship(int n);
+    std::string get_Name(){return name;}
 
 };
 #endif
