@@ -40,8 +40,8 @@ public:
     void erase_Missed_Atk();
     char search_in_Def_Board(Coordinates coordinates);
     void write_in_Atk_Board(Coordinates coordinates, char name);
-    bool get_Orientation(int n);
-    void show_Ship(int n);
+    bool get_Orientation(int n, char name);
+    void show_Ship(int n , char name);
     std::string get_Name(){return name;}
 
 };

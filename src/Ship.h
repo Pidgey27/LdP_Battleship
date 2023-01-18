@@ -18,9 +18,6 @@ protected:
     bool *armor;
 
 public:
-    Ship(Ship&&)=delete;
-    Ship(Ship const&)= delete;
-    Ship& operator=(const Ship&)=delete;
     Ship() {
     name='B';
     }

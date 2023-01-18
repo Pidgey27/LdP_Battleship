@@ -40,6 +40,6 @@ static void test_Random_Get_Coordinates_to_Move() {
     computer.show_Pieces();
     computer.print_Def_Board();
     computer.show_Ship(2);
-    std::cout<<"orientamento del pezzo uguale a "<<computer.get_Orientation(2);
+    std::cout<<"orientamento del pezzo uguale a "<<computer.get_Orientation(2, 'S');
  }
 

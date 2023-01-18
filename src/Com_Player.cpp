@@ -5,6 +5,7 @@
 #include "Player.h"
 #include <chrono>
 #include "Coordinates.h"
+#include "writeLog.h"
 
 //randomly selects a ship from pieces vector, to ensure first coordinate as always correct
  int Com_Player::Randomly_get_Ship() {
@@ -93,7 +94,6 @@ void Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinate
 }
 
 Com_Player::Com_Player(std::string nome) {
-    name=nome;
     for(int i=0; i<3;) {
         while (!declare_Battleship());
         i++;
@@ -113,7 +113,8 @@ bool Com_Player::declare_Submarine() {
     try {
         Submarine sub1(temp1);
         board.addSubmarine(temp1);
-        submarine.push_back(sub1);
+        submarine.push_back(std::move(sub1));
+        writeLog(name +" "+temp1.to_String());
         return true;
     }catch(std::invalid_argument &e) {
         return false;
@@ -128,9 +129,10 @@ bool Com_Player::declare_SupportShip() {
         Random_Coordinates_to_Construct_Ship('S', temp1);
         order_Coord();
         try {
-            Ship* supportShip=new Support_Ship(temp1, temp2, true);
+            Support_Ship supp(temp1, temp2, true);
             board.addSupportShip(temp1, temp2);
-            pieces.push_back(std::move(supportShip));
+            support.push_back(std::move(supp));
+            writeLog(name+" "+temp1.to_String()+" "+temp2.to_String());
             return true;
         } catch (std::invalid_argument &e) {
             return false;
@@ -149,9 +151,10 @@ bool Com_Player::declare_Battleship() {
         Random_Coordinates_to_Construct_Ship('C', temp1);
         order_Coord();
         try {
-            Ship* battleShip=new Battle_Ship(temp1, temp2);
+            Battle_Ship battle(temp1, temp2);
             board.addBattleShip(temp1, temp2);
-            pieces.push_back(std::move(battleShip));
+            battleship.push_back(std::move(battle));
+            writeLog(name+" "+temp1.to_String()+" "+temp2.to_String());
             return true;
         }catch (std::invalid_argument &e) {
             return false;
@@ -167,7 +170,7 @@ bool Com_Player::declare_Battleship() {
 std::string Com_Player::get_Coordinates_to_Move() {
     int i = Randomly_get_Ship();
     Coordinates temporary = temp1;
-    get_Real_Random_Coordinates(i);
+    get_Real_Random_Coordinates(i, board.get(temporary));
     return temporary.to_String() + " " + temp1.to_String();
 }
 
@@ -190,7 +193,9 @@ void Com_Player::order_Coord() {
 }
 
 Com_Player::~Com_Player() {
-    pieces.clear();
+    support.clear();
+    submarine.clear();
+    battleship.clear();
 }
 
 

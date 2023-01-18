@@ -37,9 +37,10 @@ bool Game_Master::Execute_Turn() {
     if(i==0)
         fire_Protocol(second);
     if(i==1)
-        exploring_Protocol(second);
-    if(i==2)
         current_Turn_Player->check_For_Healing(second);
+    if(i==2)
+        exploring_Protocol(second);
+
     current_Turn++;
     return current_Turn==max_Turns || Player2->check_For_Endgame() || Player1->check_For_Endgame();
 }
