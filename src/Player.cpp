@@ -145,23 +145,22 @@ bool Player::under_Fire(Coordinates coord) {
     }
     else {
         int injured= search_For_Ship(coord);
-        char temp;
-        if(board.get(coord)=='C'||board.get(coord)=='c') {
+        char temp=pieces.at(injured)->get_Name();
+        if(temp=='C')
             mid=2;
-            temp='c';
-        }
-        if(board.get(coord)=='S'||board.get(coord)=='s') {
+        if(temp=='S')
             mid = 1;
-            temp = 's';
-        }
+        if(temp=='E')
+            mid=0;
+        tolower(temp);
         int where_hit;
         if(pieces.at(injured)->getDirection() == 0) {
-            where_hit=pieces.at(injured)->get_Center_Y()-coord.get_Y()+mid;
+            where_hit=coord.get_Y()-pieces.at(injured)->get_Center_Y()+mid;
             pieces.at(injured)->set_Injured(where_hit);
             board.write_On_Defense_Board(coord, temp);
         }
         if(pieces.at(injured)->getDirection() == 1){
-            where_hit=pieces.at(injured)->get_Center_X()-coord.get_X()+mid;
+            where_hit=coord.get_X()+mid-pieces.at(injured)->get_Center_X();
             pieces.at(injured)->set_Injured(where_hit);
             board.write_On_Defense_Board(coord, temp);
             }
