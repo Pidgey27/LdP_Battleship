@@ -16,7 +16,9 @@
 class Player {
 protected:
     std::string name;
-    std::vector<Ship*> pieces;
+    std::vector<Battle_Ship> battleship;
+    std::vector<Submarine> submarine;
+    std::vector<Support_Ship> support;
     Board board;
     void remove_Ship(int i);
     void update_Board(Coordinates first, Coordinates last, int index);

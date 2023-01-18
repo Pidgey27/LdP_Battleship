@@ -16,7 +16,7 @@ protected:
     Coordinates temp1; //coordinata più piccola
     Coordinates temp2; //coordinata più grande
     int Randomly_get_Ship();    //usa temp1
-    void get_Real_Random_Coordinates(int i); //usa temp1
+    void get_Real_Random_Coordinates(int i, char name); //usa temp1
     void get_Random_Coordinates();
     bool check_For_Valid_Coordinates();
     void Random_Coordinates_to_Construct_Ship(char name_ship, Coordinates first_coord); //usa temp2

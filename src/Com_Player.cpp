@@ -11,18 +11,31 @@
     unsigned seed1;
     seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
-    int n=rand() % pieces.size();
-    temp1={pieces.at(n)->get_Center_X(), pieces.at(n)->get_Center_Y()};
-    return n;
+    int which_v=rand()%3;
+    if(which_v==0) {
+        int n = rand() % battleship.size();
+        temp1={battleship.at(n).get_Center_X(), battleship.at(n).get_Center_Y()};
+        return n;
+    }
+    else if(which_v==1){
+        int n = rand() % support.size();
+        temp1={support.at(n).get_Center_X(), support.at(n).get_Center_Y()};
+        return n;
+    }
+    else if(which_v==2){
+        int n = rand() % submarine.size();
+        temp1={submarine.at(n).get_Center_X(), submarine.at(n).get_Center_Y()};
+        return n;
+    }
 }
 
 //creates real random coordinates
-void Com_Player::get_Real_Random_Coordinates(int i) {
+void Com_Player::get_Real_Random_Coordinates(int i, char name) {
     unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     int n, m, x, y;
-    if(pieces.at(i)->get_Name()=='S') {
-        if(pieces.at(i)->getDirection()==0) {
+    if(name=='S') {
+        if(support.at(i).getDirection()==0) {
             n = 1;
             m=0;
         }
@@ -33,11 +46,10 @@ void Com_Player::get_Real_Random_Coordinates(int i) {
         do {
             x = rand() % 12;
             y = rand() % 12;
-        } while (board.get(Coordinates(x+ m, y+n))!=' '&& board.get(Coordinates(x- m, y-n))!=' ' &&
-        board.get(Coordinates(x, y))!=' ');
+        } while (board.get(Coordinates(x+ m, y+n))!=' ' && board.get(Coordinates(x-m, y-n))!=' ');
         temp1={x, y};
     }
-    else if(pieces.at(i)->get_Name()=='C') {
+    else if(name=='C') {
         x = rand() % 12;
         y = rand() % 12;
         temp1={x, y};
@@ -99,9 +111,9 @@ Com_Player::Com_Player(std::string nome) {
 bool Com_Player::declare_Submarine() {
     get_Random_Coordinates();
     try {
-        Ship* submarine=new Submarine(temp1);
+        Submarine sub1(temp1);
         board.addSubmarine(temp1);
-        pieces.push_back(std::move(submarine));
+        submarine.push_back(sub1);
         return true;
     }catch(std::invalid_argument &e) {
         return false;
