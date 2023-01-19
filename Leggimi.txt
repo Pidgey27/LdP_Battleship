@@ -1,0 +1,14 @@
+Il progetto è stato pensato in questo modo:
+l'utente combila il progetto.
+Nel momento in cui esegue il file può scegliere il tipo di partita:
+PC = Computer VS Player
+CC = Computer Vs Computer
+V = Replay
+
+Nel caso in cui venga inserito un carattere diverso da quelli elencati il main continuerà a chiedere che tipo di partita si vuole
+eseguire.
+Il file di log si chiama test.txt 
+Per ogni partita per non continuare a scrivere su file di log precedente, è vivamente consigliato di rinominare il file precedente.
+Il programma in automatico genererà un altro file test.txt se non esiste
+Per il file il replay si deve modificare il file test.txt con replay.txt
+
