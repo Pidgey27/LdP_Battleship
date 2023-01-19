@@ -34,7 +34,6 @@ bool Game_Master::Execute_Turn() {
         current_Turn_Player = Player1;
         opponent=Player2;
     }
-    current_Turn_Player->print_Def_Board();
     while(!ask_For_Coordinates());
     // da inserire QUI la funzione per salvare in log;
     Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));

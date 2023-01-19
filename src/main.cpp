@@ -4,9 +4,7 @@
 //
 
 #include <iostream>
-#include "Battle_Ship.h"
-#include "Support_Ship.h"
-#include "Replay.h"
+//#include "Replay.h"
 #include "Game_Master.h"
 #include "writeLog.h"
 
@@ -27,6 +25,7 @@ int max_mosse;
 
         if(type_of_game == "PC"){
             Game_Master gmPC(false);
+            while(gmPC.Execute_Turn());
             gmPC.who_Wins();
 
         }else if (type_of_game == "CC"){
@@ -34,10 +33,11 @@ int max_mosse;
             "Quante mosse possono effettuate i due computer prima di terminare la parita?" << std::endl;
             std::cin >> max_mosse;
             Game_Master gmCC(max_mosse,true);
+            while(gmCC.Execute_Turn());
             gmCC.who_Wins();
             
         }else if (type_of_game == "V")
-            Replay r;
+      //      Replay r;
 
         
 

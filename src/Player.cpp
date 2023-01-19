@@ -102,7 +102,6 @@ int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
     throw std::invalid_argument("Inserita tra i pezzi del giocatore una nave sconosciuta! Non riconosco il nome del pezzo");
 } catch(std::runtime_error &e) {
     std::cout<<"*Non ho trovato la nave inserita nelle prime coordinate inserite, controlla di avere inserito il centro"<<std::endl;
-    show_Pieces();
     throw std::runtime_error("C'è un carattere imprevisto sulla board, è stato compiuto qualche errore");
     }
 }
