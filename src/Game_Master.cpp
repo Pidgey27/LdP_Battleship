@@ -5,6 +5,7 @@
 #include "Game_Master.h"
 #include "writeLog.h"
 
+
 Game_Master::Game_Master(bool game_mode, int max) {
     max_Turns=max;
     if(game_mode) {
@@ -12,7 +13,7 @@ Game_Master::Game_Master(bool game_mode, int max) {
         Player2=new Com_Player("P2");
     }
     else {
-        //Player1=new Human_Player("P1");   Da implementare
+        Player1=new Human_Player("P1");
         Player2=new Com_Player("P2");
     }
 }

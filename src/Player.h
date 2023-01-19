@@ -26,7 +26,7 @@ protected:
 public:
 
     Player();
-    std::string get_Coordinates_to_Move() {};
+    virtual std::string get_Coordinates_to_Move()=0;
     int search_For_Ship(Coordinates coord);
     int play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move);
     void check_For_Healing(Coordinates coordinates);

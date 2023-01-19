@@ -7,22 +7,22 @@
 
 #include "Player.h"
 #include "Com_Player.h"
-
+#include "Human_Player.h"
 class Game_Master {
 
 private:
 
-    Com_Player* Player2;
-    Com_Player*  Player1;
+    Player* Player1;
+    Com_Player*  Player2;
     int max_Turns;
     int current_Turn=1;
     std::string moves;
-    Com_Player* current_Turn_Player=NULL;
-    Com_Player* opponent=NULL;
+    Player* current_Turn_Player=NULL;
+    Player* opponent=NULL;
 
 public:
 
-    Game_Master(bool game_mode, int max=INT_MAX);
+    Game_Master(bool game_mode, int max=2147483647);
     Game_Master(std::vector<std::string> coord_P1, std::vector<std::string> coord_P2);
     bool Execute_Turn();
     void Execute_Turn_Replay(std::string mossa);

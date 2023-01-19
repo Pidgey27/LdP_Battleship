@@ -17,7 +17,7 @@ private:
     std::string check_Input_Coordinate();
     void check_Target_Coordinate(Coordinates origin, Coordinates target, char N);
 public:
-    Human_Player();
+    Human_Player(std::string namePlayer);
     /*Ask user for coordinates then check if that coordinates are valid
     * @return a string with coordinates from the player.
     */
