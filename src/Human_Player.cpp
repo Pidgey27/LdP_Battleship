@@ -7,7 +7,8 @@
 #define CHECK_IF_INPUT_ARE_SHIP_CENTER_SUPPORT ((support.at(i).get_Center_X() == origin.get_X()) && (support.at(i).get_Center_Y() == origin.get_Y()))
 #define CHECK_IF_INPUT_ARE_SHIP_CENTER_SUBMARINE ((submarine.at(i).get_Center_X() == origin.get_X()) && (submarine.at(i).get_Center_Y() == origin.get_Y()))
 
-Human_Player::Human_Player(){
+Human_Player::Human_Player(std::string namePlayer){
+    name = namePlayer;
     prepareBoard();
 }
 
