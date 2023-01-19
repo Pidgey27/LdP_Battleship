@@ -15,7 +15,7 @@ private:
     bool checkBattleShip(Coordinates first, Coordinates last);
     bool checkSupportShip(Coordinates first, Coordinates last);
     std::string check_Input_Coordinate();
-    bool check_Target_Coordinate(Coordinates target);
+    void check_Target_Coordinate(Coordinates origin, Coordinates target, char N);
 public:
     Human_Player();
     /*Ask user for coordinates then check if that coordinates are valid

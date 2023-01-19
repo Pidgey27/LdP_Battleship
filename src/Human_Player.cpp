@@ -33,8 +33,6 @@ void Human_Player::prepareBoard(){
                 }
                 Battle_Ship test(startBoat, endBoat);
                 battleship.push_back(std::move(test));
-                std::cout << "test if here line 3" << std::endl;
-                std::cout << log << std::endl;
                 writeLog wl(log);
             }else{
                 std::cout << "\033[1;31mLe coordinate non rispettano la dimensione di una Corazzata. Riprova\033[0m"<<  std::endl;
@@ -44,7 +42,6 @@ void Human_Player::prepareBoard(){
             std::cout << "\033[1;31m" << e.what() << ". Riprova\033[0m"<<  std::endl;
             i--;
         }
-        std::cout << "test if here line 40" << std::endl; 
     }
     for (int i = 1; i < 4; i++){
         std::string log = "P1";
@@ -139,6 +136,7 @@ std::string Human_Player::check_Input_Coordinate(){
     }
     for(int i = 0; i < support.size(); i++){
         if(CHECK_IF_INPUT_ARE_SHIP_CENTER_SUPPORT){
+            check_Target_Coordinate(origin, target, 'S');
             return output;
         }else{
             flag = false; 
@@ -146,6 +144,7 @@ std::string Human_Player::check_Input_Coordinate(){
     }
     for(int i = 0; i < submarine.size(); i++){
         if(CHECK_IF_INPUT_ARE_SHIP_CENTER_SUBMARINE){
+            check_Target_Coordinate(origin, target, 'E');
             return output;
         }else{
             flag = false; 
@@ -154,7 +153,8 @@ std::string Human_Player::check_Input_Coordinate(){
     if(flag == false){
         throw std::invalid_argument("La prima coordinata non e' il centro della barca");
     }
-    check_Target_Coordinate(target);
+    //TODO dentro un if
+    check_Target_Coordinate(origin, target, board.get(origin));
 }
 
 std::string Human_Player::get_Coordinates_to_Move(){
@@ -190,6 +190,28 @@ bool Human_Player::checkSupportShip(Coordinates first, Coordinates last){
     return false;
 }
 
-bool Human_Player::check_Target_Coordinate(Coordinates target){
-    return false;
+void Human_Player::check_Target_Coordinate(Coordinates origin, Coordinates target, char N){
+    if(N == 'E'){
+        if(board.get(target) != ' ')
+            throw std::invalid_argument("Nel punto di arrivo dello spostamento c'e' una barca");
+    }
+    if(N == 'S'){
+        bool orientation;
+        for(int i = 0; i < support.size(); i++){
+            if(CHECK_IF_INPUT_ARE_SHIP_CENTER_SUPPORT)
+                orientation = support.at(i).getDirection();
+        }
+        if(orientation == 1){ // orrizzontale
+            Coordinates before = Coordinates(target.get_X()-1,target.get_Y());
+            Coordinates after  = Coordinates(target.get_X()+1, target.get_Y());
+            if(board.get(target) != ' ' || board.get(before) != ' ' || board.get(after) != ' ')
+                throw std::invalid_argument("Nel punto di arrivo dello spostamento c'e' una barca");
+        }
+        if(orientation == 0){ // verticale
+            Coordinates before = Coordinates(target.get_X(),target.get_Y()-1);
+            Coordinates after  = Coordinates(target.get_X(), target.get_Y()+1);
+            if(board.get(target) != ' ' || board.get(before) != ' ' || board.get(after) != ' ')
+                throw std::invalid_argument("Nel punto di arrivo dello spostamento c'e' una barca");
+        }
+    }
 }
