@@ -28,7 +28,7 @@ int max_mosse;
             std::cout << "Player VS Computer" << std::endl;
             Coordinates prua("H9");
             Coordinates poppa("F9");
-            Support_Ship sp(poppa,prua);
+            Support_Ship sp(poppa,prua, true);
             
             // Prova di stampa 
             writeLog wl(std::string(1,sp.get_Name()), prua.to_String(),poppa.to_String());
