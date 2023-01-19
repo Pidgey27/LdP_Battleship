@@ -12,8 +12,8 @@ class Game_Master {
 
 private:
 
-    Player* Player2;
-    Com_Player*  Player1;
+    Player* Player1;
+    Com_Player*  Player2;
     int max_Turns;
     int current_Turn=1;
     std::string moves;

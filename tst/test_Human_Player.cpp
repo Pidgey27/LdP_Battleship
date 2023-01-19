@@ -6,7 +6,7 @@
 
 static void test_Human_Player() {
  
-    Human_Player player;
+    Human_Player player("P1");
     player.show_Pieces();
     for(int i = 0; i < 10; i++){
         std::string prova = player.get_Coordinates_to_Move();
