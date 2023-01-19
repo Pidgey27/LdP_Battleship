@@ -188,8 +188,8 @@ void Board::clearHit(){
 void Board::clearScan(){
     for(int i = 0; i < 12; i ++) { //column loop
         for(int j  =0; j < 12; j ++){ //row loop
-        if(attackBoard[i][j] == 'Y')
-            attackBoard[i][j] = ' ';
+            if(attackBoard[i][j] == 'Y')
+                attackBoard[i][j] = ' ';
         }
     }
 };

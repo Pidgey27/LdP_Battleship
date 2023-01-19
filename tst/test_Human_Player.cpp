@@ -4,14 +4,14 @@
 #include "src/Human_Player.h"
 
 
-
-static void test_Get_Coordinates_to_Move() {
+static void test_Human_Player() {
  
     Human_Player player;
     player.show_Pieces();
-    while(true){
+    for(int i = 0; i < 10; i++){
         std::string prova = player.get_Coordinates_to_Move();
-        std::cout << prova;
+        std::cout << "Coordinate correttamente inserite: " << prova << std::endl;
     }
+
 }
 
