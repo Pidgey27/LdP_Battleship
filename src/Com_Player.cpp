@@ -146,16 +146,13 @@ bool Com_Player::declare_SupportShip() {
 //ok returns true.
 bool Com_Player::declare_Battleship() {
     get_Random_Coordinates();
-    std::cout<<temp1.to_String()<<std::endl;
     try{
         Random_Coordinates_to_Construct_Ship('C', temp1);
-        std::cout<<temp2.to_String()<<std::endl;
         order_Coord();
         try {
             Battle_Ship battle(temp1, temp2);
             board.addBattleShip(temp1, temp2);
             battleship.push_back(std::move(battle));
-            std::cout<<"nave creata"<<std::endl;
             writeLog(name+" "+temp1.to_String()+" "+temp2.to_String());
             return true;
         }catch (std::invalid_argument &e) {
@@ -192,12 +189,6 @@ void Com_Player::order_Coord() {
             temp2=temp1;
             temp1=realTemp;
         }
-}
-
-Com_Player::~Com_Player() {
-    support.clear();
-    submarine.clear();
-    battleship.clear();
 }
 
 

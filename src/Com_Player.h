@@ -29,8 +29,6 @@ public:
 
     Com_Player(std::string nome);
     std::string get_Coordinates_to_Move();
-
-    ~Com_Player() override;
 };
 
 #endif //LDP_BATTLESHIP_COM_PLAYER_H

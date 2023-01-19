@@ -104,7 +104,7 @@ int Player::play(Coordinates coord_Ship_to_Move, Coordinates where_To_Move) {
 
 //check in the board if there's an injured ship, and if there is one it heals it.
 void Player::check_For_Healing(Coordinates coordinates) {
-    int sub = search_For_Ship(coordinates);
+    int sup = search_For_Ship(coordinates);
     for (int j = coordinates.get_Y() - 1; j < coordinates.get_Y() + 2; j++) {
         if (j < 0)
             j++;
@@ -117,12 +117,24 @@ void Player::check_For_Healing(Coordinates coordinates) {
                 else if (i > 12)
                     return;
                 else {
-                    if(board.get(Coordinates(i, j)) != ' '){
-                        try {
-                            int index = search_For_Ship(Coordinates(i, j));
-                            if (sub != index)
-                                submarine.at(index).reset_Armor(true);
-                        } catch (std::runtime_error &e) {
+                    if(board.get(Coordinates(i, j)) != ' ') {
+                        if (board.get(Coordinates(i, j)) == 'S'||board.get(Coordinates(i, j)) == 's') {
+                            try {
+                                int index = search_For_Ship(Coordinates(i, j));
+                                if (sup != index)
+                                    support.at(index).reset_Armor(true);
+                            } catch (std::runtime_error &e) {
+                            }
+                        }
+                        else if (board.get(Coordinates(i, j)) == 'C'||board.get(Coordinates(i, j)) == 'c') {
+                            try {
+                                int index = search_For_Ship(Coordinates(i, j));
+                                battleship.at(index).reset_Armor(true);
+                            } catch (std::runtime_error &e) {
+                            }
+                        }
+                        else  {
+                            //do nothing
                         }
                     }
                 }
@@ -217,12 +229,6 @@ char Player::search_in_Def_Board(Coordinates coordinates) {
 //writes in attack board a fixed char. Used on architecture's upper level.
 void Player::write_in_Atk_Board(Coordinates coordinates, char name) {
     board.write_On_Attack_Board(coordinates, name);
-}
-
-Player::~Player() {
-    submarine.clear();
-    support.clear();
-    battleship.clear();
 }
 
 //returns orientation for a single piece. Created for a test to check correct orientation return
