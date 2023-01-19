@@ -13,6 +13,7 @@
     seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     int which_v=rand()%3;
+    std::cout<<which_v;
     if(which_v==0) {
         int n = rand() % battleship.size();
         temp1={battleship.at(n).get_Center_X(), battleship.at(n).get_Center_Y()};
@@ -94,14 +95,12 @@ void Com_Player::Random_Coordinates_to_Construct_Ship(char name_ship, Coordinate
 }
 
 Com_Player::Com_Player(std::string nome) {
-    for(int i=0; i<3;) {
-        while (!declare_Battleship());
-        i++;
-    }
-    for(int i=0; i<3;) {
-        while (!declare_SupportShip());
-        i++;
-    }
+    declare_Battleship();
+    declare_Battleship();
+    declare_Battleship();
+    declare_SupportShip();
+    declare_SupportShip();
+    declare_SupportShip();
     while(!declare_Submarine());
     while(!declare_Submarine());
     std::cout<<"*Elementi scacchiera creati"<<std::endl;
@@ -147,13 +146,16 @@ bool Com_Player::declare_SupportShip() {
 //ok returns true.
 bool Com_Player::declare_Battleship() {
     get_Random_Coordinates();
+    std::cout<<temp1.to_String()<<std::endl;
     try{
         Random_Coordinates_to_Construct_Ship('C', temp1);
+        std::cout<<temp2.to_String()<<std::endl;
         order_Coord();
         try {
             Battle_Ship battle(temp1, temp2);
             board.addBattleShip(temp1, temp2);
             battleship.push_back(std::move(battle));
+            std::cout<<"nave creata"<<std::endl;
             writeLog(name+" "+temp1.to_String()+" "+temp2.to_String());
             return true;
         }catch (std::invalid_argument &e) {
