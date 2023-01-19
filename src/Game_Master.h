@@ -23,13 +23,14 @@ private:
 public:
 
     Game_Master(bool game_mode, int max=INT_MAX);
+    Game_Master(std::vector<std::string> coord_P1, std::vector<std::string> coord_P2);
     bool Execute_Turn();
-    void Execute_Special_Command(std::string);
+    void Execute_Turn_Replay(std::string mossa);
     bool is_It_Endgame();
     void fire_Protocol(Coordinates where_To_Fire);
     void who_Wins();
     bool ask_For_Coordinates();
     void exploring_Protocol(Coordinates coordinates);
-
+    bool ask_For_Coordinates_Replay(std::string mossa);
 };
 #endif //LDP_BATTLESHIP_GAME_MASTER_H

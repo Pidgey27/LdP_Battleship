@@ -163,7 +163,7 @@ bool Player::under_Fire(Coordinates coord) {
         int injured= search_For_Ship(coord);
         char temp=board.get(coord);
         int where_hit;
-        if(temp=='C') {
+        if(battleship.at(injured).get_Name()=='C') {
             mid = 2;
             if(battleship.at(injured).getDirection() == 0) {
                 where_hit=coord.get_Y()-battleship.at(injured).get_Center_Y()+mid;
@@ -176,7 +176,7 @@ bool Player::under_Fire(Coordinates coord) {
                 board.write_On_Defense_Board(coord, 'c');
             }
         }
-        if(temp=='S')
+        if(battleship.at(injured).get_Name()=='S')
             mid = 1;
         if(support.at(injured).getDirection() == 0) {
             where_hit=coord.get_Y()-support.at(injured).get_Center_Y()+mid;
@@ -188,7 +188,7 @@ bool Player::under_Fire(Coordinates coord) {
             support.at(injured).set_Injured(where_hit);
             board.write_On_Defense_Board(coord, 's');
         }
-        if(temp=='E') {
+        if(battleship.at(injured).get_Name()=='E') {
             submarine.erase(submarine.cbegin()+injured);
             board.write_On_Defense_Board(coord, ' ');
         }

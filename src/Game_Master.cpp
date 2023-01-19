@@ -16,6 +16,10 @@ Game_Master::Game_Master(bool game_mode, int max) {
         Player2=new Com_Player("P2");
     }
 }
+Game_Master::Game_Master(std::vector<std::string> coord_P1, std::vector<std::string> coord_P2) {
+    Player1=new Com_Player(coord_P1);
+    Player2=new Com_Player(coord_P2);
+}
 
 //method uses to actually play
 //false until you reach the maximum number of turns, or one of the player loses all ships
@@ -50,9 +54,9 @@ bool Game_Master::Execute_Turn() {
 void Game_Master::who_Wins() {
     if(current_Turn==max_Turns)
         std::cout<<"*Sono stati giocati "<<max_Turns<<", la partita è finita in parità"<<std::endl;
-    if(Player1->check_For_Endgame())
+    else if(Player1->check_For_Endgame())
         std::cout<<"*Ha vinto il giocatore 2!!!"<<std::endl;
-    if(Player2->check_For_Endgame())
+    else if(Player2->check_For_Endgame())
         std::cout<<"*Ha vinto il giocatore 1!!!"<<std::endl;
 }
 
@@ -101,23 +105,64 @@ bool Game_Master::ask_For_Coordinates() {
 void Game_Master::exploring_Protocol(Coordinates coordinates) {
     for (int i =coordinates.get_Y() -2; i <coordinates.get_Y()+ 3; i++) {
         if (i < 0)
-            i++;
+            i=0;
         else if (i > 12)
             break;
         else {
             for (int j =coordinates.get_X()-2; j <coordinates.get_X()+3; j++) {
                 if (j < 0)
-                    j++;
+                    j=0;
                 else if (j> 12)
                     break;
                 else {
-                    if (opponent->search_in_Def_Board(Coordinates(i, j)) !=
-                        ' ')
-                        current_Turn_Player->write_in_Atk_Board(
-                                Coordinates(i, j), 'Y');
+                    if (opponent->search_in_Def_Board(Coordinates(j, i)) !=' ')
+                        current_Turn_Player->write_in_Atk_Board(Coordinates(j, i), 'Y');
                 }
             }
         }
     }
+}
 
+void Game_Master::Execute_Turn_Replay(std::string mossa) {
+    if(current_Turn%2==0){
+        current_Turn_Player=Player2;
+        opponent=Player1;
+    }
+    else {
+        current_Turn_Player = Player1;
+        opponent = Player2;
+    }
+    bool correct=ask_For_Coordinates_Replay(mossa);
+    if(correct==0)
+        return;
+    else {
+        Coordinates first= Coordinates(moves.substr(0, moves.find_first_of(' ')));
+        Coordinates second= Coordinates(moves.substr(moves.find_first_of(' '), moves.length()));
+        int i=current_Turn_Player->play(first, second);
+        if(i==0)
+            fire_Protocol(second);
+        if(i==1)
+            current_Turn_Player->check_For_Healing(second);
+        if(i==2)
+            exploring_Protocol(second);
+
+        current_Turn++;
+
+    }
+
+}
+
+bool Game_Master::ask_For_Coordinates_Replay(std::string mossa) {
+    if(moves=="AA AA") {
+        current_Turn_Player->remove_Spotted_Marks();
+        return false;
+    }
+    if(moves=="XX XX"){
+        current_Turn_Player->print_Def_Board();
+        return false;
+    }
+    if(moves=="OO OO"){
+        current_Turn_Player->erase_Missed_Atk();
+    }
+    return true;
 }

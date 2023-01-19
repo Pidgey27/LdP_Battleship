@@ -20,21 +20,21 @@ Com_Player::Com_Player(std::string nome) {
 }
 
 //new constructor for replay games
-Com_Player::Com_Player(std::string *coordinates_for_constructor) {
+Com_Player::Com_Player(std::vector<std::string> coordinates_for_constructor) {
     for(int i=0; i<3; i++){
-    Coordinates prua(coordinates_for_constructor[i].substr(0, coordinates_for_constructor[i].find_first_of(' ')));
-    Coordinates poppa(coordinates_for_constructor[i].substr(coordinates_for_constructor[i].find_first_of(' '), coordinates_for_constructor[i].length()));
+    Coordinates prua(coordinates_for_constructor.at(i).substr(0, coordinates_for_constructor.at(i).find_first_of(' ')));
+    Coordinates poppa(coordinates_for_constructor.at(i).substr(coordinates_for_constructor.at(i).find_first_of(' '), coordinates_for_constructor.at(i).length()));
     Battle_Ship battle(prua, poppa);
     battleship.push_back(std::move(battle));
     }
     for(int i=3; i<6; i++){
-        Coordinates prua(coordinates_for_constructor[i].substr(0, coordinates_for_constructor[i].find_first_of(' ')));
-        Coordinates poppa(coordinates_for_constructor[i].substr(coordinates_for_constructor[i].find_first_of(' '), coordinates_for_constructor[i].length()));
+        Coordinates prua(coordinates_for_constructor.at(i).substr(0, coordinates_for_constructor.at(i).find_first_of(' ')));
+        Coordinates poppa(coordinates_for_constructor.at(i).substr(coordinates_for_constructor.at(i).find_first_of(' '), coordinates_for_constructor.at(i).length()));
         Support_Ship supp(prua, poppa, true);
         support.push_back(std::move(supp));
     }
     for(int i=6; i<8; i++){
-        Coordinates monocoord(coordinates_for_constructor[i]);
+        Coordinates monocoord(coordinates_for_constructor.at(i));
         Submarine sub(monocoord);
         submarine.push_back(std::move(sub));
     }
@@ -106,7 +106,6 @@ int Com_Player::Randomly_get_Ship() {
     seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     std::srand(seed1);
     int which_v=rand()%3;
-    std::cout<<which_v;
     if(which_v==0) {
         int n = rand() % battleship.size();
         temp1={battleship.at(n).get_Center_X(), battleship.at(n).get_Center_Y()};

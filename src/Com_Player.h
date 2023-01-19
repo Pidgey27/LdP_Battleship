@@ -28,7 +28,7 @@ protected:
 public:
 
     Com_Player(std::string nome);
-    Com_Player(std::string coordinates_for_constructor[]);
+    Com_Player(std::vector<std::string> coordinates_for_constructor);
     std::string get_Coordinates_to_Move();
 };
 
