@@ -30,7 +30,7 @@ public:
     void set_Injured(int n) { armor[n]=1;}
     virtual bool isDead()=0;
     virtual bool getDirection(){return orientation;}
-    bool where_Hit(int n){};
+    bool where_Hit(int n){ return armor[n];};
 
 };
 
