@@ -115,15 +115,12 @@ void Game_Master::exploring_Protocol(Coordinates coordinates) {
                 else if (j> 12)
                     break;
                 else {
-                    if (opponent->search_in_Def_Board(Coordinates(i, j)) !=
-                        ' ')
-                        current_Turn_Player->write_in_Atk_Board(
-                                Coordinates(i, j), 'Y');
+                    if (opponent->search_in_Def_Board(Coordinates(j, i)) !=' ')
+                        current_Turn_Player->write_in_Atk_Board(Coordinates(j, i), 'Y');
                 }
             }
         }
     }
-
 }
 
 void Game_Master::Execute_Turn_Replay(std::string mossa) {

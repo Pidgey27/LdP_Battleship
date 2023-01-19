@@ -198,7 +198,7 @@ char Board::get(Coordinates coor){
     return {defenseBoard[coor.get_Y()][coor.get_X()]};
 };
 
-void Board::write_On_Attack_Board(Coordinates coordinate,char input){
+void Board::write_On_Attack_Board(Coordinates coordinate, char input){
     attackBoard[coordinate.get_Y()][coordinate.get_X()] = input;
 };
 
