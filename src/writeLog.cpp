@@ -13,10 +13,4 @@ writeLog::writeLog(std::string s){
     fs.close();
 }
 
-writeLog::writeLog(std::string nameShip, std::string s1,std::string s2){
-    std::fstream fs;
-    fs.open("test.txt", std::ios::out | std::ios::app);
-    fs << nameShip << " " << s1 << " - " << s2 << std::endl;
-    fs.close();
-}
 
