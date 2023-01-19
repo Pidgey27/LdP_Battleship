@@ -107,13 +107,13 @@ void Player::check_For_Healing(Coordinates coordinates) {
     int sup = search_For_Ship(coordinates);
     for (int j = coordinates.get_Y() - 1; j < coordinates.get_Y() + 2; j++) {
         if (j < 0)
-            j++;
+            j=0;
         else if (j > 12)
             return;
         else {
             for (int i =coordinates.get_X() -1; i < coordinates.get_X()+2; i++) {
                 if (i < 0)
-                    i++;
+                    i=0;
                 else if (i > 12)
                     return;
                 else {
@@ -168,12 +168,12 @@ bool Player::under_Fire(Coordinates coord) {
             if(battleship.at(injured).getDirection() == 0) {
                 where_hit=coord.get_Y()-battleship.at(injured).get_Center_Y()+mid;
                 battleship.at(injured).set_Injured(where_hit);
-                board.write_On_Defense_Board(coord, temp);
+                board.write_On_Defense_Board(coord, 'c');
             }
             if(battleship.at(injured).getDirection() == 1){
                 where_hit=coord.get_X()+mid-battleship.at(injured).get_Center_X();
                 battleship.at(injured).set_Injured(where_hit);
-                board.write_On_Defense_Board(coord, temp);
+                board.write_On_Defense_Board(coord, 'c');
             }
         }
         if(temp=='S')
@@ -181,12 +181,12 @@ bool Player::under_Fire(Coordinates coord) {
         if(support.at(injured).getDirection() == 0) {
             where_hit=coord.get_Y()-support.at(injured).get_Center_Y()+mid;
             support.at(injured).set_Injured(where_hit);
-            board.write_On_Defense_Board(coord, temp);
+            board.write_On_Defense_Board(coord, 's');
         }
         if(support.at(injured).getDirection() == 1){
             where_hit=coord.get_X()+mid-support.at(injured).get_Center_X();
             support.at(injured).set_Injured(where_hit);
-            board.write_On_Defense_Board(coord, temp);
+            board.write_On_Defense_Board(coord, 's');
         }
         if(temp=='E') {
             submarine.erase(submarine.cbegin()+injured);

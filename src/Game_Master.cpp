@@ -3,6 +3,7 @@
 // matricola 1137125
 
 #include "Game_Master.h"
+#include "writeLog.h"
 
 Game_Master::Game_Master(bool game_mode, int max) {
     max_Turns=max;
@@ -42,7 +43,7 @@ bool Game_Master::Execute_Turn() {
         exploring_Protocol(second);
 
     current_Turn++;
-    return current_Turn==max_Turns || Player2->check_For_Endgame() || Player1->check_For_Endgame();
+    return current_Turn>=max_Turns || Player2->check_For_Endgame() || Player1->check_For_Endgame();
 }
 
 //method that says who wins the game
@@ -80,6 +81,7 @@ void Game_Master::fire_Protocol(Coordinates where_To_Fire) {
 bool Game_Master::ask_For_Coordinates() {
     std::cout<<"Tocca al player "<<current_Turn_Player->get_Name()<<std::endl;
     moves=current_Turn_Player->get_Coordinates_to_Move();
+    writeLog(current_Turn_Player->get_Name() +" "+moves);
     std::cout<<current_Turn_Player->get_Name()<<"   "<<moves<<std::endl;
     if(moves=="AA AA") {
         current_Turn_Player->remove_Spotted_Marks();

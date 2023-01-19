@@ -45,7 +45,7 @@ std::string Coordinates::to_String() {
 }
 
 Coordinates::Coordinates(int x, int y) {
-    if (x<=-1 || y<=-1 || x>=13 || y>=13)
+    if (x<0 || y<0 || x>12 || y>12)
         throw std::invalid_argument("hai inserito coordinate fuori dalla board");
     coord_X=x;
     coord_Y=y;
