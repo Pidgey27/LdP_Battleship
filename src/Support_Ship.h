@@ -20,7 +20,6 @@ public:
         
         Support_Ship(Coordinates first, Coordinates last, bool boh);
 
-        ~Support_Ship() override;
 
         void action(Coordinates first, Coordinates last) override;
         void setDirection(Coordinates first, Coordinates last);

@@ -31,9 +31,6 @@ public:
     virtual bool isDead()=0;
     virtual bool getDirection(){return orientation;}
     bool where_Hit(int n){};
-    virtual ~Ship() {
-    delete armor;
-    }
 
 };
 

@@ -24,7 +24,7 @@ public:
             this->center_X=submarine.center_X;
             this->center_Y=submarine.center_Y;
         }
-        ~Submarine(){};
+
         void action(Coordinates first, Coordinates last) override;
         void setCenter(Coordinates mono_Cord);
         void setName(char n);

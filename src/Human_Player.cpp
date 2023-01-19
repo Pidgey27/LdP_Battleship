@@ -31,7 +31,11 @@ void Human_Player::prepareBoard(){
                     i--;
                     continue;
                 }
-                battleship.push_back(Battle_Ship(startBoat, endBoat));
+                Battle_Ship test(startBoat, endBoat);
+                battleship.push_back(std::move(test));
+                std::cout << "test if here line 3" << std::endl;
+                std::cout << log << std::endl;
+                writeLog wl(log);
             }else{
                 std::cout << "\033[1;31mLe coordinate non rispettano la dimensione di una Corazzata. Riprova\033[0m"<<  std::endl;
                 i--;
@@ -40,9 +44,7 @@ void Human_Player::prepareBoard(){
             std::cout << "\033[1;31m" << e.what() << ". Riprova\033[0m"<<  std::endl;
             i--;
         }
-        //TODO delete this line 
-        std::cout << log << std::endl;
-        writeLog wl(log);
+        std::cout << "test if here line 40" << std::endl; 
     }
     for (int i = 1; i < 4; i++){
         std::string log = "P1";
@@ -63,8 +65,8 @@ void Human_Player::prepareBoard(){
                     i--;
                     continue;
                 }
-                support.push_back(Support_Ship(startBoat, endBoat, true));
-                
+                Support_Ship ship(startBoat, endBoat, true);
+                support.push_back(std::move(ship)); 
             }else{
                 std::cout << "\033[1;31mLe coordinate non rispettano la dimensione di una Nave da Supporto. Riprova\033[0m"<<  std::endl;
                 i--;

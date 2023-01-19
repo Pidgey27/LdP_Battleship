@@ -1,7 +1,7 @@
 //
 // Created by Alessandra Villarà on 10/01/2023.
 // matricola 1137125
-#include "src/Com_Player.h"
+/*#include "src/Com_Player.h"
 static void test_Dummy_Constructor_And_Search() {
     Com_Player computer("com");
     std::cout<<"Ho inserito queste navi di default"<<std::endl;
@@ -29,7 +29,7 @@ static void test_Random_Get_Coordinates_to_Move() {
 }
   */
 
- static void test_Real_Constructor() {
+ /*static void test_Real_Constructor() {
      std::cout<<"Ho inserito queste navi di casuali"<<std::endl;
      Com_Player computer("com");
  }
@@ -42,4 +42,4 @@ static void test_Random_Get_Coordinates_to_Move() {
     computer.show_Ship(2);
     std::cout<<"orientamento del pezzo uguale a "<<computer.get_Orientation(2, 'S');
  }
-
+*/

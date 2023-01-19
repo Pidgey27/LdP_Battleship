@@ -114,6 +114,4 @@ bool Support_Ship::where_Hit(int n) {
     return {armour[n]};
 }
 
-Support_Ship::~Support_Ship() {
-    delete armour;
-}
+
